@@ -13,32 +13,41 @@ class AppHeader extends React.Component {
       return (
         <div className="app-header">
 
-            <div className="navigation-link" >
-              <BurgerIcon type="primary" />
-              <span className="text text_type_main-default">
-                Конструктор
-              </span>
+            <div className="navigation-panel">
 
-            </div>
+                <div className="navigation-link" >
+                <BurgerIcon type="primary" />
+                <span className="text text_type_main-default">
+                    Конструктор
+                </span>
 
-            <div className="navigation-link" >
-              <ListIcon type="secondary" />
-              <span className="text text_type_main-default">
-                Лента заказов
-              </span>
+                </div> 
+
+                <div className="navigation-link" >
+                <ListIcon type="secondary" />
+                <span className="text text_type_main-default">
+                    Лента заказов
+                </span>
+                </div>
+
             </div>
 
  
-            <div className="pl-5 pr-5 pb-5 pt-5" >
+            <div className="flex-center pl-5 pr-5 pb-5 pt-5" >
               <Logo  />
             </div>
 
-            <div className="navigation-link" >
-              <ProfileIcon type="secondary" />
-              <span className="text text_type_main-default">
-                Личный кабинет
-              </span>
 
+
+
+            <div className="navigation-account">
+                <div className="navigation-link" >
+                <ProfileIcon type="secondary" />
+                <span className="text text_type_main-default">
+                    Личный кабинет
+                </span>
+
+                </div>
             </div>
               
 

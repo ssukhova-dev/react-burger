@@ -3,7 +3,9 @@
   .app-header {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-around;
+   justify-content: space-around;
+   flex-direction: row;
+   /*justify-content: center;*/
   
  
     height: 88px;
@@ -19,7 +21,21 @@
     box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
 }
 
+.navigation-panel{
 
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 20px;
+  gap: 8px;
+
+  justify-content: left;
+
+
+  width: 400px;
+
+}
 
 
 .navigation-link{
@@ -31,9 +47,37 @@
     padding: 16px 20px;
     gap: 8px;
 
-    width: 178px;
-    height: 56px;
+
 
 }
+
+
+.navigation-logo{
+
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+
+.navigation-account{
+
+
+  display: flex;
+  justify-content: right;
+
+  width: 400px;
+
+
+}
+
   
+.flex-center {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 
