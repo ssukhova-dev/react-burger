@@ -1,15 +1,15 @@
 import React from 'react' // импорт библиотеки
 
-import './burger-ingredient-card.css';
+import burgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card.module.css';
 
 class BurgerIngredientCard extends React.Component {
     render() {
       return (
-              <p className="burger-ingredient-card">
+              <p className={burgerIngredientCard.burgerIngredientCard}>
                   BurgerIngredientCard
               </p>
       );
-    }
+    } 
   }
   
   export default BurgerIngredientCard 
