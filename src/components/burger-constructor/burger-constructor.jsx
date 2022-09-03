@@ -1,10 +1,12 @@
 
 import React from 'react' // импорт библиотеки
 import './burger-constructor.css';
+import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components'
 
+import Img from '../../images/bun-02.jpg'
 
-class BurgerConstructor extends React.Component {
-    render() {
+function BurgerConstructor() {
+   
       return (
         <div className="burger-constructor">
 
@@ -12,11 +14,33 @@ class BurgerConstructor extends React.Component {
                 BurgerConstructor
             </p>
 
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <ConstructorElement
+                    type="top"
+                    isLocked={true}
+                    text="Краторная булка N-200i (верх)"
+                    price={200}
+                    thumbnail={Img}
+                />
+                <ConstructorElement
+                    text="Краторная булка N-200i (верх)"
+                    price={50}
+                    thumbnail={Img}
+                />
+                <ConstructorElement
+                    type="bottom"
+                    isLocked={true}
+                    text="Краторная булка N-200i (низ)"
+                    price={200}
+                    thumbnail={Img}
+                />
+            </div>
+
 
 
         </div>
       );
-    }
+    
   }
   
   export default BurgerConstructor 
