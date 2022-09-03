@@ -7,12 +7,12 @@ import BurgerConstructor from '../burger-constructor/burger-constructor'
 
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 
-//import '@ya.praktikum/react-developer-burger-ui-components'
+//import '@ya.praktikum/react-developer-burger-ui-components' <div className="App ml-5 mr-5 mb-5 mt-5">
 
 function App() {
   const [current, setCurrent] = React.useState('one')
   return (
-    <div className="App ml-5 mr-5 mb-5 mt-5">
+    <div className="App">
    
       <AppHeader/>
       <BurgerIngredients/>
