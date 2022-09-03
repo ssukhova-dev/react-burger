@@ -1,0 +1,15 @@
+.burger-constructor {
+    display: flex;
+    flex-flow: column;
+    
+
+    width: 600px;
+    height: 912px;
+    left: 380px;
+    top: 128px;
+
+    /* interface/bg */
+
+    background: #131316;
+
+}

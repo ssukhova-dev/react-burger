@@ -1,14 +1,35 @@
 import React from 'react' // импорт библиотеки
 
+import './burger-ingredients.css';
 
-class BurgerIngredients extends React.Component {
-    render() {
-      return (
-              <h1>
-                  BurgerIngredients
-              </h1>
-      );
-    }
+import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
+
+
+
+  function BurgerIngredients() {
+    const [current, setCurrent] = React.useState('one')
+    return (
+        <div className="burger-ingredients">
+
+            <p className="text text_type_main-large pl-5 pr-5 pb-5 pt-5" >
+                Соберите бургер
+            </p>
+
+            <div style={{ display: 'flex' }}>
+                <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+                    One
+                </Tab>
+                <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+                    Two
+                </Tab>
+                <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+                    Three
+                </Tab>
+            </div>
+
+
+    </div>
+    );
   }
   
   export default BurgerIngredients 
