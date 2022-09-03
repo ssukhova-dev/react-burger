@@ -32,8 +32,7 @@
 
   justify-content: left;
 
-
-  width: 400px;
+  flex-basis: 33%;
 
 }
 
@@ -58,7 +57,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
+  flex-basis: 33%;
 
 }
 
@@ -69,7 +68,7 @@
   display: flex;
   justify-content: right;
 
-  width: 400px;
+  flex-basis: 33%;
 
 
 }
