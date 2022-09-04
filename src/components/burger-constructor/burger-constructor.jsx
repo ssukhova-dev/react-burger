@@ -3,7 +3,10 @@ import React from 'react' // импорт библиотеки
 import './burger-constructor.css';
 import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components'
 
-import Img from '../../images/bun-02.jpg'
+import ImgBun from './../../images/bun-02.svg'
+import ImgMeat from './../../images/meat-02.svg'
+import ImgMineralRings from './../../images/mineral rings.svg'
+import ImgSauce from './../../images/sauce-03.svg'
 
 function BurgerConstructor() {
    
@@ -20,31 +23,32 @@ function BurgerConstructor() {
                     isLocked={true}
                     text="Краторная булка N-200i (верх)"
                     price={200}
-                    thumbnail={Img}
+                    thumbnail={ImgBun}
                 />
                 <ConstructorElement
-                    text="Краторная булка N-200i (верх)"
-                    price={50}
-                    thumbnail={Img}
+                    text="Соус традиционный галактический"
+                    price={30}
+                    thumbnail={ImgSauce}
+                />
+                  <ConstructorElement
+                    text="Мясо бессмертных молюсков Protostomia"
+                    price={300}
+                    thumbnail={ImgMeat}
+                />
+                  <ConstructorElement
+                    text="{хрустящие минеральные кольца}"
+                    price={80}
+                    thumbnail={ImgMineralRings}
                 />
                 <ConstructorElement
                     type="bottom"
                     isLocked={true}
                     text="Краторная булка N-200i (низ)"
                     price={200}
-                    thumbnail={Img}
+                    thumbnail={ImgBun}
                 />
             </div>
 
-
-
-            <ul>
-                <li><ConstructorElement/></li>
-                <li><ConstructorElement/></li>
-                <li><ConstructorElement/></li>
-                <li><ConstructorElement/></li>
-                
-            </ul>
 
 
         </div>
