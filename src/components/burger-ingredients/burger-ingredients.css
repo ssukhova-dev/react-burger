@@ -2,14 +2,19 @@
     display: flex;
     flex-flow: column;
 
+    align-items: center;
 
     width: 600px;
     height: 912px;
-    left: 380px;
-    top: 128px;
+
 
     /* interface/bg */
 
     background: #131316;
 
+}
+
+.burger-ingredient-caption {
+    width: 100%;
+    text-align: left;
 }

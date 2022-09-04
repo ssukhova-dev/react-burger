@@ -13,11 +13,8 @@ function BurgerConstructor() {
       return (
         <div className="burger-constructor">
 
-            <p className="text text_type_main-large pl-5 pr-5 pb-5 pt-5" >
-                BurgerConstructor
-            </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginLeft: '32px' }}>
                 <ConstructorElement
                     type="top"
                     isLocked={true}

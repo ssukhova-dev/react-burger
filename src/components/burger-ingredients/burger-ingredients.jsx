@@ -12,7 +12,7 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
     return (
         <div className="burger-ingredients">
 
-            <p className="text text_type_main-large pl-5 pr-5 pb-5 pt-5" >
+            <p className="burger-ingredient-caption text text_type_main-large pl-5 pr-5 pb-5 pt-5" >
                 Соберите бургер
             </p>
 

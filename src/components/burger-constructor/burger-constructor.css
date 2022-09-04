@@ -1,12 +1,13 @@
 .burger-constructor {
     display: flex;
     flex-flow: column;
-    
+
+    margin: 100px 16px 40px 16px;
+ 
 
     width: 600px;
     height: 912px;
-    left: 380px;
-    top: 128px;
+
 
     /* interface/bg */
 

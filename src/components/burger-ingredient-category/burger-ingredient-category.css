@@ -3,10 +3,8 @@
     flex-direction: column;
     align-items: center;
 
-
-
-    border-style: solid;  
-    border-color: red;   
+    border: 1px dashed red;
+ 
   }
 
   .burger-ingredient-category-caption {
@@ -14,6 +12,6 @@
     text-align: left;
 
 
-    border-style: solid;  
-    border-color: green;   
+  /*  border-style: dashed;  
+    border-color: green;   */
   }
