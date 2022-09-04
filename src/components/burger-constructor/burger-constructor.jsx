@@ -11,7 +11,7 @@ import ImgSauce from './../../images/sauce-03.svg'
 function BurgerConstructor() {
    
       return (
-        <div className="burger-constructor">
+        <section className="burger-constructor">
 
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginLeft: '32px' }}>
@@ -48,7 +48,7 @@ function BurgerConstructor() {
 
 
 
-        </div>
+        </section>
       );
     
   }

@@ -10,7 +10,7 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
   function BurgerIngredients() {
     const [current, setCurrent] = React.useState('one')
     return (
-        <div className="burger-ingredients">
+        <section className="burger-ingredients">
 
             <p className="burger-ingredient-caption text text_type_main-large pl-5 pr-5 pb-5 pt-5" >
                 Соберите бургер
@@ -40,7 +40,7 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
 
 
 
-    </div>
+    </section>
     );
   }
   

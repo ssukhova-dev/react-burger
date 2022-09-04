@@ -4,6 +4,12 @@ import  '../burger-ingredient-category/burger-ingredient-category.css';
 
 import BurgerIngredientCard from './../burger-ingredient-card/burger-ingredient-card'
 
+
+import ImgBun02Big from './../../images/bun-02-big.svg'
+//import ImgBun01Big from './../../images/bun-01-big.svg'
+import ImgSauce03Big from './../../images/sauce-03-big.svg'
+
+
 class BurgerIngredientCategory extends React.Component {
     render() {
       return (
@@ -14,10 +20,19 @@ class BurgerIngredientCategory extends React.Component {
                 </p>
 
                 <div style={{ display: 'flex',  alignItems: 'flex-start', flexWrap: 'wrap', gap: '20px', marginLeft: '16px'  }}>
-                    <BurgerIngredientCard/>
-                    <BurgerIngredientCard/>
-                    <BurgerIngredientCard/>
-                    <BurgerIngredientCard/>
+                    <BurgerIngredientCard
+                        text="Краторная булка N-200i"
+                        price={200}
+                        thumbnail={ImgBun02Big}
+                    />
+
+                    <BurgerIngredientCard
+                        text="Соус традиционный галактический"
+                        price={30}
+                        thumbnail={ImgSauce03Big}
+                    />
+
+
                 </div>
               </div>
       );

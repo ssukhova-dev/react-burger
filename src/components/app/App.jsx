@@ -14,10 +14,10 @@ function App() {
     <div className="App">
    
       <AppHeader/>
-      <div class="app-body">
+      <section class="app-container">
         <BurgerIngredients/>
         <BurgerConstructor/>
-      </div>
+      </section>
 
    
     </div>
