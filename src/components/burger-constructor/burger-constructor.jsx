@@ -38,6 +38,15 @@ function BurgerConstructor() {
 
 
 
+            <ul>
+                <li><ConstructorElement/></li>
+                <li><ConstructorElement/></li>
+                <li><ConstructorElement/></li>
+                <li><ConstructorElement/></li>
+                
+            </ul>
+
+
         </div>
       );
     

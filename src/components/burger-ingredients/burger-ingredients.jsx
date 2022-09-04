@@ -4,7 +4,7 @@ import './burger-ingredients.css';
 
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 
-import BurgerIngredientCard from './../burger-ingredient-card/burger-ingredient-card'
+import BurgerIngredientCategory from './../burger-ingredient-category/burger-ingredient-category'
 
 
   function BurgerIngredients() {
@@ -29,12 +29,15 @@ import BurgerIngredientCard from './../burger-ingredient-card/burger-ingredient-
             </div>
 
 
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px' }}>
-                <BurgerIngredientCard/>
-                <BurgerIngredientCard/>
-                <BurgerIngredientCard/>
-                <BurgerIngredientCard/>
+
+            <div style={{ display: 'flex',  alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px' }}>
+                <BurgerIngredientCategory/>
+                <BurgerIngredientCategory/>
+                <BurgerIngredientCategory/>
+     
             </div>
+
+
 
 
     </div>

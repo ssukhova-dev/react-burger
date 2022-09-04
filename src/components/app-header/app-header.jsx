@@ -17,17 +17,17 @@ class AppHeader extends React.Component {
 
                 <div className="navigation-link" >
                 <BurgerIcon type="primary" />
-                <span className="text text_type_main-default">
+                <p className="text text_type_main-default">
                     Конструктор
-                </span>
+                </p>
 
                 </div> 
 
                 <div className="navigation-link" >
                 <ListIcon type="secondary" />
-                <span className="text text_type_main-default">
+                <p className="text text_type_main-default">
                     Лента заказов
-                </span>
+                </p>
                 </div>
 
             </div>
@@ -43,9 +43,9 @@ class AppHeader extends React.Component {
             <div className="navigation-account">
                 <div className="navigation-link" >
                 <ProfileIcon type="secondary" />
-                <span className="text text_type_main-default">
+                <p className="text text_type_main-default">
                     Личный кабинет
-                </span>
+                </p>
 
                 </div>
             </div>
