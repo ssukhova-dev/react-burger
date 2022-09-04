@@ -13,12 +13,14 @@ class BurgerIngredientCard extends React.Component {
 
          
                 <img src={ this.props.thumbnail } alt='' />
-                <span style={{ display: 'flex',  alignItems: 'flex-start'}}>
+               
+                <span className="ml-2 mr-2 mb-2 mt-2" style={{ display: 'flex',  alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
                     <p className="text text_type_main-small" style={{marginRight: '10px'}} >
                         {this.props.price}
                     </p>
                     <CurrencyIcon type="primary" />
                 </span>
+
                 <p className="text text_type_main-small" >
                     {this.props.text}
                 </p>
