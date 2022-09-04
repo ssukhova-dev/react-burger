@@ -7,7 +7,7 @@ import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientCategory from './../burger-ingredient-category/burger-ingredient-category'
 
 
-  function BurgerIngredients() {
+  function BurgerIngredients(props) {
     const [current, setCurrent] = React.useState('one')
     return (
         <section className="burger-ingredients">
@@ -31,14 +31,12 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
 
 
             <div style={{ display: 'flex',  alignItems: 'flex-start', flexWrap: 'wrap', gap: '20px', marginTop: '20px' }}>
-                <BurgerIngredientCategory caption="Булки"/>
-                <BurgerIngredientCategory caption="Соусы"/>
-                <BurgerIngredientCategory caption="Начинка"/>
+                <BurgerIngredientCategory caption="Булки" data={props.data}/>
+                <BurgerIngredientCategory caption="Соусы" data={props.data}/>
+                <BurgerIngredientCategory caption="Начинка" data={props.data}/>
      
+
             </div>
-
-
-
 
     </section>
     );
