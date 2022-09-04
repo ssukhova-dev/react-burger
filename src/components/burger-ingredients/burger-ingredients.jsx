@@ -9,6 +9,7 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
 
   function BurgerIngredients(props) {
     const [current, setCurrent] = React.useState('one')
+
     return (
         <section className="burger-ingredients">
 
@@ -31,9 +32,9 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
 
 
             <div style={{ display: 'flex',  alignItems: 'flex-start', flexWrap: 'wrap', gap: '20px', marginTop: '20px' }}>
-                <BurgerIngredientCategory caption="Булки" data={props.data}/>
-                <BurgerIngredientCategory caption="Соусы" data={props.data}/>
-                <BurgerIngredientCategory caption="Начинка" data={props.data}/>
+                <BurgerIngredientCategory caption="Булки" data={props.data.filter(item => item.type === "bun")}/>
+                <BurgerIngredientCategory caption="Соусы" data={props.data.filter(item => item.type === "sauce")}/>
+                <BurgerIngredientCategory caption="Начинка" data={props.data.filter(item => item.type === "main")}/>
      
 
             </div>
