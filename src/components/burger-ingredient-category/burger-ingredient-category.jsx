@@ -13,7 +13,7 @@ class BurgerIngredientCategory extends React.Component {
                     {this.props.caption}
                 </p>
 
-                <div style={{ display: 'flex',  alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px' }}>
+                <div style={{ display: 'flex',  alignItems: 'flex-start', flexWrap: 'wrap', gap: '20px', marginLeft: '16px'  }}>
                     <BurgerIngredientCard/>
                     <BurgerIngredientCard/>
                     <BurgerIngredientCard/>
