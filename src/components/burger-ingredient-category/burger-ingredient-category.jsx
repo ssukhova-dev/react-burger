@@ -8,7 +8,12 @@ class BurgerIngredientCategory extends React.Component {
     render() {
       return (
               <div className="burger-ingredient-category">
-                  <div style={{ display: 'flex',  alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px' }}>
+
+                <p className="burger-ingredient-category-caption text text_type_main-medium pl-5 pr-5 pb-5 pt-5" >
+                    {this.props.caption}
+                </p>
+
+                <div style={{ display: 'flex',  alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px' }}>
                     <BurgerIngredientCard/>
                     <BurgerIngredientCard/>
                     <BurgerIngredientCard/>
