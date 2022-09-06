@@ -1,0 +1,70 @@
+.burger_constructor {
+    display: flex;
+    flex-flow: column;
+
+    margin: 100px 16px 40px 16px;
+ 
+
+    width: 600px;
+    height: 500px;
+
+
+    /* interface/bg */
+
+    background: #131316;
+
+}
+
+.burger_constructor_list{
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 32px; 
+    margin-bottom: 40px;
+
+}
+
+.burger_bun{
+
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    margin: 2px 24px 2px 5px;
+    padding-left: 34px;
+}
+
+
+.burger_filling_list{
+    display: flex;
+    flex-flow: column;
+
+    height: 290px;
+
+
+    overflow-x: hidden;
+    overflow-y: auto;  
+
+}
+                  
+.burger_filling{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.cart_total{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: right;
+
+}
+

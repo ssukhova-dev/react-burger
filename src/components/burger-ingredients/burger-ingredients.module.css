@@ -1,0 +1,38 @@
+.burger_ingredients {
+    display: flex;
+    flex-flow: column;
+
+    align-items: center;
+
+    width: 600px;
+    height: 600px;
+
+
+    overflow-x: hidden;
+    overflow-y: auto;  
+  
+
+    background: #131316;
+
+}
+
+.burger_ingredient_caption {
+    width: 100%;
+    text-align: left;
+
+    margin-top: 20px;
+}
+
+.burger_ingredient_tab {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.burger_category_list {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px; 
+}
