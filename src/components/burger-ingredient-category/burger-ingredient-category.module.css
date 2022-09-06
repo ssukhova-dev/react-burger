@@ -1,4 +1,5 @@
-.burger-ingredient-category {
+
+.burger_ingredient_category {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,7 +10,7 @@
     box-sizing: border-box;*/
   }
 
-  .burger-ingredient-category-caption {
+  .burger_ingredient_category_caption {
     width: 100%;
     text-align: left;
 

@@ -1,4 +1,4 @@
-.burger-ingredients {
+.burger_ingredients {
     display: flex;
     flex-flow: column;
 
@@ -14,7 +14,7 @@
 
 }
 
-.burger-ingredient-caption {
+.burger_ingredient_caption {
     width: 100%;
     text-align: left;
 

@@ -1,6 +1,6 @@
 import React from 'react' // импорт библиотеки
 
-import './burger-ingredients.css';
+import burgerIngredients from './burger-ingredients.module.css';
 
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 
@@ -11,9 +11,9 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
     const [current, setCurrent] = React.useState('one')
 
     return (
-        <section className="burger-ingredients">
+        <section className={burgerIngredients.burger_ingredients}>
 
-            <p className="burger-ingredient-caption text text_type_main-large pl-5 pr-5 pb-5 pt-5" >
+            <p className={`${burgerIngredients.burger_ingredient_caption} text text_type_main-large pl-5 pr-5 pb-5 pt-5`} >
                 Соберите бургер
             </p>
 
@@ -32,9 +32,9 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
 
 
             <div style={{ display: 'flex',  alignItems: 'flex-start', flexWrap: 'wrap', gap: '20px', marginTop: '20px' }}>
-                <BurgerIngredientCategory caption="Булки" data={props.data.filter(item => item.type === "bun")}/>
-                <BurgerIngredientCategory caption="Соусы" data={props.data.filter(item => item.type === "sauce")}/>
-                <BurgerIngredientCategory caption="Начинка" data={props.data.filter(item => item.type === "main")}/>
+                <BurgerIngredientCategory caption="Булки" data={props.ingredients.filter(item => item.type === "bun")}/>
+                <BurgerIngredientCategory caption="Соусы" data={props.ingredients.filter(item => item.type === "sauce")}/>
+                <BurgerIngredientCategory caption="Начинка" data={props.ingredients.filter(item => item.type === "main")}/>
      
 
             </div>

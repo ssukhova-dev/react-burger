@@ -1,21 +1,17 @@
-import './app-header.css';
+import appHeader from './app-header.module.css';
 
 import React from 'react' // импорт библиотеки
-import {BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components'
-import {ListIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import {ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import {Logo} from '@ya.praktikum/react-developer-burger-ui-components'
- 
 
+import {BurgerIcon, ListIcon, ProfileIcon, Logo} from '@ya.praktikum/react-developer-burger-ui-components'
 
 class AppHeader extends React.Component {
     render() {
       return (
-        <div className="app-header">
+        <div className={appHeader.app_header}>
 
-            <div className="navigation-panel">
+            <div className={appHeader.navigation_panel}>
 
-                <div className="navigation-link" >
+                <div className={appHeader.navigation_link} >
                 <BurgerIcon type="primary" />
                 <p className="text text_type_main-default">
                     Конструктор
@@ -23,7 +19,7 @@ class AppHeader extends React.Component {
 
                 </div> 
 
-                <div className="navigation-link" >
+                <div className={appHeader.navigation_link} >
                 <ListIcon type="secondary" />
                 <p className="text text_type_main-default">
                     Лента заказов
@@ -40,8 +36,8 @@ class AppHeader extends React.Component {
 
 
 
-            <div className="navigation-account">
-                <div className="navigation-link" >
+            <div className={appHeader.navigation_account}>
+                <div className={appHeader.navigation_link} >
                 <ProfileIcon type="secondary" />
                 <p className="text text_type_main-default">
                     Личный кабинет

@@ -1,6 +1,6 @@
 
 import React from 'react' // импорт библиотеки
-import './burger-constructor.css';
+import burgerConstructor from './burger-constructor.module.css';
 import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components'
 
 import ImgBun from './../../images/bun-02.svg'
@@ -11,7 +11,7 @@ import ImgSauce from './../../images/sauce-03.svg'
 function BurgerConstructor() {
    
       return (
-        <section className="burger-constructor">
+        <section className={burgerConstructor.burger_constructor}>
 
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginLeft: '32px' }}>

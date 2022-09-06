@@ -2,14 +2,14 @@ import React from 'react' // импорт библиотеки
 
 //import burgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card.module.css'; <div className={burgerIngredientCard.burgerIngredientCard}>
 
-import  '../burger-ingredient-card/burger-ingredient-card.css';
+import burgerIngredientCard from './burger-ingredient-card.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components'
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 
 class BurgerIngredientCard extends React.Component {
     render() {
       return (
-              <div className="burger-ingredient-card">
+              <div className={burgerIngredientCard.burger_ingredient_card}>
 
          
                 <img src={ this.props.thumbnail } alt='' />

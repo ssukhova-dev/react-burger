@@ -1,6 +1,5 @@
-import React from 'react' // импорт библиотеки
 
-import  '../burger-ingredient-category/burger-ingredient-category.css';
+import burgerIngredientCategory from './burger-ingredient-category.module.css';
 
 import BurgerIngredientCard from './../burger-ingredient-card/burger-ingredient-card'
 
@@ -12,9 +11,9 @@ function BurgerIngredientCategory (props) {
  
 
       return (
-              <div className="burger-ingredient-category">
+              <div className={burgerIngredientCategory.burger_ingredient_category}>
 
-                <p className="burger-ingredient-category-caption text text_type_main-medium pl-5 pr-5 pb-5 pt-5" >
+                <p className={`${burgerIngredientCategory.burger_ingredient_category_caption} text text_type_main-medium pl-5 pr-5 pb-5 pt-5`}>
                     {props.caption}
                 </p>
 
