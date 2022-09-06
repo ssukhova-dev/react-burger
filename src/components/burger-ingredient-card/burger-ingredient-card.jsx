@@ -17,8 +17,8 @@ class BurgerIngredientCard extends React.Component {
 
                 <img src={ this.props.thumbnail } alt={`изображение ингредиента ${this.props.text}`} />
                
-                <span className="ml-2 mr-2 mb-2 mt-2" style={{ display: 'flex',  alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
-                    <p className="text text_type_main-small" style={{marginRight: '10px'}} >
+                <span className={`ml-2 mr-2 mb-2 mt-2 ${burgerIngredientCard.flex_center_row}`} >
+                    <p className="text text_type_main-small"  >
                         {this.props.price}
                     </p>
                     <CurrencyIcon type="primary" />

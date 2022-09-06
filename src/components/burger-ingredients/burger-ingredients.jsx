@@ -18,11 +18,12 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
     return (
         <section className={burgerIngredients.burger_ingredients}>
 
-            <p className={`${burgerIngredients.burger_ingredient_caption} text text_type_main-large pl-5 pr-5 pb-5 pt-5`} >
+            <p className={`${burgerIngredients.burger_ingredient_caption} text text_type_main-large p-5`} >
                 Соберите бургер
             </p>
 
-            <div style={{ display: 'flex' }}>
+  
+            <div className={burgerIngredients.burger_ingredients_tabs} style={{ display: 'flex' }}>
                 <Tab value="one" active={current === 'one'} onClick={setCurrent}>
                     Булки
                 </Tab>
@@ -36,7 +37,7 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
 
 
 
-            <div style={{ display: 'flex',  alignItems: 'flex-start', flexWrap: 'wrap', gap: '20px', marginTop: '20px' }}>
+            <div className={burgerIngredients.burger_category_list}>
                 <BurgerIngredientCategory caption="Булки" ingredients={buns}/>
                 <BurgerIngredientCategory caption="Соусы" ingredients={sauces}/>
                 <BurgerIngredientCategory caption="Начинка" ingredients={mains}/>
