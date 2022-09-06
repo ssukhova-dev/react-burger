@@ -19,8 +19,8 @@ function BurgerIngredientCategory (props) {
 
                 <div style={{ display: 'flex',  alignItems: 'flex-start', flexWrap: 'wrap', gap: '20px', marginLeft: '16px'  }}>
                    
-                    {props.data.map((ingredient) => (
-                        <BurgerIngredientCard
+                    {props.data.map((ingredient, index) => (
+                        <BurgerIngredientCard key={index}
                           text={ingredient.name}
                           price={ingredient.price}
                           thumbnail={ingredient.image}

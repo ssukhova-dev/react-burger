@@ -12,7 +12,7 @@ class BurgerIngredientCard extends React.Component {
               <div className={burgerIngredientCard.burger_ingredient_card}>
 
          
-                <img src={ this.props.thumbnail } alt='' />
+                <img src={ this.props.thumbnail } alt={`изображение ингредиента ${this.props.text}`} />
                
                 <span className="ml-2 mr-2 mb-2 mt-2" style={{ display: 'flex',  alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
                     <p className="text text_type_main-small" style={{marginRight: '10px'}} >

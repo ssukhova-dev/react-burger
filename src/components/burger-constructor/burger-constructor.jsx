@@ -33,7 +33,7 @@ function BurgerConstructor() {
                     thumbnail={ImgMeat}
                 />
                   <ConstructorElement
-                    text="{хрустящие минеральные кольца}"
+                    text="хрустящие минеральные кольца"
                     price={80}
                     thumbnail={ImgMineralRings}
                 />
