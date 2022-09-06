@@ -6,7 +6,11 @@
  
 
     width: 600px;
-    height: 912px;
+    height: 600px;
+
+
+    overflow-x: hidden;
+    overflow-y: auto;  
 
 
     /* interface/bg */

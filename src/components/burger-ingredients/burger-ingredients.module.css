@@ -5,10 +5,12 @@
     align-items: center;
 
     width: 600px;
-    height: 912px;
+    height: 600px;
 
 
-    /* interface/bg */
+    overflow-x: hidden;
+    overflow-y: auto;  
+  
 
     background: #131316;
 
