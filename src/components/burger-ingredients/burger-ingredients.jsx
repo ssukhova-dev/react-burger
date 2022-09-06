@@ -11,9 +11,11 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
   function BurgerIngredients(props) {
     const [current, setCurrent] = React.useState('one')
 
-    const buns = props.ingredients.filter(item => item.type === "bun");
-    const sauces = props.ingredients.filter(item => item.type === "sauce");
-    const mains = props.ingredients.filter(item => item.type === "main");
+    const IngredientTypes = { bun: 'bun', sauce: 'sauce', main: 'main',}
+
+    const buns = props.ingredients.filter(item => item.type === IngredientTypes.bun);
+    const sauces = props.ingredients.filter(item => item.type === IngredientTypes.sauce);
+    const mains = props.ingredients.filter(item => item.type === IngredientTypes.main);
 
     return (
         <section className={burgerIngredients.burger_ingredients}>
