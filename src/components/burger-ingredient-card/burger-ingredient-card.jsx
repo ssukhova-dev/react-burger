@@ -4,7 +4,7 @@ import React from 'react' // импорт библиотеки
 
 import burgerIngredientCard from './burger-ingredient-card.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components'
-import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 
 class BurgerIngredientCard extends React.Component {
     render() {
@@ -12,6 +12,8 @@ class BurgerIngredientCard extends React.Component {
               <div className={burgerIngredientCard.burger_ingredient_card}>
 
          
+                <Counter count={1} size="default" />
+
                 <img src={ this.props.thumbnail } alt={`изображение ингредиента ${this.props.text}`} />
                
                 <span className="ml-2 mr-2 mb-2 mt-2" style={{ display: 'flex',  alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
@@ -19,7 +21,7 @@ class BurgerIngredientCard extends React.Component {
                         {this.props.price}
                     </p>
                     <CurrencyIcon type="primary" />
-                </span>
+                </span>              
 
                 <p className="text text_type_main-small" >
                     {this.props.text}

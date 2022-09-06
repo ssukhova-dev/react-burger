@@ -1,19 +1,39 @@
 
 
 import burgerConstructor from './burger-constructor.module.css';
-import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import {ConstructorElement, Button, DragIcon, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+
 
 import ImgBun from './../../images/bun-02.svg'
 
- 
+
 
 function BurgerConstructor(props) {
+
+
+    const CartTotal = ({ total }) => {
+        return (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'right', flexDirection: 'row', gap: '10px'}}>
+                <p className="text text_type_digits-medium">
+                    {total}
+                </p>
+                
+                <CurrencyIcon type="primary" />
+                <div style={{ width: '20px'}}/>
+                <Button type="primary" size="medium" >
+                    Оформить заказ
+                </Button>
+            </div>
+        );
+    };
+
+
    
       return (
         <section className={burgerConstructor.burger_constructor}>
 
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginLeft: '32px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginLeft: '32px', marginBottom: '40px' }}>
 
                 <span className="mr-5 mb-2 mt-2" style={{ display: 'flex',  alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: '10px'}}>
                     <div style={{ width: '32px'}}/>
@@ -58,6 +78,8 @@ function BurgerConstructor(props) {
 
             </div>
 
+
+            <CartTotal total='100'/>
 
 
         </section>
