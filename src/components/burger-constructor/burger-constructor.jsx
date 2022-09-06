@@ -4,13 +4,10 @@ import burgerConstructor from './burger-constructor.module.css';
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 
 import ImgBun from './../../images/bun-02.svg'
-import ImgMeat from './../../images/meat-02.svg'
-import ImgMineralRings from './../../images/mineral rings.svg'
-import ImgSauce from './../../images/sauce-03.svg'
 
  
 
-function BurgerConstructor() {
+function BurgerConstructor(props) {
    
       return (
         <section className={burgerConstructor.burger_constructor}>
@@ -18,7 +15,7 @@ function BurgerConstructor() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginLeft: '32px' }}>
 
-                <span className="mr-2 mb-2 mt-2" style={{ display: 'flex',  alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: '10px'}}>
+                <span className="mr-5 mb-2 mt-2" style={{ display: 'flex',  alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: '10px'}}>
                     <div style={{ width: '32px'}}/>
                     <ConstructorElement
                         type="top"
@@ -29,35 +26,26 @@ function BurgerConstructor() {
                     />
                 </span>
 
-                <span className="ml-2 mr-2 mb-2 mt-2" style={{ display: 'flex',  alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: '10px'}}>
-                    <DragIcon type="primary"/>
-                    <ConstructorElement
-                        text="Соус традиционный галактический"
-                        price={30}
-                        thumbnail={ImgSauce}
-                    />
-                </span>
 
-                <span className="ml-2 mr-2 mb-2 mt-2" style={{ display: 'flex',  alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: '10px'}}>
-                    <DragIcon type="primary"/>
-                    <ConstructorElement
-                        text="Мясо бессмертных молюсков Protostomia"
-                        price={300}
-                        thumbnail={ImgMeat}
-                    />
-                </span>
+                <div className={burgerConstructor.burger_filling}>
 
-                <span className="ml-2 mr-2 mb-2 mt-2" style={{ display: 'flex',  alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: '10px'}}>
-                    <DragIcon type="primary"/>
-                    <ConstructorElement
-                        text="хрустящие минеральные кольца"
-                        price={80}
-                        thumbnail={ImgMineralRings}
-                    />
-                </span>
+                    {props.ingredients.map((ingredient, index) => (
+
+                            <span className="ml-2 mr-2 mb-2 mt-2"  key={index} style={{ display: 'flex',  alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: '10px'}}>
+                            <DragIcon type="primary"/>
+                            <ConstructorElement
+                                text={ingredient.name}
+                                price={ingredient.price}
+                                thumbnail={ingredient.image_mobile}
+                            />
+                            </span>
+                        ))}
+
+                
+                </div>
 
                   
-                <span className="mr-2 mb-2 mt-2" style={{ display: 'flex',  alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: '10px'}}>
+                <span className="mr-5 mb-2 mt-2" style={{ display: 'flex',  alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: '10px'}}>
                     <div style={{ width: '32px'}}/>
                     <ConstructorElement
                         type="bottom"

@@ -6,11 +6,7 @@
  
 
     width: 600px;
-    height: 600px;
-
-
-    overflow-x: hidden;
-    overflow-y: auto;  
+    height: 500px;
 
 
     /* interface/bg */
@@ -18,3 +14,18 @@
     background: #131316;
 
 }
+
+.burger_filling{
+    display: flex;
+    flex-flow: column;
+
+    height: 290px;
+
+
+    overflow-x: hidden;
+    overflow-y: auto;  
+
+
+
+}
+

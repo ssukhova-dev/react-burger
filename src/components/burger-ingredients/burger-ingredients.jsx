@@ -36,9 +36,9 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
 
 
             <div style={{ display: 'flex',  alignItems: 'flex-start', flexWrap: 'wrap', gap: '20px', marginTop: '20px' }}>
-                <BurgerIngredientCategory caption="Булки" data={buns}/>
-                <BurgerIngredientCategory caption="Соусы" data={sauces}/>
-                <BurgerIngredientCategory caption="Начинка" data={mains}/>
+                <BurgerIngredientCategory caption="Булки" ingredients={buns}/>
+                <BurgerIngredientCategory caption="Соусы" ingredients={sauces}/>
+                <BurgerIngredientCategory caption="Начинка" ingredients={mains}/>
      
 
             </div>
