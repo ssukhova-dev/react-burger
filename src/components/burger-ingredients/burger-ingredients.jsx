@@ -1,4 +1,5 @@
 import React from 'react' // импорт библиотеки
+import PropTypes from 'prop-types';
 
 import burgerIngredients from './burger-ingredients.module.css';
 
@@ -46,5 +47,9 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
     </section>
     );
   }
+
+  BurgerIngredients.propTypes = {
+    ingredients: PropTypes.array
+  };
   
   export default BurgerIngredients 

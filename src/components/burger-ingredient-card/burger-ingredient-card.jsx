@@ -1,4 +1,5 @@
 import React from 'react' // импорт библиотеки
+import PropTypes from 'prop-types';
 
 //import burgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card.module.css'; <div className={burgerIngredientCard.burgerIngredientCard}>
 
@@ -33,5 +34,11 @@ class BurgerIngredientCard extends React.Component {
       );
     } 
   }
+
+  BurgerIngredientCard.propTypes = {
+    price: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired
+  };
   
   export default BurgerIngredientCard 
