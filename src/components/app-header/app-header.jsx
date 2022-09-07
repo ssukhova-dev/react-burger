@@ -4,8 +4,8 @@ import React from 'react' // импорт библиотеки
 
 import {BurgerIcon, ListIcon, ProfileIcon, Logo} from '@ya.praktikum/react-developer-burger-ui-components'
 
-class AppHeader extends React.Component {
-    render() {
+function AppHeader() {
+   
       return (
         <div className={appHeader.app_header}>
 
@@ -49,7 +49,7 @@ class AppHeader extends React.Component {
 
         </div>
       );
-    }
+    
   }
   
   export default AppHeader 
