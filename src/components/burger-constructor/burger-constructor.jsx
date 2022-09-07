@@ -35,7 +35,7 @@ function BurgerConstructor(props) {
 
             <div className={burgerConstructor.burger_constructor_list} >
   
-                <span className={burgerConstructor.burger_bun}>
+                <span className={burgerConstructor.burger_bun} >
                     <ConstructorElement
                         type="top"
                         isLocked={true}
@@ -50,7 +50,7 @@ function BurgerConstructor(props) {
 
                     {props.ingredients.map((ingredient, index) => (
 
-                            <span className={`${burgerConstructor.burger_filling} m-2`}>
+                            <span className={`${burgerConstructor.burger_filling} m-2`} key={index}>
                             <DragIcon type="primary"/>
                             <ConstructorElement
                                 text={ingredient.name}
