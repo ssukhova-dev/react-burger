@@ -62,9 +62,17 @@
 .cart_total{
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 30px;
     align-items: center;
     justify-content: right;
 
+}
+
+.price_module{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
 

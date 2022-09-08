@@ -14,12 +14,14 @@ function BurgerConstructor(props) {
     const CartTotal = ({ total }) => {
         return (
             <section className={burgerConstructorStyles.cart_total}>
-                <p className="text text_type_digits-medium">
-                    {total}
-                </p>
-                
-                <CurrencyIcon type="primary" />
-                <div style={{ width: '20px'}}/>
+
+                <div className={burgerConstructorStyles.price_module}>
+                    <p className="text text_type_digits-medium">
+                        {total}
+                    </p>
+                    <CurrencyIcon type="primary" />
+                </div>  
+        
                 <Button type="primary" size="medium" >
                     Оформить заказ
                 </Button>
