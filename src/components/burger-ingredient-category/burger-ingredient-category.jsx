@@ -20,8 +20,8 @@ function BurgerIngredientCategory (props) {
 
                 <div className={burgerIngCategoryStyles.burger_ingredient_list}>
                    
-                    {props.ingredients.map((ingredient, index) => (
-                        <BurgerIngredientCard key={index}
+                    {props.ingredients.map((ingredient) => (
+                        <BurgerIngredientCard key={ingredient._id}
                           text={ingredient.name}
                           price={ingredient.price}
                           thumbnail={ingredient.image}

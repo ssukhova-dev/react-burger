@@ -29,15 +29,15 @@ function BurgerConstructor(props) {
 
                 <div className={burgerConstructorStyles.burger_filling_list}>
 
-                    {props.ingredients.map((ingredient, index) => (
+                    {props.ingredients.map((ingredient) => (
 
-                            <span className={`${burgerConstructorStyles.burger_filling} m-2`} key={index}>
-                            <DragIcon type="primary"/>
-                            <ConstructorElement
-                                text={ingredient.name}
-                                price={ingredient.price}
-                                thumbnail={ingredient.image_mobile}
-                            />
+                            <span className={`${burgerConstructorStyles.burger_filling} m-2`} key={ingredient._id}>
+                                <DragIcon type="primary"/>
+                                <ConstructorElement
+                                    text={ingredient.name}
+                                    price={ingredient.price}
+                                    thumbnail={ingredient.image_mobile}                                 
+                                />
                             </span>
                         ))}
 
@@ -58,7 +58,7 @@ function BurgerConstructor(props) {
             </div>
 
 
-            <CartTotal total='100'/>
+            <CartTotal total={100}/>
 
 
         </section>
