@@ -2,6 +2,7 @@ import React from 'react' // импорт библиотеки
 import PropTypes from 'prop-types';
 
 import burgerIngStyles from './burger-ingredients.module.css';
+import commonStyles from  './../../utils/common-styles.module.css';
 
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
  
@@ -40,7 +41,7 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
 
 
 
-            <div className={burgerIngStyles.burger_category_list}>
+            <div className={`${burgerIngStyles.burger_category_list} ${commonStyles.custom_scrollbar}`}>
                 <BurgerIngredientCategory caption="Булки" ingredients={buns}/>
                 <BurgerIngredientCategory caption="Соусы" ingredients={sauces}/>
                 <BurgerIngredientCategory caption="Начинка" ingredients={mains}/>

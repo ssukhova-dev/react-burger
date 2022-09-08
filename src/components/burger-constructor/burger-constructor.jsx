@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 
 import burgerConstructorStyles from './burger-constructor.module.css';
+import commonStyles from  './../../utils/common-styles.module.css';
+
 import ingredientPropType from './../../utils/prop-types.jsx'
 
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
@@ -29,7 +31,8 @@ function BurgerConstructor(props) {
                 </span>
 
 
-                <div className={burgerConstructorStyles.burger_filling_list}>
+        
+                <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`}>
 
                     {props.ingredients.map((ingredient) => (
 
