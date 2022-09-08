@@ -1,7 +1,6 @@
 import React from 'react' // импорт библиотеки
 import PropTypes from 'prop-types';
 
-//import burgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card.module.css'; <div className={burgerIngredientCard.burgerIngredientCard}>
 
 import burgerIngCardStyle from './burger-ingredient-card.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components'
