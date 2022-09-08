@@ -1,7 +1,7 @@
 import React from 'react' // импорт библиотеки
 import PropTypes from 'prop-types';
 
-import burgerIngredients from './burger-ingredients.module.css';
+import burgerIngStyles from './burger-ingredients.module.css';
 
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 
@@ -17,14 +17,14 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
     const mains = props.ingredients.filter(item => item.type === IngredientTypes.main);
 
     return (
-        <section className={burgerIngredients.burger_ingredients}>
+        <section className={burgerIngStyles.burger_ingredients}>
 
-            <p className={`${burgerIngredients.burger_ingredient_caption} text text_type_main-large p-5`} >
+            <p className={`${burgerIngStyles.burger_ingredient_caption} text text_type_main-large p-5`} >
                 Соберите бургер
             </p>
 
   
-            <div className={burgerIngredients.burger_ingredients_tabs} style={{ display: 'flex' }}>
+            <div className={burgerIngStyles.burger_ingredients_tabs} >
                 <Tab value="one" active={current === 'one'} onClick={setCurrent}>
                     Булки
                 </Tab>
@@ -38,7 +38,7 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
 
 
 
-            <div className={burgerIngredients.burger_category_list}>
+            <div className={burgerIngStyles.burger_category_list}>
                 <BurgerIngredientCategory caption="Булки" ingredients={buns}/>
                 <BurgerIngredientCategory caption="Соусы" ingredients={sauces}/>
                 <BurgerIngredientCategory caption="Начинка" ingredients={mains}/>

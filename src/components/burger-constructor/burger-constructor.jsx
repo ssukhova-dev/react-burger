@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import burgerConstructor from './burger-constructor.module.css';
+import burgerConstructorStyles from './burger-constructor.module.css';
 import {ConstructorElement, Button, DragIcon, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 
 
@@ -13,7 +13,7 @@ function BurgerConstructor(props) {
 
     const CartTotal = ({ total }) => {
         return (
-            <section className={burgerConstructor.cart_total}>
+            <section className={burgerConstructorStyles.cart_total}>
                 <p className="text text_type_digits-medium">
                     {total}
                 </p>
@@ -30,12 +30,12 @@ function BurgerConstructor(props) {
 
    
       return (
-        <section className={burgerConstructor.burger_constructor}>
+        <section className={burgerConstructorStyles.burger_constructor}>
 
 
-            <div className={burgerConstructor.burger_constructor_list} >
+            <div className={burgerConstructorStyles.burger_constructor_list} >
   
-                <span className={burgerConstructor.burger_bun} >
+                <span className={burgerConstructorStyles.burger_bun} >
                     <ConstructorElement
                         type="top"
                         isLocked={true}
@@ -46,11 +46,11 @@ function BurgerConstructor(props) {
                 </span>
 
 
-                <div className={burgerConstructor.burger_filling_list}>
+                <div className={burgerConstructorStyles.burger_filling_list}>
 
                     {props.ingredients.map((ingredient, index) => (
 
-                            <span className={`${burgerConstructor.burger_filling} m-2`} key={index}>
+                            <span className={`${burgerConstructorStyles.burger_filling} m-2`} key={index}>
                             <DragIcon type="primary"/>
                             <ConstructorElement
                                 text={ingredient.name}
@@ -64,7 +64,7 @@ function BurgerConstructor(props) {
                 </div>
 
                   
-                <span className={burgerConstructor.burger_bun}>
+                <span className={burgerConstructorStyles.burger_bun}>
                     <ConstructorElement
                         type="bottom"
                         isLocked={true}

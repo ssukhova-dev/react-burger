@@ -1,4 +1,4 @@
-import appHeader from './app-header.module.css';
+import appHeaderStyles from './app-header.module.css';
 
 import React from 'react' // импорт библиотеки
 
@@ -7,11 +7,11 @@ import {BurgerIcon, ListIcon, ProfileIcon, Logo} from '@ya.praktikum/react-devel
 function AppHeader() {
    
       return (
-        <div className={appHeader.app_header}>
+        <div className={appHeaderStyles.app_header}>
 
-            <div className={appHeader.navigation_panel}>
+            <div className={appHeaderStyles.navigation_panel}>
 
-                <div className={appHeader.navigation_link} >
+                <div className={appHeaderStyles.navigation_link} >
                 <BurgerIcon type="primary" />
                 <p className="text text_type_main-default">
                     Конструктор
@@ -19,7 +19,7 @@ function AppHeader() {
 
                 </div> 
 
-                <div className={appHeader.navigation_link} >
+                <div className={appHeaderStyles.navigation_link} >
                 <ListIcon type="secondary" />
                 <p className="text text_type_main-default">
                     Лента заказов
@@ -36,8 +36,8 @@ function AppHeader() {
 
 
 
-            <div className={appHeader.navigation_account}>
-                <div className={appHeader.navigation_link} >
+            <div className={appHeaderStyles.navigation_account}>
+                <div className={appHeaderStyles.navigation_link} >
                 <ProfileIcon type="secondary" />
                 <p className="text text_type_main-default">
                     Личный кабинет
