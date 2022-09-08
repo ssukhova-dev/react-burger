@@ -1,36 +1,15 @@
 import PropTypes from 'prop-types';
 
 import burgerConstructorStyles from './burger-constructor.module.css';
-import {ConstructorElement, Button, DragIcon, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 
+import CartTotal from '../cart-total/cart-total'
 
 import ImgBun from './../../images/bun-02.svg'
 
 
-
 function BurgerConstructor(props) {
 
-
-    const CartTotal = ({ total }) => {
-        return (
-            <section className={burgerConstructorStyles.cart_total}>
-
-                <div className={burgerConstructorStyles.price_module}>
-                    <p className="text text_type_digits-medium">
-                        {total}
-                    </p>
-                    <CurrencyIcon type="primary" />
-                </div>  
-        
-                <Button type="primary" size="medium" >
-                    Оформить заказ
-                </Button>
-            </section>
-        );
-    };
-
-
-   
       return (
         <section className={burgerConstructorStyles.burger_constructor}>
 
