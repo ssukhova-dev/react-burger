@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import burgerIngStyles from './burger-ingredients.module.css';
 
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
-
+ 
+import ingredientPropType from './../../utils/prop-types.jsx'
 import BurgerIngredientCategory from './../burger-ingredient-category/burger-ingredient-category'
 
   function BurgerIngredients(props) {
@@ -50,8 +51,10 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
     );
   }
 
+
+
   BurgerIngredients.propTypes = {
-    ingredients: PropTypes.array
+    ingredients: PropTypes.arrayOf(ingredientPropType)
   };
   
   export default BurgerIngredients 

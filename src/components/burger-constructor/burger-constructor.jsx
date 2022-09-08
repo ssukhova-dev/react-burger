@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 
 import burgerConstructorStyles from './burger-constructor.module.css';
+import ingredientPropType from './../../utils/prop-types.jsx'
+
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 
 import CartTotal from '../cart-total/cart-total'
@@ -67,7 +69,7 @@ function BurgerConstructor(props) {
   }
 
   BurgerConstructor.propTypes = {
-    ingredients: PropTypes.array
+    ingredients: PropTypes.arrayOf(ingredientPropType)
   };
   
   export default BurgerConstructor 

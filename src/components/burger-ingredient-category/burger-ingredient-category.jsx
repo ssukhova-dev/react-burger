@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import burgerIngCategoryStyles from './burger-ingredient-category.module.css';
-
+import ingredientPropType from './../../utils/prop-types.jsx'
 import BurgerIngredientCard from './../burger-ingredient-card/burger-ingredient-card'
 
 
@@ -37,7 +37,8 @@ function BurgerIngredientCategory (props) {
 
   BurgerIngredientCategory.propTypes = {
     caption: PropTypes.string.isRequired,
-    ingredients: PropTypes.array
+
+    ingredients: PropTypes.arrayOf(ingredientPropType)
   };
-  
+   
   export default BurgerIngredientCategory 

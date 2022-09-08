@@ -27,7 +27,7 @@ function CartTotal({ total }) {
         };
 
     CartTotal.propTypes = {
-        total: PropTypes.number
+        total: PropTypes.number.isRequired
   };
   
   export default CartTotal 
