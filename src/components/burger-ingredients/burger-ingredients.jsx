@@ -9,9 +9,10 @@ import ingredientPropType from './../../utils/prop-types.jsx'
 import BurgerIngredientCategory from './../burger-ingredient-category/burger-ingredient-category'
 
   function BurgerIngredients(props) {
-    const [current, setCurrent] = React.useState('one')
-
     const IngredientTypes = { bun: 'bun', sauce: 'sauce', main: 'main',}
+   
+    const [current, setCurrent] = React.useState(IngredientTypes.bun)
+
 
     const buns = props.ingredients.filter(item => item.type === IngredientTypes.bun);
     const sauces = props.ingredients.filter(item => item.type === IngredientTypes.sauce);
@@ -26,13 +27,13 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
 
   
             <div className={burgerIngStyles.burger_ingredients_tabs} >
-                <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+                <Tab value={IngredientTypes.bun} active={current === IngredientTypes.bun} onClick={setCurrent}>
                     Булки
                 </Tab>
-                <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+                <Tab value={IngredientTypes.sauce} active={current === IngredientTypes.sauce} onClick={setCurrent}>
                     Соусы
                 </Tab>
-                <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+                <Tab value={IngredientTypes.main} active={current === IngredientTypes.main} onClick={setCurrent}>
                     Начинки
                 </Tab>
             </div>
