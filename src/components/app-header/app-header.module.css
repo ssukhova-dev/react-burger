@@ -43,11 +43,47 @@
     flex-direction: row;
     align-items: center;
     padding: 16px 20px;
-    gap: 8px;
+    gap: 7px;
 
 
 
 }
+
+
+a:link.navigation_link {
+
+  text-decoration: none;
+
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #8585AD;;
+}
+
+
+a:hover.navigation_link {
+
+	color: #F2F2F3;
+
+}
+
+.link_icon {
+  display: flex;
+}
+.link_icon_hover {
+  display: none;
+}
+a:hover.navigation_link div.link_icon  {
+  display: none;
+}
+a:hover.navigation_link div.link_icon_hover {
+  display: flex;
+}
+
+
 
 
 .navigation_logo{

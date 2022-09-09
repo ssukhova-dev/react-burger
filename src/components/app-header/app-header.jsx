@@ -12,18 +12,23 @@ function AppHeader() {
             <div className={appHeaderStyles.navigation_panel}>
 
                 <div className={appHeaderStyles.navigation_link} >
-                <BurgerIcon type="primary" />
-                <p className="text text_type_main-default">
-                    Конструктор
-                </p>
-
+                <a href="#" className={appHeaderStyles.navigation_link} >
+                    <div className={appHeaderStyles.link_icon}><BurgerIcon type="secondary"/></div>
+                    <div className={appHeaderStyles.link_icon_hover}><BurgerIcon type="primary"/></div>
+                    <p className="text text_type_main-default">
+                        Конструктор
+                    </p>
+                </a>
                 </div> 
 
                 <div className={appHeaderStyles.navigation_link} >
-                <ListIcon type="secondary" />
+                <a href="#" className={appHeaderStyles.navigation_link} >
+                <div className={appHeaderStyles.link_icon}><ListIcon type="secondary"/></div>
+                <div className={appHeaderStyles.link_icon_hover}><ListIcon type="primary"/></div>
                 <p className="text text_type_main-default">
                     Лента заказов
                 </p>
+                </a>
                 </div>
 
             </div>
@@ -38,11 +43,13 @@ function AppHeader() {
 
             <div className={appHeaderStyles.navigation_account}>
                 <div className={appHeaderStyles.navigation_link} >
-                <ProfileIcon type="secondary" />
+                <a href="#" className={appHeaderStyles.navigation_link} >
+                <div className={appHeaderStyles.link_icon}><ProfileIcon type="secondary"/></div>
+                <div className={appHeaderStyles.link_icon_hover}><ProfileIcon type="primary"/></div>
                 <p className="text text_type_main-default">
                     Личный кабинет
                 </p>
-
+                </a>
                 </div>
             </div>
               
