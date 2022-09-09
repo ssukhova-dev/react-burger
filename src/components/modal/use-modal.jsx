@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function useModalDlg() {
+function useModal() {
     const [isModalOpen, setIsModalOpen] = React.useState(false);
   
     function handleOpenModal() {
@@ -23,4 +23,4 @@ function useModalDlg() {
   }
   
 
-  export default useModalDlg;
+  export default useModal;
