@@ -22,10 +22,7 @@ function App() {
       fetch(ingredientsUrl)
         .then(res => res.json())
         .then(data => {
-          
-              console.log(data);
               setState({ ...state, ingredients: data.data, isLoading: false }) 
-
             }
           )
         .catch(e => {

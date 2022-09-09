@@ -8,8 +8,6 @@ import Modal from '../modal/modal'
 
 function IngredientDetails (props){
 
-    console.log(props);
-
     return (
         <div >
       

@@ -1,5 +1,5 @@
 import React from 'react' // импорт библиотеки
-import PropTypes from 'prop-types';
+
 import ingredientPropType from './../../utils/prop-types.jsx'
 
 import burgerIngCardStyle from './burger-ingredient-card.module.css';
@@ -12,13 +12,11 @@ import IngredientDetails from '../ingredient-details/ingredient-details'
 function BurgerIngredientCard(ingredient) {
 
 
-  console.log(ingredient);
-
-      const IngredientDetailsDlg = useModal();
+      const ingredientDetailsDlg = useModal();
 
       return (
         <>
-              <div className={burgerIngCardStyle.burger_ingredient_card} onClick={IngredientDetailsDlg.open}>
+              <div className={burgerIngCardStyle.burger_ingredient_card} onClick={ingredientDetailsDlg.open}>
 
          
                 <Counter count={1} size="default" />
@@ -40,7 +38,7 @@ function BurgerIngredientCard(ingredient) {
                   
               </div>
 
-              <IngredientDetails {...IngredientDetailsDlg.modalProps}  ingredient = {ingredient}/>
+              <IngredientDetails {...ingredientDetailsDlg.modalProps}  ingredient = {ingredient}/>
 
           </>
       );

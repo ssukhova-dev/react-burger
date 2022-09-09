@@ -9,8 +9,7 @@ function OrderDetails (props){
            <Modal {...props} title="OrderDetails">
                <>
                    content
-                   <button>1</button>
-                   <button>2</button>
+   
                </>
            </Modal>
    
