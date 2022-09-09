@@ -24,6 +24,12 @@ function Modal(props){
 
 
 
+  function handleClose() {
+    console.log("requestClose");
+    props.requestClose && props.requestClose();
+  }
+
+
   return props.isOpen && ReactDom.createPortal(
       <div className={modalStyles.modal_root}>
 
@@ -38,7 +44,7 @@ function Modal(props){
        
           </div>
 
-          <div className={modalStyles.modal_close} onClick={() => props.requestClose && props.requestClose()}>
+          <div className={modalStyles.modal_close} onClick={ handleClose}>
             <div className={modalStyles.close_btn} >
                 <CloseIcon type="primary" />
             </div>
@@ -47,7 +53,10 @@ function Modal(props){
             </div>
           </div>
 
-          {props.children}
+          <div className={modalStyles.modal_body}>
+            {props.children}
+          </div>
+          
         </div>
       </div>,
       ModalSectionElement

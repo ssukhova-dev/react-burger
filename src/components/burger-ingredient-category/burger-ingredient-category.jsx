@@ -22,9 +22,7 @@ function BurgerIngredientCategory (props) {
                    
                     {props.ingredients.map((ingredient) => (
                         <BurgerIngredientCard key={ingredient._id}
-                          text={ingredient.name}
-                          price={ingredient.price}
-                          thumbnail={ingredient.image}
+                        {...ingredient}
                         />
                     ))}
 

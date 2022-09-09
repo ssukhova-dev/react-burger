@@ -8,8 +8,12 @@ function useModal() {
       setIsModalOpen(true);
     }
   
-    function handleCloseModal(requester) {
+    function handleCloseModal() {
+      console.log("handleCloseModal");
+
       setIsModalOpen(false);
+
+      console.log(isModalOpen);
     }
   
     return {
