@@ -9,11 +9,7 @@ function useModal() {
     }
   
     function handleCloseModal() {
-      console.log("handleCloseModal");
-
       setIsModalOpen(false);
-
-      console.log(isModalOpen);
     }
   
     return {

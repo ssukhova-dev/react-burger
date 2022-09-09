@@ -46,7 +46,7 @@ function IngredientDetails (props){
 
 }
 
-Modal.propTypes = {
+IngredientDetails.propTypes = {
     title: PropTypes.string,
     isOpen: PropTypes.bool.isRequired,
     requestClose: PropTypes.func.isRequired,

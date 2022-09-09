@@ -27,7 +27,7 @@ function CartTotal({ total }) {
                 </Button>
             </section>
 
-            <OrderDetails {...orderDetailsDlg.modalProps} />
+            <OrderDetails {...orderDetailsDlg.modalProps} orderId={55555} />
 
             </>
         );

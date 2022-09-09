@@ -25,7 +25,6 @@ function Modal(props){
 
 
   function handleClose() {
-    console.log("requestClose");
     props.requestClose && props.requestClose();
   }
 
