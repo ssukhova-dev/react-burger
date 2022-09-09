@@ -1,6 +1,6 @@
 import appHeaderStyles from './app-header.module.css';
 
-import React from 'react' // импорт библиотеки
+import React from 'react'
 
 import {BurgerIcon, ListIcon, ProfileIcon, Logo} from '@ya.praktikum/react-developer-burger-ui-components'
 

@@ -1,4 +1,4 @@
-import React from 'react' // импорт библиотеки
+import React from 'react'  
 
 import ingredientPropType from './../../utils/prop-types.jsx'
 
