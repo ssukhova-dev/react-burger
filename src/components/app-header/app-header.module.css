@@ -83,6 +83,8 @@ a:hover.navigation_link {
 
 }
 
+
+
 .link_icon {
   display: flex;
 }
@@ -96,6 +98,19 @@ a:hover.navigation_link div.link_icon_hover {
   display: flex;
 }
 
+
+a[active_page="true"] { 
+
+	color: #F2F2F3;
+
+}
+
+a[active_page="true"] div.link_icon  {
+  display: none;
+}
+a[active_page="true"] div.link_icon_hover {
+  display: flex;
+}
 
 
 
