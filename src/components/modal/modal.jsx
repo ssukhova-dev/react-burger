@@ -10,12 +10,13 @@ import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 
 
 const ModalSectionElement = document.querySelector('#modals-section');
+const ESC = 'Escape';
 
 function Modal(props){
 
 
   function handleKeyDown(e) {
-    if (e.key === 'Escape') {
+    if (e.key === ESC) {
       props.requestClose();
     }
   }
