@@ -8,6 +8,8 @@ import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-com
 
 import useModal from '../modal/use-modal'
 import IngredientDetails from '../ingredient-details/ingredient-details'
+import Modal from '../modal/modal'
+
 
 function BurgerIngredientCard(ingredient) {
 
@@ -34,11 +36,13 @@ function BurgerIngredientCard(ingredient) {
                     {ingredient.name}
                 </p>
 
-                
-                  
               </div>
 
-              <IngredientDetails {...ingredientDetailsDlg.modalProps}  ingredient = {ingredient}/>
+              
+
+              <Modal {...ingredientDetailsDlg.modalProps} title="Детали ингредиента">
+                  <IngredientDetails ingredient = {ingredient}/>
+              </Modal>
 
           </>
       );

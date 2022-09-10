@@ -6,6 +6,7 @@ import {CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-comp
 
 import useModal from '../modal/use-modal'
 import OrderDetails from '../order-details/order-details'
+import Modal from '../modal/modal'
 
 function CartTotal({ total }) {
 
@@ -27,7 +28,9 @@ function CartTotal({ total }) {
                 </Button>
             </section>
 
-            <OrderDetails {...orderDetailsDlg.modalProps} orderId={55555} />
+            <Modal {...orderDetailsDlg.modalProps}>
+                  <OrderDetails orderId={55555}/>
+            </Modal>
 
             </>
         );
