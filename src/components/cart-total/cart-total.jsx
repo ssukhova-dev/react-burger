@@ -28,9 +28,13 @@ function CartTotal({ total }) {
                 </Button>
             </section>
 
-            <Modal {...orderDetailsDlg}>
-                  <OrderDetails orderId={55555}/>
-            </Modal>
+            {
+                orderDetailsDlg.isOpen && (
+                    <Modal onClose={orderDetailsDlg.requestClose}>
+                        <OrderDetails orderId={55555}/>
+                    </Modal>
+                )
+            }
 
             </>
         );

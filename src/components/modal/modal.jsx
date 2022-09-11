@@ -17,7 +17,7 @@ function Modal(props){
 
   function handleKeyDown(e) {
     if (e.key === ESC) {
-      props.requestClose();
+      props.onClose();
     }
   }
 
@@ -28,11 +28,11 @@ function Modal(props){
 
 
   function handleClose() {
-    props.requestClose();
+    props.onClose();
   }
 
 
-  return props.isOpen && ReactDom.createPortal(
+  return ReactDom.createPortal(
       <div className={modalStyles.modal_root}>
 
         <ModalOverlay {...props}/>
@@ -67,9 +67,9 @@ function Modal(props){
 
 Modal.propTypes = {
     title: PropTypes.string,
-    isOpen: PropTypes.bool.isRequired,
-    requestClose: PropTypes.func.isRequired
-  };
+    onClose: PropTypes.func.isRequired
+  
+};
 
 
 export default Modal;

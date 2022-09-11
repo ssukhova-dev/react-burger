@@ -68,9 +68,13 @@ function BurgerIngredients(props) {
 
         </section>
 
-        <Modal {...ingredientDetailsDlg} title="Детали ингредиента">
-                <IngredientDetails ingredient = {selectedIngredient}/>
-        </Modal>
+        {
+            ingredientDetailsDlg.isOpen && (
+                <Modal onClose={ingredientDetailsDlg.requestClose} title="Детали ингредиента">
+                    <IngredientDetails ingredient = {selectedIngredient}/>
+                </Modal>
+            )
+        }
 
         </>
     );
