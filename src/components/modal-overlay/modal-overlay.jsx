@@ -9,7 +9,7 @@ function ModalOverlay(props){
 
   return (
 
-        <div className={modalOverlayStyles.modal_overlay} onClick={() => props.requestClose()}></div>
+        <div className={modalOverlayStyles.modal_overlay} onClick={props.requestClose}></div>
        
   );
 };
