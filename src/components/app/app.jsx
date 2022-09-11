@@ -7,7 +7,7 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 
 
-import {BURGER_API_URL} from '../../utils/burger-api' 
+import {getIngredientsData} from '../../utils/burger-api' 
 
 function App() {
 
@@ -16,31 +16,22 @@ function App() {
     ingredients: []});
 
 
-  const ingredientsUrl = `${BURGER_API_URL}/ingredients`;
-
-
-  const checkResponse = (res) => {
-    return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
-  };
-
-
   React.useEffect(()=>{ 
     const getIngredients = async () => {
-      setState({ ...state, hasError: false, isLoading: true });
-      fetch(ingredientsUrl)
-        .then(checkResponse)
-        .then(data => {
-              setState({ ...state, ingredients: data.data, isLoading: false }) 
-            }
-          )
+        setState({ ...state, hasError: false, isLoading: true });
+
+        getIngredientsData()
+        .then((data) => {
+          setState({ ...state, ingredients: data.data, isLoading: false }) 
+        })
         .catch(e => {
           setState({ ...state, hasError: true, isLoading: false });
-        });
+        })
       }
 
       getIngredients();
   }, []);
-
+  
 
 
   return (
