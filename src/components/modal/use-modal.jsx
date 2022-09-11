@@ -13,12 +13,10 @@ function useModal() {
     }
   
     return {
-      open: handleOpenModal,
-      close: handleCloseModal,
-      modalProps: {
-        isOpen: isModalOpen,
-        requestClose: handleCloseModal
-      }
+      open: handleOpenModal,  
+      isOpen: isModalOpen,
+      requestClose: handleCloseModal
+  
     };
   }
   

@@ -68,7 +68,7 @@ function BurgerIngredients(props) {
 
         </section>
 
-        <Modal {...ingredientDetailsDlg.modalProps} title="Детали ингредиента">
+        <Modal {...ingredientDetailsDlg} title="Детали ингредиента">
                 <IngredientDetails ingredient = {selectedIngredient}/>
         </Modal>
 
