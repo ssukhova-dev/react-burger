@@ -6,10 +6,7 @@
  
 
     width: 600px;
-    height: 500px;
 
-
-    /* interface/bg */
 
     background: #131316;
 
@@ -42,7 +39,7 @@
     display: flex;
     flex-flow: column;
 
-    height: 290px;
+    height: calc(100vh - 520px);
 
 
     overflow-x: hidden;
@@ -59,12 +56,5 @@
 
 }
 
-.cart_total{
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
-    justify-content: right;
 
-}
 

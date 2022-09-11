@@ -1,44 +1,57 @@
-import React from 'react' // импорт библиотеки
-import PropTypes from 'prop-types';
+import React from 'react'  
 
-//import burgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card.module.css'; <div className={burgerIngredientCard.burgerIngredientCard}>
+import ingredientPropType from './../../utils/prop-types.jsx'
 
-import burgerIngredientCard from './burger-ingredient-card.module.css';
+import burgerIngCardStyle from './burger-ingredient-card.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 
-class BurgerIngredientCard extends React.Component {
-    render() {
+import useModal from '../modal/use-modal'
+import IngredientDetails from '../ingredient-details/ingredient-details'
+import Modal from '../modal/modal'
+
+
+function BurgerIngredientCard(ingredient) {
+
+
+      const ingredientDetailsDlg = useModal();
+
       return (
-              <div className={burgerIngredientCard.burger_ingredient_card}>
+        <>
+              <div className={burgerIngCardStyle.burger_ingredient_card} onClick={ingredientDetailsDlg.open}>
 
          
                 <Counter count={1} size="default" />
 
-                <img src={ this.props.thumbnail } alt={`изображение ингредиента ${this.props.text}`} />
+                <img src={ ingredient.image } alt={`изображение ингредиента ${ingredient.name}`} />
                
-                <span className={`ml-2 mr-2 mb-2 mt-2 ${burgerIngredientCard.flex_center_row}`} >
+                <span className={`ml-2 mr-2 mb-2 mt-2 ${burgerIngCardStyle.flex_center_row}`} >
                     <p className="text text_type_main-small"  >
-                        {this.props.price}
+                        {ingredient.price}
                     </p>
                     <CurrencyIcon type="primary" />
                 </span>              
 
                 <p className="text text_type_main-small" >
-                    {this.props.text}
+                    {ingredient.name}
                 </p>
-                  
+
               </div>
 
+              
 
+              <Modal {...ingredientDetailsDlg.modalProps} title="Детали ингредиента">
+                  <IngredientDetails ingredient = {ingredient}/>
+              </Modal>
+
+          </>
       );
-    } 
+  
   }
 
   BurgerIngredientCard.propTypes = {
-    price: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    thumbnail: PropTypes.string.isRequired
+    ingredient: ingredientPropType
+
   };
   
   export default BurgerIngredientCard 

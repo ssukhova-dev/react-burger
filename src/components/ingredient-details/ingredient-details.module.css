@@ -1,0 +1,38 @@
+
+.content_body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    justify-content: center;
+
+   
+    margin: auto;
+
+
+  }
+
+.nutritional_value_list{
+
+    display: flex;
+    list-style: none;
+    padding-inline-start: 0px;
+
+    gap: 40px;
+}
+
+.nutritional_value{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.flex_center_row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}

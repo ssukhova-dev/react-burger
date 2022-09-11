@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
-import burgerIngredientCategory from './burger-ingredient-category.module.css';
-
+import burgerIngCategoryStyles from './burger-ingredient-category.module.css';
+import ingredientPropType from './../../utils/prop-types.jsx'
 import BurgerIngredientCard from './../burger-ingredient-card/burger-ingredient-card'
 
 
@@ -12,19 +12,17 @@ function BurgerIngredientCategory (props) {
  
 
       return (
-              <div className={burgerIngredientCategory.burger_ingredient_category}>
+              <div className={burgerIngCategoryStyles.burger_ingredient_category}>
 
-                <p className={`${burgerIngredientCategory.burger_ingredient_category_caption} text text_type_main-medium p-5`}>
+                <p className={`${burgerIngCategoryStyles.burger_ingredient_category_caption} text text_type_main-medium p-5`}>
                     {props.caption}
                 </p>
 
-                <div className={burgerIngredientCategory.burger_ingredient_list}>
+                <div className={burgerIngCategoryStyles.burger_ingredient_list}>
                    
-                    {props.ingredients.map((ingredient, index) => (
-                        <BurgerIngredientCard key={index}
-                          text={ingredient.name}
-                          price={ingredient.price}
-                          thumbnail={ingredient.image}
+                    {props.ingredients.map((ingredient) => (
+                        <BurgerIngredientCard key={ingredient._id}
+                        {...ingredient}
                         />
                     ))}
 
@@ -37,7 +35,8 @@ function BurgerIngredientCategory (props) {
 
   BurgerIngredientCategory.propTypes = {
     caption: PropTypes.string.isRequired,
-    ingredients: PropTypes.array
+
+    ingredients: PropTypes.arrayOf(ingredientPropType)
   };
-  
+   
   export default BurgerIngredientCategory 

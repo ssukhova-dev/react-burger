@@ -4,16 +4,6 @@
 
     align-items: center;
 
-    width: 600px;
-    height: 600px;
-
-
-    overflow-x: hidden;
-    overflow-y: auto;  
-  
-
-    background: #131316;
-
 }
 
 .burger_ingredient_caption {
@@ -23,10 +13,8 @@
     margin-top: 20px;
 }
 
-.burger_ingredient_tab {
+.burger_ingredients_tabs {
     display: flex;
-    flex-direction: row;
-    width: 100%;
 }
 
 .burger_category_list {
@@ -35,4 +23,12 @@
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 20px; 
+
+    width: 600px;
+    height: calc(100vh - 410px);
+
+
+    overflow-x: hidden;
+    overflow-y: auto;  
 }
+

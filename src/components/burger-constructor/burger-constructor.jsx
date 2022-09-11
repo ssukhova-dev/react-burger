@@ -1,41 +1,26 @@
 import PropTypes from 'prop-types';
 
-import burgerConstructor from './burger-constructor.module.css';
-import {ConstructorElement, Button, DragIcon, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import burgerConstructorStyles from './burger-constructor.module.css';
+import commonStyles from  './../../utils/common-styles.module.css';
 
+import ingredientPropType from './../../utils/prop-types.jsx'
+
+import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+
+import CartTotal from '../cart-total/cart-total'
 
 import ImgBun from './../../images/bun-02.svg'
 
 
-
 function BurgerConstructor(props) {
 
-
-    const CartTotal = ({ total }) => {
-        return (
-            <section className={burgerConstructor.cart_total}>
-                <p className="text text_type_digits-medium">
-                    {total}
-                </p>
-                
-                <CurrencyIcon type="primary" />
-                <div style={{ width: '20px'}}/>
-                <Button type="primary" size="medium" >
-                    Оформить заказ
-                </Button>
-            </section>
-        );
-    };
-
-
-   
       return (
-        <section className={burgerConstructor.burger_constructor}>
+        <section className={burgerConstructorStyles.burger_constructor}>
 
 
-            <div className={burgerConstructor.burger_constructor_list} >
+            <div className={burgerConstructorStyles.burger_constructor_list} >
   
-                <span className={burgerConstructor.burger_bun}>
+                <span className={burgerConstructorStyles.burger_bun} >
                     <ConstructorElement
                         type="top"
                         isLocked={true}
@@ -46,17 +31,18 @@ function BurgerConstructor(props) {
                 </span>
 
 
-                <div className={burgerConstructor.burger_filling_list}>
+        
+                <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`}>
 
-                    {props.ingredients.map((ingredient, index) => (
+                    {props.ingredients.map((ingredient) => (
 
-                            <span className={`${burgerConstructor.burger_filling} m-2`}>
-                            <DragIcon type="primary"/>
-                            <ConstructorElement
-                                text={ingredient.name}
-                                price={ingredient.price}
-                                thumbnail={ingredient.image_mobile}
-                            />
+                            <span className={`${burgerConstructorStyles.burger_filling} m-2`} key={ingredient._id}>
+                                <DragIcon type="primary"/>
+                                <ConstructorElement
+                                    text={ingredient.name}
+                                    price={ingredient.price}
+                                    thumbnail={ingredient.image_mobile}                                 
+                                />
                             </span>
                         ))}
 
@@ -64,7 +50,7 @@ function BurgerConstructor(props) {
                 </div>
 
                   
-                <span className={burgerConstructor.burger_bun}>
+                <span className={burgerConstructorStyles.burger_bun}>
                     <ConstructorElement
                         type="bottom"
                         isLocked={true}
@@ -77,7 +63,7 @@ function BurgerConstructor(props) {
             </div>
 
 
-            <CartTotal total='100'/>
+            <CartTotal total={100}/>
 
 
         </section>
@@ -86,7 +72,7 @@ function BurgerConstructor(props) {
   }
 
   BurgerConstructor.propTypes = {
-    ingredients: PropTypes.array
+    ingredients: PropTypes.arrayOf(ingredientPropType)
   };
   
   export default BurgerConstructor 

@@ -1,0 +1,75 @@
+import React from 'react';
+import ReactDom from 'react-dom';
+import PropTypes from 'prop-types';
+
+import modalStyles from './modal.module.css';
+
+import ModalOverlay from '../modal-overlay/modal-overlay'
+
+import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+
+
+const ModalSectionElement = document.querySelector('#modals-section');
+const ESC = 'Escape';
+
+function Modal(props){
+
+
+  function handleKeyDown(e) {
+    if (e.key === ESC) {
+      props.requestClose();
+    }
+  }
+
+  React.useEffect(() => { document.addEventListener('keydown', handleKeyDown);
+           return () => { document.removeEventListener('keydown', handleKeyDown); }
+  }, []);
+
+
+
+  function handleClose() {
+    props.requestClose();
+  }
+
+
+  return props.isOpen && ReactDom.createPortal(
+      <div className={modalStyles.modal_root}>
+
+        <ModalOverlay {...props}/>
+
+        <div className={modalStyles.modal_content}>
+
+          <div className={modalStyles.modal_title}>
+            <p className="text text_type_main-large">
+                {props.title ? props.title : ""}
+            </p>
+       
+          </div>
+
+          <div className={modalStyles.modal_close} onClick={ handleClose}>
+            <div className={modalStyles.close_btn} >
+                <CloseIcon type="primary" />
+            </div>
+            <div className={modalStyles.close_btn_hover} >
+                <CloseIcon type="secondary" />
+            </div>
+          </div>
+
+          <div className={modalStyles.modal_body}>
+            {props.children}
+          </div>
+          
+        </div>
+      </div>,
+      ModalSectionElement
+  );
+};
+
+Modal.propTypes = {
+    title: PropTypes.string,
+    isOpen: PropTypes.bool.isRequired,
+    requestClose: PropTypes.func.isRequired
+  };
+
+
+export default Modal;

@@ -1,19 +1,22 @@
 .app {
   text-align: center;
 
+  height: calc(100vh - 20px);
+
 }
 
 
 .app_container {
 
-  min-height: 100vh;
   display: flex;
   flex-flow: row nowrap;
   align-items: stretch;
   justify-content: center;
   
+  height: calc(100vh - 108px);
 
   gap: 40px;
+
 }
 
 

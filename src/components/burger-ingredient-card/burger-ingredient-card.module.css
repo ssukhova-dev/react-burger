@@ -10,8 +10,8 @@
 
     margin: 4px 4px 0px 0px;
 
-   /* border: 1px dashed blue;
-    box-sizing: border-box;*/
+    cursor: pointer;
+
   }
 
   .flex_center_row{
