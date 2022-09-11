@@ -11,8 +11,15 @@ import CartTotal from '../cart-total/cart-total'
 
 import ImgBun from './../../images/bun-02.svg'
 
+import {v4 as uuidv4} from 'uuid'
+
+
+
 
 function BurgerConstructor(props) {
+
+
+    console.log(uuidv4());
 
       return (
         <section className={burgerConstructorStyles.burger_constructor}>
@@ -36,7 +43,7 @@ function BurgerConstructor(props) {
 
                     {props.ingredients.map((ingredient) => (
 
-                            <span className={`${burgerConstructorStyles.burger_filling} m-2`} key={ingredient._id}>
+                            <span className={`${burgerConstructorStyles.burger_filling} m-2`} key={uuidv4()}>
                                 <DragIcon type="primary"/>
                                 <ConstructorElement
                                     text={ingredient.name}
