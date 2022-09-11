@@ -22,9 +22,9 @@ function BurgerIngredients(props) {
     const ingredientDetailsDlg = useModal();
 
 
-    const buns = props.ingredients.filter(item => item.type === IngredientTypes.bun);
-    const sauces = props.ingredients.filter(item => item.type === IngredientTypes.sauce);
-    const mains = props.ingredients.filter(item => item.type === IngredientTypes.main);
+    const buns = React.useMemo(() => props.ingredients.filter(item => item.type === IngredientTypes.bun), [props.ingredients]);
+    const sauces = React.useMemo(() => props.ingredients.filter(item => item.type === IngredientTypes.sauce), [props.ingredients]);
+    const mains = React.useMemo(() => props.ingredients.filter(item => item.type === IngredientTypes.main), [props.ingredients]);
 
 
     const [selectedIngredient, setIngredient] = React.useState(null)
