@@ -9,17 +9,34 @@ import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientPropType from './../../utils/prop-types.jsx'
 import BurgerIngredientCategory from './../burger-ingredient-category/burger-ingredient-category'
 
-  function BurgerIngredients(props) {
+import useModal from '../modal/use-modal'
+import IngredientDetails from '../ingredient-details/ingredient-details'
+import Modal from '../modal/modal'
+
+
+function BurgerIngredients(props) {
     const IngredientTypes = { bun: 'bun', sauce: 'sauce', main: 'main',}
    
     const [current, setCurrent] = React.useState(IngredientTypes.bun)
+
+    const ingredientDetailsDlg = useModal();
 
 
     const buns = props.ingredients.filter(item => item.type === IngredientTypes.bun);
     const sauces = props.ingredients.filter(item => item.type === IngredientTypes.sauce);
     const mains = props.ingredients.filter(item => item.type === IngredientTypes.main);
 
+
+    const [selectedIngredient, setIngredient] = React.useState(null)
+
+    function showIngredientDetailsDlg(ingredient){
+
+        setIngredient(ingredient);
+        ingredientDetailsDlg.open();
+    }
+
     return (
+        <>
         <section className={burgerIngStyles.burger_ingredients}>
 
             <p className={`${burgerIngStyles.burger_ingredient_caption} text text_type_main-large p-5`} >
@@ -42,14 +59,20 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
 
 
             <div className={`${burgerIngStyles.burger_category_list} ${commonStyles.custom_scrollbar}`}>
-                <BurgerIngredientCategory caption="Булки" ingredients={buns}/>
-                <BurgerIngredientCategory caption="Соусы" ingredients={sauces}/>
-                <BurgerIngredientCategory caption="Начинка" ingredients={mains}/>
+                <BurgerIngredientCategory caption="Булки" ingredients={buns} ingredientDetailsDlgRequest={showIngredientDetailsDlg}/>
+                <BurgerIngredientCategory caption="Соусы" ingredients={sauces} ingredientDetailsDlgRequest={showIngredientDetailsDlg}/>
+                <BurgerIngredientCategory caption="Начинка" ingredients={mains} ingredientDetailsDlgRequest={showIngredientDetailsDlg}/>
      
 
             </div>
 
-    </section>
+        </section>
+
+        <Modal {...ingredientDetailsDlg.modalProps} title="Детали ингредиента">
+                <IngredientDetails ingredient = {selectedIngredient}/>
+        </Modal>
+
+        </>
     );
   }
 

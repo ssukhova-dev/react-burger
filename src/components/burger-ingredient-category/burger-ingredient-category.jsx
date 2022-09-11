@@ -22,7 +22,7 @@ function BurgerIngredientCategory (props) {
                    
                     {props.ingredients.map((ingredient) => (
                         <BurgerIngredientCard key={ingredient._id}
-                        {...ingredient}
+                        ingredient={ingredient} ingredientDetailsDlgRequest={props.ingredientDetailsDlgRequest}
                         />
                     ))}
 
@@ -35,7 +35,7 @@ function BurgerIngredientCategory (props) {
 
   BurgerIngredientCategory.propTypes = {
     caption: PropTypes.string.isRequired,
-
+    ingredientDetailsDlgRequest: PropTypes.func.isRequired,
     ingredients: PropTypes.arrayOf(ingredientPropType)
   };
    
