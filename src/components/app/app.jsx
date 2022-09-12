@@ -31,17 +31,35 @@ function App() {
 
       getIngredients();
   }, []);
-  
+
 
 
   return (
     <div className={styles.app}>
    
-      <AppHeader/>
-      <section className={styles.app_container}>
-        <BurgerIngredients ingredients = {state.ingredients}/>
-        <BurgerConstructor ingredients = {state.ingredients}/>
-      </section>
+
+      {state.hasError ? (
+          <section className={styles.app_error}>
+              Some error. Reload application, please.
+          </section> 
+      ) : (
+
+      state.isLoading ? (
+          <section className={styles.app_loading}>
+              Loading...
+          </section> 
+      ) : (
+
+        <>
+          <AppHeader/>
+          <section className={styles.app_container}>
+            <BurgerIngredients ingredients = {state.ingredients}/>
+            <BurgerConstructor ingredients = {state.ingredients}/>
+          </section>
+        </>
+
+      ))}
+ 
  
 
     </div>
