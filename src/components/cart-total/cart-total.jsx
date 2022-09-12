@@ -1,3 +1,4 @@
+import React from 'react' 
 import PropTypes from 'prop-types';
 
 import cartTotalStyles from './cart-total.module.css';
@@ -8,9 +9,13 @@ import useModal from '../modal/use-modal'
 import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
 
+import {IngredientsContext} from '../../utils/context'
+
 function CartTotal({ total }) {
 
     const orderDetailsDlg = useModal();
+
+    const ingredients = React.useContext(IngredientsContext);
 
         return (
             <>

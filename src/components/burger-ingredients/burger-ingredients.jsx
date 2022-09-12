@@ -1,4 +1,4 @@
-import React from 'react' // импорт библиотеки
+import React from 'react' 
 import PropTypes from 'prop-types';
 
 import burgerIngStyles from './burger-ingredients.module.css';
@@ -13,19 +13,21 @@ import useModal from '../modal/use-modal'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal'
 
+import {IngredientsContext} from '../../utils/context'
 
-function BurgerIngredients(props) {
+
+function BurgerIngredients() {
     const IngredientTypes = { bun: 'bun', sauce: 'sauce', main: 'main',}
    
     const [current, setCurrent] = React.useState(IngredientTypes.bun)
 
     const ingredientDetailsDlg = useModal();
 
+    const ingredients = React.useContext(IngredientsContext);
 
-    const buns = React.useMemo(() => props.ingredients.filter(item => item.type === IngredientTypes.bun), [props.ingredients]);
-    const sauces = React.useMemo(() => props.ingredients.filter(item => item.type === IngredientTypes.sauce), [props.ingredients]);
-    const mains = React.useMemo(() => props.ingredients.filter(item => item.type === IngredientTypes.main), [props.ingredients]);
-
+    const buns = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.bun), [ingredients]);
+    const sauces = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.sauce), [ingredients]);
+    const mains = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.main), [ingredients]);
 
     const [selectedIngredient, setIngredient] = React.useState(null)
 
@@ -83,7 +85,7 @@ function BurgerIngredients(props) {
 
 
   BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientPropType)
+
   };
   
   export default BurgerIngredients 

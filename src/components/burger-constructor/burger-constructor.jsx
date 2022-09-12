@@ -1,3 +1,4 @@
+import React from 'react' 
 import PropTypes from 'prop-types';
 
 import burgerConstructorStyles from './burger-constructor.module.css';
@@ -13,11 +14,12 @@ import ImgBun from './../../images/bun-02.svg'
 
 import {v4 as uuidv4} from 'uuid'
 
+import {IngredientsContext} from '../../utils/context'
 
 
+function BurgerConstructor() {
 
-function BurgerConstructor(props) {
-
+    const ingredients = React.useContext(IngredientsContext);
 
       return (
         <section className={burgerConstructorStyles.burger_constructor}>
@@ -39,7 +41,7 @@ function BurgerConstructor(props) {
         
                 <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`}>
 
-                    {props.ingredients.map((ingredient) => (
+                    {ingredients.map((ingredient) => (
 
                             <span className={`${burgerConstructorStyles.burger_filling} m-2`} key={uuidv4()}>
                                 <DragIcon type="primary"/>
@@ -77,7 +79,7 @@ function BurgerConstructor(props) {
   }
 
   BurgerConstructor.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientPropType)
+    
   };
   
   export default BurgerConstructor 
