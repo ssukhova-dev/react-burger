@@ -7,44 +7,26 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 
 
-import {getIngredientsData} from '../../utils/burger-api' 
+import {useFetch, getIngredientsData} from '../../utils/burger-api' 
+
+
 
 function App() {
 
-  const [state, setState] = React.useState({isLoading: false,
-    hasError: false,
-    ingredients: []});
-
-
-  React.useEffect(()=>{ 
-    const getIngredients = async () => {
-        setState({ ...state, hasError: false, isLoading: true });
-
-        getIngredientsData()
-        .then((data) => {
-          setState({ ...state, ingredients: data.data, isLoading: false }) 
-        })
-        .catch(e => {
-          setState({ ...state, hasError: true, isLoading: false });
-        })
-      }
-
-      getIngredients();
-  }, []);
-
+  const {isLoading, hasError, resultData : ingredients} = useFetch(getIngredientsData);
 
 
   return (
     <div className={styles.app}>
    
 
-      {state.hasError ? (
+      {hasError ? (
           <section className={styles.app_error}>
               Some error. Reload application, please.
           </section> 
       ) : (
 
-      state.isLoading ? (
+      isLoading ? (
           <section className={styles.app_loading}>
               Loading...
           </section> 
@@ -53,8 +35,8 @@ function App() {
         <>
           <AppHeader/>
           <section className={styles.app_container}>
-            <BurgerIngredients ingredients = {state.ingredients}/>
-            <BurgerConstructor ingredients = {state.ingredients}/>
+            <BurgerIngredients ingredients = {ingredients}/>
+            <BurgerConstructor ingredients = {ingredients}/>
           </section>
         </>
 
