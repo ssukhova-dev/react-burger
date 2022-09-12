@@ -14,12 +14,17 @@ import ImgBun from './../../images/bun-02.svg'
 
 import {v4 as uuidv4} from 'uuid'
 
-import {IngredientsContext} from '../../utils/context'
+import {IngredientsContext, SelectedIngredientsContext} from '../../utils/context'
 
 
 function BurgerConstructor() {
 
     const ingredients = React.useContext(IngredientsContext);
+    const {selectedIngredients, setSelectedIngredients} = React.useContext(SelectedIngredientsContext);
+
+    setSelectedIngredients(ingredients);//временное решение
+    console.log(selectedIngredients);
+
 
       return (
         <section className={burgerConstructorStyles.burger_constructor}>
