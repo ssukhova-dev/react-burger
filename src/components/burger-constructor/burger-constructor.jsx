@@ -10,8 +10,6 @@ import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger
 
 import CartTotal from '../cart-total/cart-total'
 
-import ImgBun from './../../images/bun-02.svg'
-
 import {v4 as uuidv4} from 'uuid'
 
 import {IngredientsContext, SelectedIngredientsContext} from '../../utils/context'
