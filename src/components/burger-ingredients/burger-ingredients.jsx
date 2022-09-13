@@ -14,10 +14,9 @@ import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal'
 
 import {IngredientsContext} from '../../utils/context'
-
+import {IngredientTypes} from '../../utils/constants'
 
 function BurgerIngredients() {
-    const IngredientTypes = { bun: 'bun', sauce: 'sauce', main: 'main',}
    
     const [current, setCurrent] = React.useState(IngredientTypes.bun)
 

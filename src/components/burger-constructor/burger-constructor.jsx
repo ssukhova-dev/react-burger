@@ -15,6 +15,10 @@ import ImgBun from './../../images/bun-02.svg'
 import {v4 as uuidv4} from 'uuid'
 
 import {IngredientsContext, SelectedIngredientsContext} from '../../utils/context'
+import appData from '../../utils/data'
+
+import {IngredientTypes} from '../../utils/constants'
+
 
 
 function BurgerConstructor() {
@@ -22,9 +26,28 @@ function BurgerConstructor() {
     const ingredients = React.useContext(IngredientsContext);
     const {selectedIngredients, setSelectedIngredients} = React.useContext(SelectedIngredientsContext);
 
-    setSelectedIngredients(ingredients);//временное решение
-    console.log(selectedIngredients);
+    setSelectedIngredients(appData);//временное решение
 
+    function getBunIngredient()
+    {
+        const bunIngredients = selectedIngredients.filter(item => item.type === IngredientTypes.bun )
+        return (bunIngredients.length == 0) ? null : bunIngredients[0];
+    }
+    const bunIngredient = React.useMemo( getBunIngredient, [selectedIngredients]);   
+
+
+    function getTotal()
+    {
+        let sum = bunIngredient ? (bunIngredient.price * 2) : 0;
+
+        sum = selectedIngredients.reduce((sum, item) => ( 
+            (item.type != IngredientTypes.bun) ? (sum + item.price) : sum), sum);        
+
+        return sum;
+    }
+    const total = React.useMemo(getTotal, [selectedIngredients]);        
+
+     
 
       return (
         <section className={burgerConstructorStyles.burger_constructor}>
@@ -32,22 +55,24 @@ function BurgerConstructor() {
 
             <div className={burgerConstructorStyles.burger_constructor_list} >
   
-                <span className={burgerConstructorStyles.burger_bun} >
-                    <ConstructorElement
-                        type="top"
-                        isLocked={true}
-                        text="Краторная булка N-200i (верх)"
-                        price={200}
-                        thumbnail={ImgBun}
-                    />
-                </span>
+                {bunIngredient && (
+                    <span className={burgerConstructorStyles.burger_bun} >
+                        <ConstructorElement
+                            type="top"
+                            isLocked={true}
+                            text={`${bunIngredient.name} (верх)`}
+                            price={bunIngredient.price}
+                            thumbnail={bunIngredient.image_mobile}       
+                        />
+                    </span>
+                )}
 
 
         
                 <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`}>
 
-                    {ingredients.map((ingredient) => (
-
+                    {selectedIngredients.map((ingredient) => (
+                        (ingredient.type != IngredientTypes.bun) && (
                             <span className={`${burgerConstructorStyles.burger_filling} m-2`} key={uuidv4()}>
                                 <DragIcon type="primary"/>
                                 <ConstructorElement
@@ -56,26 +81,29 @@ function BurgerConstructor() {
                                     thumbnail={ingredient.image_mobile}                                 
                                 />
                             </span>
-                        ))}
+                        )
+                    ))}
 
                 
                 </div>
+ 
 
-                  
-                <span className={burgerConstructorStyles.burger_bun}>
-                    <ConstructorElement
-                        type="bottom"
-                        isLocked={true}
-                        text="Краторная булка N-200i (низ)"
-                        price={200}
-                        thumbnail={ImgBun}
-                    />
-                </span>  
+                {bunIngredient && (
+                    <span className={burgerConstructorStyles.burger_bun} >
+                        <ConstructorElement
+                            type="bottom"
+                            isLocked={true}
+                            text={`${bunIngredient.name} (низ)`}
+                            price={bunIngredient.price}
+                            thumbnail={bunIngredient.image_mobile}       
+                        />
+                    </span>
+                )}
 
             </div>
 
 
-            <CartTotal total={100}/>
+            <CartTotal total={total}/>
 
 
         </section>

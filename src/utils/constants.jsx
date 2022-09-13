@@ -1,0 +1,1 @@
+export const IngredientTypes = { bun: 'bun', sauce: 'sauce', main: 'main'}
