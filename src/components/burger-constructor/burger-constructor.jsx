@@ -34,7 +34,7 @@ function BurgerConstructor() {
     const bunIngredient = React.useMemo( getBunIngredient, [selectedIngredients]);   
 
 
-    function getTotal()
+    function getTotalReducer()
     {
         let sum = bunIngredient ? (bunIngredient.price * 2) : 0;
 
@@ -43,9 +43,11 @@ function BurgerConstructor() {
 
         return sum;
     }
-    const total = React.useMemo(getTotal, [selectedIngredients]);        
+    
+    const [total, totalDispatcher] = React.useReducer(getTotalReducer, 0, undefined);
 
-     
+    React.useEffect( totalDispatcher, [selectedIngredients]  );
+    
 
       return (
         <section className={burgerConstructorStyles.burger_constructor}>
