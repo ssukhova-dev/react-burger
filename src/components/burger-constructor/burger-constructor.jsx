@@ -13,7 +13,6 @@ import CartTotal from '../cart-total/cart-total'
 import {v4 as uuidv4} from 'uuid'
 
 import {IngredientsContext, SelectedIngredientsContext} from '../../utils/context'
-import appData from '../../utils/data'
 
 import {IngredientTypes} from '../../utils/constants'
 
@@ -24,7 +23,7 @@ function BurgerConstructor() {
     const ingredients = React.useContext(IngredientsContext);
     const {selectedIngredients, setSelectedIngredients} = React.useContext(SelectedIngredientsContext);
 
-    setSelectedIngredients(appData);//временное решение
+    setSelectedIngredients(ingredients);//временное решение
 
     function getBunIngredient()
     {

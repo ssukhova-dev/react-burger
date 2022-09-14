@@ -9,13 +9,42 @@ import useModal from '../modal/use-modal'
 import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
 
-import {IngredientsContext} from '../../utils/context'
+import {SelectedIngredientsContext} from '../../utils/context'
+
+import { getOrders} from '../../utils/burger-api' 
+
 
 function CartTotal({ total }) {
 
     const orderDetailsDlg = useModal();
 
-    const ingredients = React.useContext(IngredientsContext);
+    const {selectedIngredients} = React.useContext(SelectedIngredientsContext);
+
+    const [order, setOrder] = React.useState(0);
+
+  
+    function handleClickMakeOrder()
+    {
+        let ingredients = [] ; 
+        for (let ingredient of selectedIngredients) {
+            ingredients.push(ingredient._id);
+        }
+
+        getOrders(ingredients).then((data) => {
+
+            if (data.success) {
+                setOrder(data.order.number);
+            }
+        })
+        .then(() => {
+            orderDetailsDlg.open();
+        })
+        .catch(e => {
+            
+        })
+
+
+    }
 
         return (
             <>
@@ -28,7 +57,7 @@ function CartTotal({ total }) {
                     <CurrencyIcon type="primary" />
                 </div>  
         
-                <Button type="primary" size="medium"  onClick={orderDetailsDlg.open}>
+                <Button type="primary" size="medium"  onClick={handleClickMakeOrder}>
                     Оформить заказ
                 </Button>
             </section>
@@ -36,7 +65,7 @@ function CartTotal({ total }) {
             {
                 orderDetailsDlg.isOpen && (
                     <Modal onClose={orderDetailsDlg.requestClose}>
-                        <OrderDetails orderId={55555}/>
+                        <OrderDetails orderId={order}/>
                     </Modal>
                 )
             }

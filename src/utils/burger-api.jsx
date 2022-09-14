@@ -2,9 +2,11 @@ import React from 'react';
 
 const BURGER_API_URL = "https://norma.nomoreparties.space/api";
 const INGREDIENTS_API_URL = `${BURGER_API_URL}/ingredients`;
+const ORDERS_API_URL = `${BURGER_API_URL}/orders`;
 
 
 const checkResponse = (res) => {
+    console.log(res);
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
@@ -26,10 +28,10 @@ export function useFetch(requestFn)
         setState({ ...state, hasError: false, isLoading: true });
 
         requestFn().then((data) => {
-        setState({ ...state, resultData: data.data, isLoading: false }) 
+            setState({ ...state, resultData: data.data, isLoading: false }) 
         })
         .catch(e => {
-        setState({ ...state, hasError: true, isLoading: false });
+            setState({ ...state, hasError: true, isLoading: false });
         })
         
     }, []);
@@ -39,5 +41,16 @@ export function useFetch(requestFn)
 }
   
 
+export const getOrders = (ingredients) => {
 
+    console.log(JSON.stringify({ ingredients }));
+
+    return fetch(ORDERS_API_URL, {
+                        method: 'POST',
+                        headers: {
+                        "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ ingredients })})
+            .then(checkResponse)
+};
 
