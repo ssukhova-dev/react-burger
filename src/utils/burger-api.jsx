@@ -6,7 +6,6 @@ const ORDERS_API_URL = `${BURGER_API_URL}/orders`;
 
 
 const checkResponse = (res) => {
-    console.log(res);
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
@@ -42,8 +41,6 @@ export function useFetch(requestFn)
   
 
 export const getOrders = (ingredients) => {
-
-    console.log(JSON.stringify({ ingredients }));
 
     return fetch(ORDERS_API_URL, {
                         method: 'POST',
