@@ -1,10 +1,7 @@
 import React from 'react' 
-import PropTypes from 'prop-types';
 
 import burgerConstructorStyles from './burger-constructor.module.css';
 import commonStyles from  './../../utils/common-styles.module.css';
-
-import ingredientPropType from './../../utils/prop-types.jsx'
 
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 
@@ -27,20 +24,17 @@ function BurgerConstructor() {
 
     function getBunIngredient()
     {
-        const bunIngredients = selectedIngredients.filter(item => item.type === IngredientTypes.bun )
-        return (bunIngredients.length == 0) ? null : bunIngredients[0];
+        return selectedIngredients.find(item => item.type === IngredientTypes.bun);
     }
-    const bunIngredient = React.useMemo( getBunIngredient, [selectedIngredients]);   
+    const bunIngredient = React.useMemo( getBunIngredient, [selectedIngredients, getBunIngredient]);   
 
 
     function getTotalReducer()
     {
-        let sum = bunIngredient ? (bunIngredient.price * 2) : 0;
+        const sum = bunIngredient ? (bunIngredient.price * 2) : 0;
 
-        sum = selectedIngredients.reduce((sum, item) => ( 
-            (item.type != IngredientTypes.bun) ? (sum + item.price) : sum), sum);        
-
-        return sum;
+        return selectedIngredients.reduce((sum, item) => ( 
+            (item.type !== IngredientTypes.bun) ? (sum + item.price) : sum), sum);  
     }
     
     const [total, totalDispatcher] = React.useReducer(getTotalReducer, 0, undefined);
@@ -71,7 +65,7 @@ function BurgerConstructor() {
                 <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`}>
 
                     {selectedIngredients.map((ingredient) => (
-                        (ingredient.type != IngredientTypes.bun) && (
+                        (ingredient.type !== IngredientTypes.bun) && (
                             <span className={`${burgerConstructorStyles.burger_filling} m-2`} key={uuidv4()}>
                                 <DragIcon type="primary"/>
                                 <ConstructorElement
@@ -110,8 +104,5 @@ function BurgerConstructor() {
     
   }
 
-  BurgerConstructor.propTypes = {
-    
-  };
   
   export default BurgerConstructor 

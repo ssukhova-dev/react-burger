@@ -7,8 +7,6 @@ import BurgerIngredientCard from './../burger-ingredient-card/burger-ingredient-
 
 
 function BurgerIngredientCategory (props) {
-
-
  
 
       return (
@@ -22,7 +20,7 @@ function BurgerIngredientCategory (props) {
                    
                     {props.ingredients.map((ingredient) => (
                         <BurgerIngredientCard key={ingredient._id}
-                        ingredient={ingredient} ingredientDetailsDlgRequest={props.ingredientDetailsDlgRequest}
+                        ingredient={ingredient} ingredientDetailsDlgOpen={props.ingredientDetailsDlgOpen}
                         />
                     ))}
 
@@ -35,7 +33,7 @@ function BurgerIngredientCategory (props) {
 
   BurgerIngredientCategory.propTypes = {
     caption: PropTypes.string.isRequired,
-    ingredientDetailsDlgRequest: PropTypes.func.isRequired,
+    ingredientDetailsDlgOpen: PropTypes.func.isRequired,
     ingredients: PropTypes.arrayOf(ingredientPropType)
   };
    

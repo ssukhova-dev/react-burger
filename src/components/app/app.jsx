@@ -6,6 +6,8 @@ import AppHeader from '../app-header/app-header'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 
+import {ERROR_TEXT, LOADING_TEXT} from '../../utils/constants' 
+
 import {useFetch, getIngredientsData} from '../../utils/burger-api' 
 
 import {IngredientsContext, SelectedIngredientsContext} from '../../utils/context'
@@ -15,7 +17,7 @@ function App() {
 
   const {isLoading, hasError, resultData : ingredients} = useFetch(getIngredientsData);
 
-  const [selectedIngredients, setSelectedIngredients] = React.useState( []);
+  const [selectedIngredients, setSelectedIngredients] = React.useState([]);
 
 
 
@@ -27,13 +29,13 @@ function App() {
 
           {hasError ? (
               <section className={styles.app_error}>
-                  Some error. Reload application, please.
+                  {ERROR_TEXT}
               </section> 
           ) : (
 
           isLoading ? (
               <section className={styles.app_loading}>
-                  Loading...
+                  {LOADING_TEXT}
               </section> 
           ) : (
 

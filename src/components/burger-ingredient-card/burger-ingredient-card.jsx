@@ -1,4 +1,3 @@
-import React from 'react'  
 import PropTypes from 'prop-types';
 
 import ingredientPropType from './../../utils/prop-types.jsx'
@@ -7,11 +6,17 @@ import burgerIngCardStyle from './burger-ingredient-card.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 
-function BurgerIngredientCard({ ingredient, ingredientDetailsDlgRequest }) {
+function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
+
+
+      const onCardClick = () => {
+        ingredientDetailsDlgOpen(ingredient);
+      };
+
 
       return (
 
-              <div className={burgerIngCardStyle.burger_ingredient_card} onClick={()=>ingredientDetailsDlgRequest(ingredient)}>
+              <div className={burgerIngCardStyle.burger_ingredient_card} onClick={onCardClick}>
 
          
                 <Counter count={1} size="default" />
@@ -36,8 +41,8 @@ function BurgerIngredientCard({ ingredient, ingredientDetailsDlgRequest }) {
   }
 
   BurgerIngredientCard.propTypes = {
-    ingredient: ingredientPropType,
-    ingredientDetailsDlgRequest: PropTypes.func.isRequired
+    ingredient: ingredientPropType.isRequired,
+    ingredientDetailsDlgOpen: PropTypes.func.isRequired
   };
   
   export default BurgerIngredientCard 

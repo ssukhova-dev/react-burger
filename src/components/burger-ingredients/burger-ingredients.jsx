@@ -1,12 +1,10 @@
 import React from 'react' 
-import PropTypes from 'prop-types';
 
 import burgerIngStyles from './burger-ingredients.module.css';
 import commonStyles from  './../../utils/common-styles.module.css';
 
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
  
-import ingredientPropType from './../../utils/prop-types.jsx'
 import BurgerIngredientCategory from './../burger-ingredient-category/burger-ingredient-category'
 
 import useModal from '../modal/use-modal'
@@ -31,9 +29,13 @@ function BurgerIngredients() {
     const [selectedIngredient, setIngredient] = React.useState(null)
 
     function showIngredientDetailsDlg(ingredient){
-
         setIngredient(ingredient);
         ingredientDetailsDlg.open();
+    }
+
+    function closeIngredientDetailsDlg(){
+        setIngredient(null);
+        ingredientDetailsDlg.requestClose();
     }
 
     return (
@@ -60,9 +62,9 @@ function BurgerIngredients() {
 
 
             <div className={`${burgerIngStyles.burger_category_list} ${commonStyles.custom_scrollbar}`}>
-                <BurgerIngredientCategory caption="Булки" ingredients={buns} ingredientDetailsDlgRequest={showIngredientDetailsDlg}/>
-                <BurgerIngredientCategory caption="Соусы" ingredients={sauces} ingredientDetailsDlgRequest={showIngredientDetailsDlg}/>
-                <BurgerIngredientCategory caption="Начинка" ingredients={mains} ingredientDetailsDlgRequest={showIngredientDetailsDlg}/>
+                <BurgerIngredientCategory caption="Булки" ingredients={buns} ingredientDetailsDlgOpen={showIngredientDetailsDlg}/>
+                <BurgerIngredientCategory caption="Соусы" ingredients={sauces} ingredientDetailsDlgOpen={showIngredientDetailsDlg}/>
+                <BurgerIngredientCategory caption="Начинка" ingredients={mains} ingredientDetailsDlgOpen={showIngredientDetailsDlg}/>
      
 
             </div>
@@ -71,7 +73,7 @@ function BurgerIngredients() {
 
         {
             ingredientDetailsDlg.isOpen && (
-                <Modal onClose={ingredientDetailsDlg.requestClose} title="Детали ингредиента">
+                <Modal onClose={closeIngredientDetailsDlg} title="Детали ингредиента">
                     <IngredientDetails ingredient = {selectedIngredient}/>
                 </Modal>
             )
@@ -82,9 +84,5 @@ function BurgerIngredients() {
   }
 
 
-
-  BurgerIngredients.propTypes = {
-
-  };
   
   export default BurgerIngredients 

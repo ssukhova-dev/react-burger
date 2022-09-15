@@ -20,27 +20,32 @@ function CartTotal({ total }) {
 
     const {selectedIngredients} = React.useContext(SelectedIngredientsContext);
 
-    const [order, setOrder] = React.useState(0);
+    const [order, setOrder] = React.useState(null);
 
   
     function handleClickMakeOrder()
     {
-        let ingredients = [] ; 
-        for (let ingredient of selectedIngredients) {
+        const ingredients = [] ; 
+
+        selectedIngredients.forEach((ingredient) => {
             ingredients.push(ingredient._id);
-        }
+          })
+
 
         getOrders(ingredients).then((data) => {
 
-            if (data.success) {
+            if (data.success === true) {
                 setOrder(data.order.number);
+            } 
+            else{
+                throw("не удалось сделать заказ");
             }
         })
         .then(() => {
             orderDetailsDlg.open();
         })
         .catch(e => {
-            
+            console.log(e);
         })
 
 
