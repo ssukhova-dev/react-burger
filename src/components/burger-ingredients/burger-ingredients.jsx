@@ -1,25 +1,45 @@
-import React from 'react' // импорт библиотеки
-import PropTypes from 'prop-types';
+import React from 'react' 
 
 import burgerIngStyles from './burger-ingredients.module.css';
 import commonStyles from  './../../utils/common-styles.module.css';
 
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
  
-import ingredientPropType from './../../utils/prop-types.jsx'
 import BurgerIngredientCategory from './../burger-ingredient-category/burger-ingredient-category'
 
-  function BurgerIngredients(props) {
-    const IngredientTypes = { bun: 'bun', sauce: 'sauce', main: 'main',}
+import useModal from '../modal/use-modal'
+import IngredientDetails from '../ingredient-details/ingredient-details'
+import Modal from '../modal/modal'
+
+import {IngredientsContext} from '../../utils/context'
+import {IngredientTypes} from '../../utils/constants'
+
+function BurgerIngredients() {
    
     const [current, setCurrent] = React.useState(IngredientTypes.bun)
 
+    const ingredientDetailsDlg = useModal();
 
-    const buns = props.ingredients.filter(item => item.type === IngredientTypes.bun);
-    const sauces = props.ingredients.filter(item => item.type === IngredientTypes.sauce);
-    const mains = props.ingredients.filter(item => item.type === IngredientTypes.main);
+    const ingredients = React.useContext(IngredientsContext);
+
+    const buns = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.bun), [ingredients]);
+    const sauces = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.sauce), [ingredients]);
+    const mains = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.main), [ingredients]);
+
+    const [selectedIngredient, setIngredient] = React.useState(null)
+
+    function showIngredientDetailsDlg(ingredient){
+        setIngredient(ingredient);
+        ingredientDetailsDlg.open();
+    }
+
+    function closeIngredientDetailsDlg(){
+        setIngredient(null);
+        ingredientDetailsDlg.requestClose();
+    }
 
     return (
+        <>
         <section className={burgerIngStyles.burger_ingredients}>
 
             <p className={`${burgerIngStyles.burger_ingredient_caption} text text_type_main-large p-5`} >
@@ -42,21 +62,27 @@ import BurgerIngredientCategory from './../burger-ingredient-category/burger-ing
 
 
             <div className={`${burgerIngStyles.burger_category_list} ${commonStyles.custom_scrollbar}`}>
-                <BurgerIngredientCategory caption="Булки" ingredients={buns}/>
-                <BurgerIngredientCategory caption="Соусы" ingredients={sauces}/>
-                <BurgerIngredientCategory caption="Начинка" ingredients={mains}/>
+                <BurgerIngredientCategory caption="Булки" ingredients={buns} ingredientDetailsDlgOpen={showIngredientDetailsDlg}/>
+                <BurgerIngredientCategory caption="Соусы" ingredients={sauces} ingredientDetailsDlgOpen={showIngredientDetailsDlg}/>
+                <BurgerIngredientCategory caption="Начинка" ingredients={mains} ingredientDetailsDlgOpen={showIngredientDetailsDlg}/>
      
 
             </div>
 
-    </section>
+        </section>
+
+        {
+            ingredientDetailsDlg.isOpen && (
+                <Modal onClose={closeIngredientDetailsDlg} title="Детали ингредиента">
+                    <IngredientDetails ingredient = {selectedIngredient}/>
+                </Modal>
+            )
+        }
+
+        </>
     );
   }
 
 
-
-  BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientPropType)
-  };
   
   export default BurgerIngredients 

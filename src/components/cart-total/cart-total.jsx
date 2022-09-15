@@ -1,3 +1,4 @@
+import React from 'react' 
 import PropTypes from 'prop-types';
 
 import cartTotalStyles from './cart-total.module.css';
@@ -8,9 +9,47 @@ import useModal from '../modal/use-modal'
 import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
 
+import {SelectedIngredientsContext} from '../../utils/context'
+
+import { getOrders} from '../../utils/burger-api' 
+
+
 function CartTotal({ total }) {
 
     const orderDetailsDlg = useModal();
+
+    const {selectedIngredients} = React.useContext(SelectedIngredientsContext);
+
+    const [order, setOrder] = React.useState(null);
+
+  
+    function handleClickMakeOrder()
+    {
+        const ingredients = [] ; 
+
+        selectedIngredients.forEach((ingredient) => {
+            ingredients.push(ingredient._id);
+          })
+
+
+        getOrders(ingredients).then((data) => {
+
+            if (data.success === true) {
+                setOrder(data.order.number);
+            } 
+            else{
+                throw("не удалось сделать заказ");
+            }
+        })
+        .then(() => {
+            orderDetailsDlg.open();
+        })
+        .catch(e => {
+            console.log(e);
+        })
+
+
+    }
 
         return (
             <>
@@ -23,14 +62,18 @@ function CartTotal({ total }) {
                     <CurrencyIcon type="primary" />
                 </div>  
         
-                <Button type="primary" size="medium"  onClick={orderDetailsDlg.open}>
+                <Button type="primary" size="medium"  onClick={handleClickMakeOrder}>
                     Оформить заказ
                 </Button>
             </section>
 
-            <Modal {...orderDetailsDlg.modalProps}>
-                  <OrderDetails orderId={55555}/>
-            </Modal>
+            {
+                orderDetailsDlg.isOpen && (
+                    <Modal onClose={orderDetailsDlg.requestClose}>
+                        <OrderDetails orderId={order}/>
+                    </Modal>
+                )
+            }
 
             </>
         );

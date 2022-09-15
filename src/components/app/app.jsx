@@ -6,54 +6,54 @@ import AppHeader from '../app-header/app-header'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 
+import {ERROR_TEXT, LOADING_TEXT} from '../../utils/constants' 
 
-import {BURGER_API_URL} from '../../utils/burger-api' 
+import {useFetch, getIngredientsData} from '../../utils/burger-api' 
+
+import {IngredientsContext, SelectedIngredientsContext} from '../../utils/context'
+
 
 function App() {
 
-  const [state, setState] = React.useState({isLoading: false,
-    hasError: false,
-    ingredients: []});
+  const {isLoading, hasError, resultData : ingredients} = useFetch(getIngredientsData);
 
-
-  const ingredientsUrl = `${BURGER_API_URL}/ingredients`;
-
-
-  const checkResponse = (res) => {
-    return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
-  };
-
-
-  React.useEffect(()=>{ 
-    const getIngredients = async () => {
-      setState({ ...state, hasError: false, isLoading: true });
-      fetch(ingredientsUrl)
-        .then(checkResponse)
-        .then(data => {
-              setState({ ...state, ingredients: data.data, isLoading: false }) 
-            }
-          )
-        .catch(e => {
-          setState({ ...state, hasError: true, isLoading: false });
-        });
-      }
-
-      getIngredients();
-  }, []);
+  const [selectedIngredients, setSelectedIngredients] = React.useState([]);
 
 
 
   return (
-    <div className={styles.app}>
-   
-      <AppHeader/>
-      <section className={styles.app_container}>
-        <BurgerIngredients ingredients = {state.ingredients}/>
-        <BurgerConstructor ingredients = {state.ingredients}/>
-      </section>
- 
+    <IngredientsContext.Provider value={ingredients}>
+      <SelectedIngredientsContext.Provider value={{selectedIngredients, setSelectedIngredients}}>
+        <div className={styles.app}>
+      
 
-    </div>
+          {hasError ? (
+              <section className={styles.app_error}>
+                  {ERROR_TEXT}
+              </section> 
+          ) : (
+
+          isLoading ? (
+              <section className={styles.app_loading}>
+                  {LOADING_TEXT}
+              </section> 
+          ) : (
+
+            <>
+              <AppHeader/>
+              <section className={styles.app_container}>
+                <BurgerIngredients />
+                <BurgerConstructor />
+              </section>
+            </>
+
+          ))}
+    
+    
+
+        </div>
+      </SelectedIngredientsContext.Provider>
+    </IngredientsContext.Provider>
   );
 }
 

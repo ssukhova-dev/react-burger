@@ -19,5 +19,16 @@
 
 }
 
+.app_loading, .app_error {
 
+  width: 100%;
+  margin: auto;
 
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  height: 300px;
+
+}
