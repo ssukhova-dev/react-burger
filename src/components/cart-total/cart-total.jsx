@@ -9,16 +9,17 @@ import useModal from '../modal/use-modal'
 import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
 
-import {SelectedIngredientsContext} from '../../utils/context'
-
 import { getOrders} from '../../utils/burger-api' 
+
+import { useDispatch, useSelector } from 'react-redux';
 
 
 function CartTotal({ total }) {
 
     const orderDetailsDlg = useModal();
 
-    const {selectedIngredients} = React.useContext(SelectedIngredientsContext);
+    const cart = useSelector(store => store.cart);
+
 
     const [order, setOrder] = React.useState(null);
 
@@ -27,7 +28,7 @@ function CartTotal({ total }) {
     {
         const ingredients = [] ; 
 
-        selectedIngredients.forEach((ingredient) => {
+        cart.forEach((ingredient) => {
             ingredients.push(ingredient._id);
           })
 

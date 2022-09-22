@@ -10,21 +10,29 @@ import {ERROR_TEXT, LOADING_TEXT} from '../../utils/constants'
 
 import {useFetch, getIngredientsData} from '../../utils/burger-api' 
 
-import {IngredientsContext, SelectedIngredientsContext} from '../../utils/context'
+import {useSelector, useDispatch} from 'react-redux'
+import { SET_INGREDIENTS, ADD_INGREDIENT, REMOVE_INGREDIENT } from '../../services/actions/actions';
 
 
 function App() {
 
-  const {isLoading, hasError, resultData : ingredients} = useFetch(getIngredientsData);
+  const {isLoading, hasError, resultData : ingredientsResultData} = useFetch(getIngredientsData);
 
-  const [selectedIngredients, setSelectedIngredients] = React.useState([]);
+  const dispatch = useDispatch();
 
+  React.useEffect(()=> {
 
+      dispatch(
+          {
+            type: SET_INGREDIENTS,
+            ingredients: ingredientsResultData
+          }
+        );
+
+  }, [ingredientsResultData]);
 
   return (
-    <IngredientsContext.Provider value={ingredients}>
-      <SelectedIngredientsContext.Provider value={{selectedIngredients, setSelectedIngredients}}>
-        <div className={styles.app}>
+      <div className={styles.app}>
       
 
           {hasError ? (
@@ -52,8 +60,7 @@ function App() {
     
 
         </div>
-      </SelectedIngredientsContext.Provider>
-    </IngredientsContext.Provider>
+
   );
 }
 

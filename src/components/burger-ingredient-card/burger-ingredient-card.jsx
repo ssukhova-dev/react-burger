@@ -6,11 +6,21 @@ import burgerIngCardStyle from './burger-ingredient-card.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 
+import {useDispatch} from 'react-redux'
+import { ADD_INGREDIENT } from '../../services/actions/actions';
+
 function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
 
+      const dispatch = useDispatch();
 
       const onCardClick = () => {
+        
         ingredientDetailsDlgOpen(ingredient);
+        
+        dispatch({
+            type: ADD_INGREDIENT,
+            ingredient: ingredient
+          });
       };
 
 

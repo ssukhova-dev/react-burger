@@ -11,31 +11,39 @@ import useModal from '../modal/use-modal'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal'
 
-import {IngredientsContext} from '../../utils/context'
+
 import {IngredientTypes} from '../../utils/constants'
+import { useDispatch, useSelector } from 'react-redux';
+import { ADD_CURRENT_INGREDIENT, REMOVE_CURRENT_INGREDIENT } from '../../services/actions/actions';
 
 function BurgerIngredients() {
    
+    const dispatch = useDispatch();
     const [current, setCurrent] = React.useState(IngredientTypes.bun)
 
     const ingredientDetailsDlg = useModal();
 
-    const ingredients = React.useContext(IngredientsContext);
+    const ingredients = useSelector(store => store.ingredients);
 
     const buns = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.bun), [ingredients]);
     const sauces = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.sauce), [ingredients]);
     const mains = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.main), [ingredients]);
 
-    const [selectedIngredient, setIngredient] = React.useState(null)
 
     function showIngredientDetailsDlg(ingredient){
-        setIngredient(ingredient);
+        dispatch({
+            type: ADD_CURRENT_INGREDIENT,
+            ingredient: ingredient
+          });
         ingredientDetailsDlg.open();
     }
 
     function closeIngredientDetailsDlg(){
-        setIngredient(null);
+        dispatch({
+            type: REMOVE_CURRENT_INGREDIENT
+          });
         ingredientDetailsDlg.requestClose();
+     
     }
 
     return (
@@ -74,7 +82,7 @@ function BurgerIngredients() {
         {
             ingredientDetailsDlg.isOpen && (
                 <Modal onClose={closeIngredientDetailsDlg} title="Детали ингредиента">
-                    <IngredientDetails ingredient = {selectedIngredient}/>
+                    <IngredientDetails />
                 </Modal>
             )
         }
