@@ -12,8 +12,9 @@ import {v4 as uuidv4} from 'uuid'
 import {IngredientTypes} from '../../utils/constants'
 
 import { useDispatch, useSelector } from 'react-redux';
-import { REMOVE_INGREDIENT } from '../../services/actions/actions';
+import { REMOVE_INGREDIENT, ADD_INGREDIENT } from '../../services/actions/actions';
 
+import { useDrop } from 'react-dnd';
 
 function BurgerConstructor() {
 
@@ -62,13 +63,31 @@ function BurgerConstructor() {
           } );
       };
 
+      const addIngredient = (item) => {
+        dispatch({
+            type: ADD_INGREDIENT,
+            ingredient: item
+          });
+      };
+
+      const [{ isHover }, dropTarget] = useDrop({
+        accept: 'ingredient',
+        collect: monitor => ({
+          isHover: monitor.isOver()
+        }),
+        drop(item) { addIngredient(item); }
+      });
     
+
+      const className = `${burgerConstructorStyles.burger_constructor_list} ${
+                             isHover ? burgerConstructorStyles.onHover : ''
+                        }`;
 
       return (
         <section className={burgerConstructorStyles.burger_constructor}>
 
 
-            <div className={burgerConstructorStyles.burger_constructor_list} >
+            <div className={className} ref={dropTarget} >
   
                 {bunIngredient && (
                     <span className={burgerConstructorStyles.burger_bun} >

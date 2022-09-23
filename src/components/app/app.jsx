@@ -13,6 +13,8 @@ import {useFetch, getIngredientsData} from '../../utils/burger-api'
 import {useSelector, useDispatch} from 'react-redux'
 import { SET_INGREDIENTS, ADD_INGREDIENT, REMOVE_INGREDIENT } from '../../services/actions/actions';
 
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
 
 function App() {
 
@@ -50,8 +52,10 @@ function App() {
             <>
               <AppHeader/>
               <section className={styles.app_container}>
-                <BurgerIngredients />
-                <BurgerConstructor />
+                <DndProvider backend={HTML5Backend}>
+                  <BurgerIngredients />
+                  <BurgerConstructor />
+                </DndProvider >
               </section>
             </>
 

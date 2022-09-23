@@ -9,6 +9,8 @@ import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-com
 import {useDispatch, useSelector} from 'react-redux'
 import { ADD_INGREDIENT } from '../../services/actions/actions';
 
+import { useDrag } from 'react-dnd';
+
 function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
 
       const dispatch = useDispatch();
@@ -30,9 +32,17 @@ function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
 
       })
 
+      const [{ opacity }, ref] = useDrag({
+        type: 'ingredient',
+        item:  ingredient ,
+        collect: monitor => ({
+          opacity: monitor.isDragging() ? 0.5 : 1
+        })
+      });
+
       return (
 
-              <div className={burgerIngCardStyle.burger_ingredient_card} onClick={onCardClick}>
+              <div className={burgerIngCardStyle.burger_ingredient_card} onClick={onCardClick} ref={ref} style={{ opacity }}>
 
          
                 {(count !== 0) && (<Counter count={count} size="default" />)}
