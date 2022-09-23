@@ -20,26 +20,26 @@ export const rootReducer = (state, action) => {
 
             let newCart = state.cart;
 
+
+            if (action.ingredient.type === "bun") {
+                const hasBun = state.cart.some((item) => item.type === "bun");
+
+                if (hasBun) {
+                    newCart = state.cart.filter((item) => item.type !== "bun")
+                }  
+
+                const new_ingredient = {...action.ingredient, count: 1};
+                return {...state, cart: [...newCart, new_ingredient]};
+            }
+
+
+
             const ingredient = state.cart.find( item => item._id === action.ingredient._id);
-            
 
             if (ingredient){
 
                 if (ingredient.count <= 0)
                     return state;
-
-                if (ingredient.type === "bun") {
-                    const hasBun = state.cart.some((item) => item.type === "bun");
-
-                    if (hasBun) {
-
-                        newCart = newCart.filter((item) => item.typed !== "bun")
-                    }  
-
-                    const new_ingredient = {...action.ingredient, count: 1};
-                    return {...state, cart: [...state.cart, new_ingredient]};
-                }
-
 
                 newCart = newCart.map( (item) => {
                     if (item._id === action.ingredient._id){
