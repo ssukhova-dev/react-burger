@@ -21,51 +21,33 @@ function BurgerConstructor() {
 
     const cart = useSelector(store => store.cart);
 
+    const bunIngredient = useSelector( store => {
+        return store.cart.find(item => item.type === IngredientTypes.bun);
+    })
 
-    function getBunIngredient()
-    {
-        return cart.find(item => item.type === IngredientTypes.bun);
-    }
-    const bunIngredient = React.useMemo( getBunIngredient, [cart, getBunIngredient]);   
-
-
-    function getTotalReducer()
-    {
-        const sum = bunIngredient ? (bunIngredient.price * 2) : 0;
-
-        return cart.reduce((sum, item) => ( 
-            (item.type !== IngredientTypes.bun) ? (sum + item.price) : sum), sum);  
-    }
-    
-    const [total, totalDispatcher] = React.useReducer(getTotalReducer, 0, undefined);
-
-    React.useEffect( totalDispatcher, [cart]  );
-
-
-  /*  const total = useSelector( state => {
+    const total = useSelector( store => {
 
         let sum = 0;
 
-        state.cart.forEach( (item) => {
-            if (item.type === IngredientTypes.bun)
-            {
+        store.cart.forEach( (item) => {
+            if (item.type === IngredientTypes.bun) {
                 sum += item.price * 2;
             } else {
                 sum += item.price * item.count;
             }
         })
         return sum;
-    });*/
+    });
 
 
-      const onCardClick = () => {
+      const handleRemoveIngredient = (ingredientId) => {
         dispatch(
           {
             type: REMOVE_INGREDIENT,
-            ingredient: cart[0]
-          }
-        );
+            ingredientId: ingredientId
+          } );
       };
+
     
 
       return (
@@ -75,7 +57,7 @@ function BurgerConstructor() {
             <div className={burgerConstructorStyles.burger_constructor_list} >
   
                 {bunIngredient && (
-                    <span className={burgerConstructorStyles.burger_bun} onClick={onCardClick}    >
+                    <span className={burgerConstructorStyles.burger_bun} >
                         <ConstructorElement 
                             type="top"
                             isLocked={true}
@@ -98,7 +80,8 @@ function BurgerConstructor() {
                                 <ConstructorElement
                                     text={ingredient.name}
                                     price={ingredient.price}
-                                    thumbnail={ingredient.image_mobile}                                 
+                                    thumbnail={ingredient.image_mobile}   
+                                    handleClose={() => handleRemoveIngredient(ingredient._id)}                          
                                 />
                             </span>
                         )

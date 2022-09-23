@@ -8,9 +8,6 @@ import { SET_INGREDIENTS,
 
 export const rootReducer = (state, action) => {
 
-    console.log('recieve action', action);
-
-
     switch (action.type) {
 
         case SET_INGREDIENTS:
@@ -21,16 +18,12 @@ export const rootReducer = (state, action) => {
             if (!action.ingredient)
                 return state; 
 
-            console.log(state.cart);
-
             let newCart = state.cart;
 
             const ingredient = state.cart.find( item => item._id === action.ingredient._id);
             
 
             if (ingredient){
-
-                console.log('ingredient found');
 
                 if (ingredient.count <= 0)
                     return state;
@@ -46,7 +39,6 @@ export const rootReducer = (state, action) => {
                     const new_ingredient = {...action.ingredient, count: 1};
                     return {...state, cart: [...state.cart, new_ingredient]};
                 }
-
 
 
                 newCart = newCart.map( (item) => {
@@ -72,14 +64,14 @@ export const rootReducer = (state, action) => {
         {
             let newCart = state.cart;
 
-            const ingredient = state.cart.find( item => item._id === action.ingredient._id);
+            const ingredient = state.cart.find( item => item._id === action.ingredientId);
             
             if (ingredient.count === 1) {
-                newCart = newCart.filter((item) => item._id !== action.ingredient._id)
+                newCart = newCart.filter((item) => item._id !== action.ingredientId)
             }
             else{
                 newCart = newCart.map( (item) => {
-                    if (item._id === action.ingredient._id){
+                    if (item._id === action.ingredientId){
                         return {...item, count: item.count - 1};
 
                     } else {
