@@ -2,7 +2,8 @@ import { SET_INGREDIENTS,
          ADD_INGREDIENT, 
          REMOVE_INGREDIENT, 
          ADD_CURRENT_INGREDIENT,
-         REMOVE_CURRENT_INGREDIENT } from '../actions/actions';
+         REMOVE_CURRENT_INGREDIENT,
+         ADD_ORDER } from '../actions/actions';
 
 export const rootReducer = (state, action) => {
 
@@ -98,6 +99,13 @@ export const rootReducer = (state, action) => {
         case REMOVE_CURRENT_INGREDIENT:
         {
             return {...state, currentIngredient: null};
+        }
+        case ADD_ORDER:
+        {
+            if (!action.order)
+                return state; 
+
+            return {...state, order: action.order};
         }
         default:
             return state;

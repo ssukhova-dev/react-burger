@@ -12,6 +12,7 @@ import Modal from '../modal/modal'
 import { getOrders} from '../../utils/burger-api' 
 
 import { useDispatch, useSelector } from 'react-redux';
+import { ADD_ORDER } from '../../services/actions/actions';
 
 
 function CartTotal({ total }) {
@@ -19,11 +20,8 @@ function CartTotal({ total }) {
     const orderDetailsDlg = useModal();
 
     const cart = useSelector(store => store.cart);
+    const dispatch = useDispatch();
 
-
-    const [order, setOrder] = React.useState(null);
-
-  
     function handleClickMakeOrder()
     {
         const ingredients = [] ; 
@@ -31,12 +29,15 @@ function CartTotal({ total }) {
         cart.forEach((ingredient) => {
             ingredients.push(ingredient._id);
           })
-
+ 
 
         getOrders(ingredients).then((data) => {
 
             if (data.success === true) {
-                setOrder(data.order.number);
+                dispatch({
+                    type: ADD_ORDER,
+                    order: data.order.number
+                })    
             } 
             else{
                 throw("не удалось сделать заказ");
@@ -71,7 +72,7 @@ function CartTotal({ total }) {
             {
                 orderDetailsDlg.isOpen && (
                     <Modal onClose={orderDetailsDlg.requestClose}>
-                        <OrderDetails orderId={order}/>
+                        <OrderDetails/>
                     </Modal>
                 )
             }
