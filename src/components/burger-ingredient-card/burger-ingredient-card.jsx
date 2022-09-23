@@ -6,7 +6,7 @@ import burgerIngCardStyle from './burger-ingredient-card.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { ADD_INGREDIENT } from '../../services/actions/actions';
 
 function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
@@ -16,20 +16,26 @@ function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
       const onCardClick = () => {
         
         ingredientDetailsDlgOpen(ingredient);
-        
+
         dispatch({
             type: ADD_INGREDIENT,
             ingredient: ingredient
           });
       };
 
+      const count = useSelector(store => {
+
+        const foundedIngredient = store.cart.find( item => item._id === ingredient._id);
+        return foundedIngredient ? foundedIngredient.count : 0;
+
+      })
 
       return (
 
               <div className={burgerIngCardStyle.burger_ingredient_card} onClick={onCardClick}>
 
          
-                <Counter count={1} size="default" />
+                {(count !== 0) && (<Counter count={count} size="default" />)}
 
                 <img src={ ingredient.image } alt={`изображение ингредиента ${ingredient.name}`} />
                
