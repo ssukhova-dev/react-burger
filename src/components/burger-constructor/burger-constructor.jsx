@@ -25,6 +25,20 @@ function BurgerConstructor() {
         return store.cart.find(item => item.type === IngredientTypes.bun);
     })
 
+    const cartIngredients = useSelector( store => {
+
+        let ingredients = [];
+
+        store.cart.forEach( (item) => {
+            if (item.type !== IngredientTypes.bun) {
+                for (let i = 0; i < item.count; i++) {
+                    ingredients.push(item);
+                }
+            } 
+        })
+        return ingredients
+    });
+
     const total = useSelector( store => {
 
         let sum = 0;
@@ -73,8 +87,9 @@ function BurgerConstructor() {
         
                 <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`}>
 
-                    {cart.map((ingredient) => (
-                        (ingredient.type !== IngredientTypes.bun) && (
+                    {cartIngredients.map((ingredient) => (
+                       
+                      
                             <span className={`${burgerConstructorStyles.burger_filling} m-2`} key={uuidv4()}>
                                 <DragIcon type="primary"/>
                                 <ConstructorElement
@@ -84,7 +99,7 @@ function BurgerConstructor() {
                                     handleClose={() => handleRemoveIngredient(ingredient._id)}                          
                                 />
                             </span>
-                        )
+                       
                     ))}
 
                 
