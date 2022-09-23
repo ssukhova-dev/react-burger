@@ -3,7 +3,8 @@ import { SET_INGREDIENTS,
          REMOVE_INGREDIENT, 
          ADD_CURRENT_INGREDIENT,
          REMOVE_CURRENT_INGREDIENT,
-         ADD_ORDER } from '../actions/actions';
+         ADD_ORDER,
+         SET_CURRENT_TAB } from '../actions/actions';
 
 export const rootReducer = (state, action) => {
 
@@ -106,6 +107,10 @@ export const rootReducer = (state, action) => {
                 return state; 
 
             return {...state, order: action.order};
+        }
+        case SET_CURRENT_TAB:
+        {
+            return {...state, currentTab: action.currentTab};
         }
         default:
             return state;

@@ -1,5 +1,6 @@
 import { legacy_createStore, compose } from 'redux';
 import {rootReducer} from '../services/reducers/root-reducer'
+import {IngredientTypes} from './constants'
 
 
 const composeEnhancers =
@@ -17,7 +18,8 @@ const preloadedState = {
     ingredients: [],
     cart: [],
     currentIngredient: null,
-    order: null
+    order: null,
+    currentTab: IngredientTypes.bun
 }
 
 

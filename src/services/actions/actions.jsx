@@ -7,4 +7,8 @@ export const REMOVE_CURRENT_INGREDIENT = 'REMOVE_CURRENT_INGREDIENT';
 
 export const ADD_ORDER = 'ADD_ORDER';
 
+export const SET_CURRENT_TAB = 'SET_CURRENT_TAB';
+
+
+
 
