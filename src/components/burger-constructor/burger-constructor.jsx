@@ -70,8 +70,9 @@ function BurgerConstructor() {
 
             <div className={className} ref={dropTarget} >
   
-                {bunIngredient && (
-                    <span className={burgerConstructorStyles.burger_bun} >
+  
+                <span className={burgerConstructorStyles.burger_bun} >
+                    {bunIngredient && (
                         <ConstructorElement 
                             type="top"
                             isLocked={true}
@@ -79,9 +80,9 @@ function BurgerConstructor() {
                             price={bunIngredient.price}
                             thumbnail={bunIngredient.image_mobile}     
                         />
-                    </span>
-                )}
-
+                    )}
+                </span>
+       
         
                 <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`} >
 
@@ -91,8 +92,9 @@ function BurgerConstructor() {
                 </div>
  
 
-                {bunIngredient && (
-                    <span className={burgerConstructorStyles.burger_bun} >
+              
+                <span className={burgerConstructorStyles.burger_bun} >
+                    {bunIngredient && (
                         <ConstructorElement
                             type="bottom"
                             isLocked={true}
@@ -100,9 +102,10 @@ function BurgerConstructor() {
                             price={bunIngredient.price}
                             thumbnail={bunIngredient.image_mobile}       
                         />
-                    </span>
-                )}
-
+                    )}
+                </span>
+            
+            
             </div>
 
             <CartTotal total={total}/>
