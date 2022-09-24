@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 function IngredientDetails (){
 
-    const ingredient = useSelector(store => store.cart.currentIngredient);
+    const ingredient = useSelector(store => store.currentIngredient.currentIngredient);
 
     return (
         <div className={ingredientDetailsStyle.content_body}>

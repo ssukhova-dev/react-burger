@@ -1,20 +1,11 @@
 import { 
          ADD_INGREDIENT, 
-         REMOVE_INGREDIENT, 
-         ADD_CURRENT_INGREDIENT,
-         REMOVE_CURRENT_INGREDIENT,
-         ADD_ORDER,
-         SET_CURRENT_TAB } from '../actions/burger-constructor';
-
-import {IngredientTypes} from '../../utils/constants'
+         REMOVE_INGREDIENT } from '../actions/burger-constructor';
 
 
 const initialState = {
     cart: [],
-    currentIngredient: null,
-    currentTab: IngredientTypes.bun
 }
-
         
 export const cartReducer = (state = initialState, action) => {
 
@@ -88,21 +79,6 @@ export const cartReducer = (state = initialState, action) => {
             }
             
             return {...state, cart: newCart};
-        }
-        case ADD_CURRENT_INGREDIENT:
-        {
-            if (!action.ingredient)
-                return state; 
-
-            return {...state, currentIngredient: action.ingredient};
-        }
-        case REMOVE_CURRENT_INGREDIENT:
-        {
-            return {...state, currentIngredient: null};
-        }
-        case SET_CURRENT_TAB:
-        {
-            return {...state, currentTab: action.currentTab};
         }
         default:
             return state;
