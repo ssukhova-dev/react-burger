@@ -1,4 +1,4 @@
-
+import React from 'react';
 import cardStyles from './burger-constructor-card.module.css';
 import ingredientPropType from './../../utils/prop-types.jsx'
 
@@ -6,8 +6,9 @@ import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger
 
 import { useDispatch } from 'react-redux';
 
-import { REMOVE_INGREDIENT } from '../../services/actions/burger-constructor';
+import { REMOVE_INGREDIENT,MOVE_INGREDIENTs } from '../../services/actions/burger-constructor';
 
+import { useDrag, useDrop } from 'react-dnd';
 
 function BurgerConstructorCard({ingredient}) {
 
@@ -21,8 +22,39 @@ function BurgerConstructorCard({ingredient}) {
           } );
       };
 
+      const ref = React.useRef(null); 
+
+      const [{ opacity }, dragRef] = useDrag({
+        type: 'cartIngredient',
+        item:  ingredient ,
+        collect: monitor => ({
+          opacity: monitor.isDragging() ? 0.5 : 1
+        })
+      });
+
+      const moveIngredients = (dragIngredient, dropIngredient) => {
+
+        dispatch({
+            type: MOVE_INGREDIENTs,
+            dragIngredient: dragIngredient,
+            dropIngredient: dropIngredient
+          });
+      };
+
+      const [{ isHover }, dropTarget] = useDrop({
+        accept: 'cartIngredient',
+        collect: monitor => ({
+            isHover: monitor.isOver()
+        }),
+        drop(item) {           
+            moveIngredients(item, ingredient);  
+        }
+      });
+
+      dragRef(dropTarget(ref));
+
       return (
-                <span className={`${cardStyles.burger_filling} m-2`} >
+                <span className={`${cardStyles.burger_filling} m-2`} ref={ref} style={{ opacity }} >
                     <DragIcon type="primary"/>
                     <ConstructorElement
                         text={ingredient.name}

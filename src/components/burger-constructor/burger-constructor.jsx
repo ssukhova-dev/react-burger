@@ -25,7 +25,11 @@ function BurgerConstructor() {
     })
 
     const cartIngredients = useSelector( store => {
-        return store.cart.cart.filter((item) => item.type !== "bun")
+        return store.cart.cart.filter((item) => item.type !== "bun").sort((a, b) => {
+            if (a.order > b.order) return 1;
+            if (a.order == b.order) return 0;
+            if (a.order < b.order) return -1;
+          })
     });
 
     const total = useSelector( store => {
@@ -56,7 +60,6 @@ function BurgerConstructor() {
         }),
         drop(item) { addIngredient(item); }
       });
-    
 
       const className = `${burgerConstructorStyles.burger_constructor_list} ${
                              isHover ? burgerConstructorStyles.onHover : ''
@@ -80,7 +83,7 @@ function BurgerConstructor() {
                 )}
 
         
-                <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`}>
+                <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`} >
 
                     {cartIngredients.map((ingredient) => (            
                          <BurgerConstructorCard ingredient={ingredient} key={uuidv4()}/>
