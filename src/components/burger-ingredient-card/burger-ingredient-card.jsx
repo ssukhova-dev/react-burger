@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import ingredientPropType from './../../utils/prop-types.jsx'
-
+import { DNDTypes} from '../../utils/constants'
 import burgerIngCardStyle from './burger-ingredient-card.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
@@ -22,7 +22,7 @@ function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
       })
 
       const [{ opacity }, ref] = useDrag({
-        type: 'ingredient',
+        type: DNDTypes.ingredient,
         item:  ingredient ,
         collect: monitor => ({
           opacity: monitor.isDragging() ? 0.5 : 1

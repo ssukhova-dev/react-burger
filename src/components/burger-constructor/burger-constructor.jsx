@@ -9,7 +9,7 @@ import BurgerConstructorCard from '../burger-constructor-card/burger-constructor
 
 import {v4 as uuidv4} from 'uuid'
 
-import {IngredientTypes} from '../../utils/constants'
+import {IngredientTypes, DNDTypes} from '../../utils/constants'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_INGREDIENT } from '../../services/actions/burger-constructor';
@@ -54,7 +54,7 @@ function BurgerConstructor() {
       };
 
       const [{ isHover }, dropTarget] = useDrop({
-        accept: 'ingredient',
+        accept: DNDTypes.ingredient,
         collect: monitor => ({
           isHover: monitor.isOver()
         }),

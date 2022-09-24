@@ -1,6 +1,7 @@
 import React from 'react';
 import cardStyles from './burger-constructor-card.module.css';
 import ingredientPropType from './../../utils/prop-types.jsx'
+import { DNDTypes} from '../../utils/constants'
 
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 
@@ -25,7 +26,7 @@ function BurgerConstructorCard({ingredient}) {
       const ref = React.useRef(null); 
 
       const [{ opacity }, dragRef] = useDrag({
-        type: 'cartIngredient',
+        type: DNDTypes.cartIngredient,
         item:  ingredient ,
         collect: monitor => ({
           opacity: monitor.isDragging() ? 0.5 : 1
@@ -42,7 +43,7 @@ function BurgerConstructorCard({ingredient}) {
       };
 
       const [{ isHover }, dropTarget] = useDrop({
-        accept: 'cartIngredient',
+        accept: DNDTypes.cartIngredient,
         collect: monitor => ({
             isHover: monitor.isOver()
         }),
