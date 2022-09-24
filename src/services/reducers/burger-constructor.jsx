@@ -1,17 +1,25 @@
-import { SET_INGREDIENTS, 
+import { 
          ADD_INGREDIENT, 
          REMOVE_INGREDIENT, 
          ADD_CURRENT_INGREDIENT,
          REMOVE_CURRENT_INGREDIENT,
          ADD_ORDER,
-         SET_CURRENT_TAB } from '../actions/actions';
+         SET_CURRENT_TAB } from '../actions/burger-constructor';
 
-export const rootReducer = (state, action) => {
+import {IngredientTypes} from '../../utils/constants'
+
+
+const initialState = {
+    cart: [],
+    currentIngredient: null,
+    order: null,
+    currentTab: IngredientTypes.bun
+}
+
+        
+export const cartReducer = (state = initialState, action) => {
 
     switch (action.type) {
-
-        case SET_INGREDIENTS:
-            return {...state, ingredients: action.ingredients};
         
         case ADD_INGREDIENT:
         {

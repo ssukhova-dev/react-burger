@@ -6,28 +6,19 @@ import burgerIngCardStyle from './burger-ingredient-card.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 
-import {useDispatch, useSelector} from 'react-redux'
-import { ADD_INGREDIENT } from '../../services/actions/actions';
+import {useSelector} from 'react-redux'
 
 import { useDrag } from 'react-dnd';
 
 function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
 
-      const dispatch = useDispatch();
-
       const onCardClick = () => {
-        
         ingredientDetailsDlgOpen(ingredient);
-
-        dispatch({
-            type: ADD_INGREDIENT,
-            ingredient: ingredient
-          });
       };
 
       const count = useSelector(store => {
 
-        const foundedIngredient = store.cart.find( item => item._id === ingredient._id);
+        const foundedIngredient = store.cart.cart.find( item => item._id === ingredient._id);
         return foundedIngredient ? foundedIngredient.count : 0;
 
       })

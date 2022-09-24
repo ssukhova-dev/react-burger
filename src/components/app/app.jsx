@@ -8,30 +8,26 @@ import BurgerConstructor from '../burger-constructor/burger-constructor'
 
 import {ERROR_TEXT, LOADING_TEXT} from '../../utils/constants' 
 
-import {useFetch, getIngredientsData} from '../../utils/burger-api' 
+import {getIngredients} from '../../services/actions/burger-ingredients' 
 
 import {useSelector, useDispatch} from 'react-redux'
-import { SET_INGREDIENTS, ADD_INGREDIENT, REMOVE_INGREDIENT } from '../../services/actions/actions';
 
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 
 function App() {
 
-  const {isLoading, hasError, resultData : ingredientsResultData} = useFetch(getIngredientsData);
+
+ const isLoading = useSelector(store => store.ingredients.ingredientsRequest);
+ const hasError = useSelector(store => store.ingredients.ingredientsFailed);
+
 
   const dispatch = useDispatch();
-
+  
   React.useEffect(()=> {
+        dispatch(getIngredients())
+    }, [dispatch])
 
-      dispatch(
-          {
-            type: SET_INGREDIENTS,
-            ingredients: ingredientsResultData
-          }
-        );
-
-  }, [ingredientsResultData]);
 
   return (
       <div className={styles.app}>

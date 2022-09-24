@@ -14,7 +14,7 @@ import Modal from '../modal/modal'
 
 import {IngredientTypes} from '../../utils/constants'
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_CURRENT_INGREDIENT, REMOVE_CURRENT_INGREDIENT, SET_CURRENT_TAB } from '../../services/actions/actions';
+import { ADD_CURRENT_INGREDIENT, REMOVE_CURRENT_INGREDIENT, SET_CURRENT_TAB } from '../../services/actions/burger-constructor';
 
 function BurgerIngredients() {
    
@@ -25,7 +25,7 @@ function BurgerIngredients() {
     const mainsRef = React.useRef(null);
     const listRef = React.useRef(null);
 
-    const currentTab = useSelector(store => store.currentTab);
+    const currentTab = useSelector(store => store.cart.currentTab);
 
      const refs = new Map([
         [IngredientTypes.bun,   bunRef],
@@ -46,7 +46,7 @@ function BurgerIngredients() {
 
     const ingredientDetailsDlg = useModal();
 
-    const ingredients = useSelector(store => store.ingredients);
+    const ingredients = useSelector(store => store.ingredients.ingredients);
 
     const buns = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.bun), [ingredients]);
     const sauces = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.sauce), [ingredients]);

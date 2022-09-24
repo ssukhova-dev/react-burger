@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 function OrderDetails (){
 
-    const orderId = useSelector(store => store.order);
+    const orderId = useSelector(store => store.cart.order);
 
     return (
         <div className={orderDetailsStyle.content_body}>

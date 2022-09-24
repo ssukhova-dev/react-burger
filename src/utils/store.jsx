@@ -1,6 +1,7 @@
-import { legacy_createStore, compose } from 'redux';
-import {rootReducer} from '../services/reducers/root-reducer'
-import {IngredientTypes} from './constants'
+import { legacy_createStore, compose, applyMiddleware } from 'redux';
+import {rootReducer} from '../services/reducers'
+
+import thunk from 'redux-thunk';
 
 
 const composeEnhancers =
@@ -9,19 +10,7 @@ const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
     }) : compose;
 
-const enhancer = composeEnhancers();
+const enhancer = composeEnhancers(applyMiddleware(thunk));
 
 
-
-
-const preloadedState = {
-    ingredients: [],
-    cart: [],
-    currentIngredient: null,
-    order: null,
-    currentTab: IngredientTypes.bun
-}
-
-
-
-export const store = legacy_createStore(rootReducer, preloadedState, enhancer); 
+export const store = legacy_createStore(rootReducer, enhancer); 

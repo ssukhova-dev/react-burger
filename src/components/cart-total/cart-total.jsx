@@ -12,14 +12,14 @@ import Modal from '../modal/modal'
 import { getOrders} from '../../utils/burger-api' 
 
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_ORDER } from '../../services/actions/actions';
+import { ADD_ORDER } from '../../services/actions/burger-constructor';
 
 
 function CartTotal({ total }) {
 
     const orderDetailsDlg = useModal();
 
-    const cart = useSelector(store => store.cart);
+    const cart = useSelector(store => store.cart.cart);
     const dispatch = useDispatch();
 
     function handleClickMakeOrder()

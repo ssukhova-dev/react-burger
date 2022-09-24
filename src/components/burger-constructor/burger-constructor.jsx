@@ -12,7 +12,7 @@ import {v4 as uuidv4} from 'uuid'
 import {IngredientTypes} from '../../utils/constants'
 
 import { useDispatch, useSelector } from 'react-redux';
-import { REMOVE_INGREDIENT, ADD_INGREDIENT } from '../../services/actions/actions';
+import { REMOVE_INGREDIENT, ADD_INGREDIENT } from '../../services/actions/burger-constructor';
 
 import { useDrop } from 'react-dnd';
 
@@ -20,17 +20,17 @@ function BurgerConstructor() {
 
     const dispatch = useDispatch();
 
-    const cart = useSelector(store => store.cart);
+    const cart = useSelector(store => store.cart.cart);
 
     const bunIngredient = useSelector( store => {
-        return store.cart.find(item => item.type === IngredientTypes.bun);
+        return store.cart.cart.find(item => item.type === IngredientTypes.bun);
     })
 
     const cartIngredients = useSelector( store => {
 
         let ingredients = [];
 
-        store.cart.forEach( (item) => {
+        store.cart.cart.forEach( (item) => {
             if (item.type !== IngredientTypes.bun) {
                 for (let i = 0; i < item.count; i++) {
                     ingredients.push(item);
@@ -44,7 +44,7 @@ function BurgerConstructor() {
 
         let sum = 0;
 
-        store.cart.forEach( (item) => {
+        store.cart.cart.forEach( (item) => {
             if (item.type === IngredientTypes.bun) {
                 sum += item.price * 2;
             } else {
