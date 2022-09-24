@@ -2,16 +2,17 @@
 import burgerConstructorStyles from './burger-constructor.module.css';
 import commonStyles from  './../../utils/common-styles.module.css';
 
-import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components'
 
 import CartTotal from '../cart-total/cart-total'
+import BurgerConstructorCard from '../burger-constructor-card/burger-constructor-card'
 
 import {v4 as uuidv4} from 'uuid'
 
 import {IngredientTypes} from '../../utils/constants'
 
 import { useDispatch, useSelector } from 'react-redux';
-import { REMOVE_INGREDIENT, ADD_INGREDIENT } from '../../services/actions/burger-constructor';
+import { ADD_INGREDIENT } from '../../services/actions/burger-constructor';
 
 import { useDrop } from 'react-dnd';
 
@@ -40,15 +41,6 @@ function BurgerConstructor() {
         })
         return sum;
     });
-
-
-      const handleRemoveIngredient = (ingredient) => {
-        dispatch(
-          {
-            type: REMOVE_INGREDIENT,
-            ingredient: ingredient
-          } );
-      };
 
       const addIngredient = (item) => {
         dispatch({
@@ -90,18 +82,8 @@ function BurgerConstructor() {
         
                 <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`}>
 
-                    {cartIngredients.map((ingredient) => (
-                      
-                            <span className={`${burgerConstructorStyles.burger_filling} m-2`} key={uuidv4()}>
-                                <DragIcon type="primary"/>
-                                <ConstructorElement
-                                    text={ingredient.name}
-                                    price={ingredient.price}
-                                    thumbnail={ingredient.image_mobile}   
-                                    handleClose={() => handleRemoveIngredient(ingredient)}                          
-                                />
-                            </span>
-                       
+                    {cartIngredients.map((ingredient) => (            
+                         <BurgerConstructorCard ingredient={ingredient} key={uuidv4()}/>
                     ))}
                 </div>
  
