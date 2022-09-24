@@ -12,7 +12,6 @@ import {IngredientTypes} from '../../utils/constants'
 const initialState = {
     cart: [],
     currentIngredient: null,
-    order: null,
     currentTab: IngredientTypes.bun
 }
 
@@ -100,13 +99,6 @@ export const cartReducer = (state = initialState, action) => {
         case REMOVE_CURRENT_INGREDIENT:
         {
             return {...state, currentIngredient: null};
-        }
-        case ADD_ORDER:
-        {
-            if (!action.order)
-                return state; 
-
-            return {...state, order: action.order};
         }
         case SET_CURRENT_TAB:
         {

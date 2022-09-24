@@ -1,4 +1,3 @@
-import React from 'react' 
 
 import burgerConstructorStyles from './burger-constructor.module.css';
 import commonStyles from  './../../utils/common-styles.module.css';

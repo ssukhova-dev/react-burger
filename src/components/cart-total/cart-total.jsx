@@ -5,21 +5,19 @@ import cartTotalStyles from './cart-total.module.css';
 
 import {CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components'
 
-import useModal from '../modal/use-modal'
 import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
 
-import { getOrders} from '../../utils/burger-api' 
 
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_ORDER } from '../../services/actions/burger-constructor';
+import { getOrders, CLOSE_ORDER_DETAILS } from '../../services/actions/cart-total';
 
 
 function CartTotal({ total }) {
 
-    const orderDetailsDlg = useModal();
-
+    const isOrderDetailOpen = useSelector(store => store.order.isOrderDetailOpen);
     const cart = useSelector(store => store.cart.cart);
+
     const dispatch = useDispatch();
 
     function handleClickMakeOrder()
@@ -29,29 +27,16 @@ function CartTotal({ total }) {
         cart.forEach((ingredient) => {
             ingredients.push(ingredient._id);
           })
- 
 
-        getOrders(ingredients).then((data) => {
-
-            if (data.success === true) {
-                dispatch({
-                    type: ADD_ORDER,
-                    order: data.order.number
-                })    
-            } 
-            else{
-                throw("не удалось сделать заказ");
-            }
-        })
-        .then(() => {
-            orderDetailsDlg.open();
-        })
-        .catch(e => {
-            console.log(e);
-        })
-
+          dispatch(getOrders(ingredients));
 
     }
+
+    function handleCloseOrderDetail() {
+        dispatch({
+            type: CLOSE_ORDER_DETAILS
+          });
+      }
 
         return (
             <>
@@ -70,8 +55,8 @@ function CartTotal({ total }) {
             </section>
 
             {
-                orderDetailsDlg.isOpen && (
-                    <Modal onClose={orderDetailsDlg.requestClose}>
+                isOrderDetailOpen && (
+                    <Modal onClose={handleCloseOrderDetail}>
                         <OrderDetails/>
                     </Modal>
                 )

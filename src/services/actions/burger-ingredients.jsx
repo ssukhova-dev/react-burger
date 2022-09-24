@@ -21,6 +21,11 @@ export function getIngredients() {
             type: GET_INGREDIENTS_ERROR
           });
         }
-      });
+      })
+      .catch(e => {
+        dispatch({
+            type: GET_INGREDIENTS_ERROR
+          });
+    });;
     };
   }

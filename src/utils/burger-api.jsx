@@ -40,7 +40,7 @@ export function useFetch(requestFn)
 }
   
 
-export const getOrders = (ingredients) => {
+export const getOrdersData = (ingredients) => {
 
     return fetch(ORDERS_API_URL, {
                         method: 'POST',
