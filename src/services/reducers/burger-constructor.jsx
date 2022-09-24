@@ -26,57 +26,23 @@ export const cartReducer = (state = initialState, action) => {
                     newCart = state.cart.filter((item) => item.type !== "bun")
                 }  
 
-                const new_ingredient = {...action.ingredient, count: 1};
+                const new_ingredient = {...action.ingredient, order: 0};
                 return {...state, cart: [...newCart, new_ingredient]};
             }
 
 
-
-            const ingredient = state.cart.find( item => item._id === action.ingredient._id);
-
-            if (ingredient){
-
-                if (ingredient.count <= 0)
-                    return state;
-
-                newCart = newCart.map( (item) => {
-                    if (item._id === action.ingredient._id){
-                        return {...item, count: item.count + 1};
-
-                    } else {
-                        return item;
-                    }
-                    
-                });
-
-                return {...state, cart: newCart};
-            }
-            else{
-                const new_ingredient = {...action.ingredient, count: 1};
-                return {...state, cart: [...state.cart, new_ingredient]};
-            }
-
-            return {...state, cart: {...state.cart}};
+            const new_ingredient = {...action.ingredient, order: state.cart.length};
+            return {...state, cart: [...state.cart, new_ingredient]};
+        
         }
         case REMOVE_INGREDIENT:
         {
             let newCart = state.cart;
 
-            const ingredient = state.cart.find( item => item._id === action.ingredientId);
-            
-            if (ingredient.count === 1) {
-                newCart = newCart.filter((item) => item._id !== action.ingredientId)
-            }
-            else{
-                newCart = newCart.map( (item) => {
-                    if (item._id === action.ingredientId){
-                        return {...item, count: item.count - 1};
+            console.log('REMOVE_INGREDIENT', action);
 
-                    } else {
-                        return item;
-                    }
-                });
-            }
+            newCart = newCart.filter( (item) =>  ((item._id !== action.ingredient._id) || 
+                                                     (item.order !== action.ingredient.order)) );
             
             return {...state, cart: newCart};
         }

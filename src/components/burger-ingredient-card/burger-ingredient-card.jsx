@@ -17,10 +17,8 @@ function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
       };
 
       const count = useSelector(store => {
-
-        const foundedIngredient = store.cart.cart.find( item => item._id === ingredient._id);
-        return foundedIngredient ? foundedIngredient.count : 0;
-
+        const foundedIngredients = store.cart.cart.filter( item => item._id === ingredient._id);
+        return foundedIngredients ? foundedIngredients.length : 0;
       })
 
       const [{ opacity }, ref] = useDrag({

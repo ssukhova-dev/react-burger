@@ -19,24 +19,12 @@ function BurgerConstructor() {
 
     const dispatch = useDispatch();
 
-    const cart = useSelector(store => store.cart.cart);
-
     const bunIngredient = useSelector( store => {
         return store.cart.cart.find(item => item.type === IngredientTypes.bun);
     })
 
     const cartIngredients = useSelector( store => {
-
-        let ingredients = [];
-
-        store.cart.cart.forEach( (item) => {
-            if (item.type !== IngredientTypes.bun) {
-                for (let i = 0; i < item.count; i++) {
-                    ingredients.push(item);
-                }
-            } 
-        })
-        return ingredients
+        return store.cart.cart.filter((item) => item.type !== "bun")
     });
 
     const total = useSelector( store => {
@@ -47,18 +35,18 @@ function BurgerConstructor() {
             if (item.type === IngredientTypes.bun) {
                 sum += item.price * 2;
             } else {
-                sum += item.price * item.count;
+                sum += item.price;
             }
         })
         return sum;
     });
 
 
-      const handleRemoveIngredient = (ingredientId) => {
+      const handleRemoveIngredient = (ingredient) => {
         dispatch(
           {
             type: REMOVE_INGREDIENT,
-            ingredientId: ingredientId
+            ingredient: ingredient
           } );
       };
 
@@ -85,7 +73,6 @@ function BurgerConstructor() {
       return (
         <section className={burgerConstructorStyles.burger_constructor}>
 
-
             <div className={className} ref={dropTarget} >
   
                 {bunIngredient && (
@@ -95,18 +82,15 @@ function BurgerConstructor() {
                             isLocked={true}
                             text={`${bunIngredient.name} (верх)`}
                             price={bunIngredient.price}
-                            thumbnail={bunIngredient.image_mobile}   
-                            
+                            thumbnail={bunIngredient.image_mobile}     
                         />
                     </span>
                 )}
-
 
         
                 <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`}>
 
                     {cartIngredients.map((ingredient) => (
-                       
                       
                             <span className={`${burgerConstructorStyles.burger_filling} m-2`} key={uuidv4()}>
                                 <DragIcon type="primary"/>
@@ -114,13 +98,11 @@ function BurgerConstructor() {
                                     text={ingredient.name}
                                     price={ingredient.price}
                                     thumbnail={ingredient.image_mobile}   
-                                    handleClose={() => handleRemoveIngredient(ingredient._id)}                          
+                                    handleClose={() => handleRemoveIngredient(ingredient)}                          
                                 />
                             </span>
                        
                     ))}
-
-                
                 </div>
  
 
@@ -138,9 +120,7 @@ function BurgerConstructor() {
 
             </div>
 
-
             <CartTotal total={total}/>
-
 
         </section>
       );
