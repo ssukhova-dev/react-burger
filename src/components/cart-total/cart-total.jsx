@@ -7,7 +7,7 @@ import {CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-comp
 
 import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
-
+import {IngredientTypes} from '../../utils/constants'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrders, CLOSE_ORDER_DETAILS } from '../../services/actions/cart-total';
@@ -17,6 +17,10 @@ function CartTotal({ total }) {
 
     const isOrderDetailOpen = useSelector(store => store.order.isOrderDetailOpen);
     const cart = useSelector(store => store.cart.cart);
+
+    const bunIngredient = useSelector( store => {
+        return store.cart.cart.find(item => item.type === IngredientTypes.bun);
+    })
 
     const dispatch = useDispatch();
 
@@ -49,7 +53,7 @@ function CartTotal({ total }) {
                     <CurrencyIcon type="primary" />
                 </div>  
         
-                <Button type="primary" size="medium"  onClick={handleClickMakeOrder}>
+                <Button type="primary" size="medium"  onClick={handleClickMakeOrder} disabled={!bunIngredient}>
                     Оформить заказ
                 </Button>
             </section>
