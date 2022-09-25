@@ -25,8 +25,9 @@ function BurgerConstructor() {
     const cartIngredients = useSelector( store => {
         return store.cart.cart.filter((item) => item.type !== "bun").sort((a, b) => {
             if (a.order > b.order) return 1;
-            if (a.order == b.order) return 0;
+            if (a.order === b.order) return 0;
             if (a.order < b.order) return -1;
+            return 0;
           })
     });
 
