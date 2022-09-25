@@ -7,8 +7,6 @@ import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-compon
 import CartTotal from '../cart-total/cart-total'
 import BurgerConstructorCard from '../burger-constructor-card/burger-constructor-card'
 
-import {v4 as uuidv4} from 'uuid'
-
 import {IngredientTypes, DNDTypes} from '../../utils/constants'
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -87,7 +85,7 @@ function BurgerConstructor() {
                 <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`} >
 
                     {cartIngredients.map((ingredient) => (            
-                         <BurgerConstructorCard ingredient={ingredient} key={uuidv4()}/>
+                         <BurgerConstructorCard ingredient={ingredient} key={ingredient.key}/>
                     ))}
                 </div>
  
