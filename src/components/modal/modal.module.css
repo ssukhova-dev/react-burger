@@ -84,9 +84,9 @@
 
 
   .close_btn {
-    opacity: 1;
+    opacity: 0.5;
   }
   .modal_close:hover div.close_btn  {
-    opacity: 0.5;
+    opacity: 1;
   }
 
