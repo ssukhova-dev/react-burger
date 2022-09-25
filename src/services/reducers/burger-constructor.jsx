@@ -71,9 +71,9 @@ export const cartReducer = (state = initialState, action) => {
                 {
                     if ((item._id === action.dragIngredient._id) && 
                         (item.order === dragOrder)) {
-                            item.order = dropOrder - 1;
+                            item.order = dropOrder;
                     } else {
-                        if ((item.order > dragOrder) && (item.order < dropOrder))
+                        if ((item.order > dragOrder) && (item.order <= dropOrder))
                         {
                             item.order = item.order - 1;
                         }
