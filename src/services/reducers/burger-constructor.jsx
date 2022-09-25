@@ -4,6 +4,7 @@ import {
          ADD_INGREDIENT, 
          REMOVE_INGREDIENT,
          MOVE_INGREDIENTs } from '../actions/burger-constructor';
+import { CLEAR_CART } from '../actions/cart-total';
 
 
 const initialState = {
@@ -43,6 +44,10 @@ export const cartReducer = (state = initialState, action) => {
             newCart = newCart.filter( (item) =>  ((item._id !== action.ingredient._id) || 
                                                      (item.order !== action.ingredient.order)) );
             return {...state, cart: newCart};
+        }
+        case CLEAR_CART:
+        {
+            return {...state, cart: []};
         }
         case MOVE_INGREDIENTs:
         {
