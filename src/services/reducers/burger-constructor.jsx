@@ -1,4 +1,4 @@
-import {v4 as uuidv4} from 'uuid'
+
 
 import { 
          ADD_INGREDIENT, 
@@ -29,11 +29,11 @@ export const cartReducer = (state = initialState, action) => {
                     newCart = state.cart.filter((item) => item.type !== "bun")
                 }  
 
-                const new_ingredient = {...action.ingredient, order: 0, key: uuidv4()};
+                const new_ingredient = {...action.ingredient, order: 0, key: action.key};
                 return {...state, cart: [...newCart, new_ingredient]};
             }
 
-            const new_ingredient = {...action.ingredient, order: state.cart.length, key: uuidv4()};
+            const new_ingredient = {...action.ingredient, order: state.cart.length, key: action.key};
 
             return {...state, cart: [...state.cart, new_ingredient]};
         

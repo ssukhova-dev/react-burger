@@ -12,6 +12,8 @@ import {IngredientTypes, DNDTypes} from '../../utils/constants'
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_INGREDIENT } from '../../services/actions/burger-constructor';
 
+import {v4 as uuidv4} from 'uuid'
+
 import { useDrop } from 'react-dnd';
 
 function BurgerConstructor() {
@@ -48,7 +50,8 @@ function BurgerConstructor() {
       const addIngredient = (item) => {
         dispatch({
             type: ADD_INGREDIENT,
-            ingredient: item
+            ingredient: item,
+            key: uuidv4()
           });
       };
 
