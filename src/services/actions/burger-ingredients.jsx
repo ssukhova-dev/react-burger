@@ -10,27 +10,38 @@ export const REMOVE_CURRENT_INGREDIENT = 'REMOVE_CURRENT_INGREDIENT';
 export const SET_CURRENT_TAB = 'SET_CURRENT_TAB';
 
 
+function getIngredientRequest() {
+  return {
+    type: GET_INGREDIENTS_REQUEST
+  }
+}
+
+function getIngredientSuccess(data) {
+  return {
+    type: GET_INGREDIENTS_SUCCESS,
+    ingredients: data
+  }
+}
+
+function getIngredientError() {
+  return {
+    type: GET_INGREDIENTS_ERROR
+  }
+}
+
 export function getIngredients() {
     return function(dispatch) {
-      dispatch({
-        type: GET_INGREDIENTS_REQUEST
-      });
+      dispatch(getIngredientRequest);
+
       getIngredientsData().then(res => {
         if (res && res.success) {
-          dispatch({
-            type: GET_INGREDIENTS_SUCCESS,
-            ingredients: res.data
-          });
+          dispatch(getIngredientSuccess( res.data ));
         } else {
-          dispatch({
-            type: GET_INGREDIENTS_ERROR
-          });
+          dispatch(getIngredientError());
         }
       })
       .catch(e => {
-        dispatch({
-            type: GET_INGREDIENTS_ERROR
-          });
+        dispatch(getIngredientError());
     });;
     };
   }

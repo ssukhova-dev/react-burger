@@ -9,35 +9,52 @@ export const CLOSE_ORDER_DETAILS = 'CLOSE_ORDER_DETAILS';
 export const CLEAR_CART = 'CLEAR_CART';
 
 
+function getOrdersRequest() {
+  return {
+    type: GET_ORDERS_REQUEST
+  }
+}
+
+function getOrdersSuccess(orderId) {
+  return {
+    type: GET_ORDERS_SUCCESS,
+    orderId: orderId
+  }
+}
+
+function getOrdersError() {
+  return {
+    type: GET_ORDERS_ERROR
+  }
+}
+
+function clearCart() {
+  return {
+    type: CLEAR_CART
+  }
+}
+
+function openOrderDetails() {
+  return {
+    type: OPEN_ORDER_DETAILS
+  }
+}
 
 export function getOrders(ingredients) {
     return function(dispatch) {
-      dispatch({
-        type: GET_ORDERS_REQUEST
-      });
+      dispatch(getOrdersRequest());
       getOrdersData(ingredients).then(res => {
         if (res && res.success) {
-          dispatch({
-            type: GET_ORDERS_SUCCESS,
-            orderId: res.order.number
-          });
-          dispatch({
-            type: CLEAR_CART
-          });
+          dispatch(getOrdersSuccess( res.order.number ));
+          dispatch(clearCart());
         } else {
-          dispatch({
-            type: GET_ORDERS_ERROR
-          });
+          dispatch(getOrdersError());
         }
       }).then(() => {
-        dispatch({
-            type: OPEN_ORDER_DETAILS
-          });
+        dispatch(openOrderDetails());
         })
         .catch(e => {
-            dispatch({
-                type: GET_ORDERS_ERROR
-              });
+            dispatch(getOrdersError());
         });
     };
   }
