@@ -31,7 +31,7 @@ function getIngredientError() {
 
 export function getIngredients() {
     return function(dispatch) {
-      dispatch(getIngredientRequest);
+      dispatch(getIngredientRequest());
 
       getIngredientsData().then(res => {
         if (res && res.success) {
