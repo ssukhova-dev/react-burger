@@ -8,23 +8,29 @@ import BurgerConstructor from '../burger-constructor/burger-constructor'
 
 import {ERROR_TEXT, LOADING_TEXT} from '../../utils/constants' 
 
-import {useFetch, getIngredientsData} from '../../utils/burger-api' 
+import {getIngredients} from '../../services/actions/burger-ingredients' 
 
-import {IngredientsContext, SelectedIngredientsContext} from '../../utils/context'
+import {useSelector, useDispatch} from 'react-redux'
 
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
 
 function App() {
 
-  const {isLoading, hasError, resultData : ingredients} = useFetch(getIngredientsData);
 
-  const [selectedIngredients, setSelectedIngredients] = React.useState([]);
+ const isLoading = useSelector(store => store.ingredients.ingredientsRequest);
+ const hasError = useSelector(store => store.ingredients.ingredientsFailed);
 
+
+  const dispatch = useDispatch();
+  
+  React.useEffect(()=> {
+        dispatch(getIngredients())
+    }, [dispatch])
 
 
   return (
-    <IngredientsContext.Provider value={ingredients}>
-      <SelectedIngredientsContext.Provider value={{selectedIngredients, setSelectedIngredients}}>
-        <div className={styles.app}>
+      <div className={styles.app}>
       
 
           {hasError ? (
@@ -42,8 +48,10 @@ function App() {
             <>
               <AppHeader/>
               <section className={styles.app_container}>
-                <BurgerIngredients />
-                <BurgerConstructor />
+                <DndProvider backend={HTML5Backend}>
+                  <BurgerIngredients />
+                  <BurgerConstructor />
+                </DndProvider >
               </section>
             </>
 
@@ -52,8 +60,7 @@ function App() {
     
 
         </div>
-      </SelectedIngredientsContext.Provider>
-    </IngredientsContext.Provider>
+
   );
 }
 

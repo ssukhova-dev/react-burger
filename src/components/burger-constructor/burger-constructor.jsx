@@ -1,88 +1,102 @@
-import React from 'react' 
 
 import burgerConstructorStyles from './burger-constructor.module.css';
 import commonStyles from  './../../utils/common-styles.module.css';
 
-import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components'
 
 import CartTotal from '../cart-total/cart-total'
+import BurgerConstructorCard from '../burger-constructor-card/burger-constructor-card'
+
+import {IngredientTypes, DNDTypes} from '../../utils/constants'
+
+import { useDispatch, useSelector } from 'react-redux';
+import { ADD_INGREDIENT } from '../../services/actions/burger-constructor';
 
 import {v4 as uuidv4} from 'uuid'
 
-import {IngredientsContext, SelectedIngredientsContext} from '../../utils/context'
-
-import {IngredientTypes} from '../../utils/constants'
-
-
+import { useDrop } from 'react-dnd';
 
 function BurgerConstructor() {
 
-    const ingredients = React.useContext(IngredientsContext);
-    const {selectedIngredients, setSelectedIngredients} = React.useContext(SelectedIngredientsContext);
+    const dispatch = useDispatch();
 
-    setSelectedIngredients(ingredients);//временное решение
+    const bunIngredient = useSelector( store => {
+        return store.cart.cart.find(item => item.type === IngredientTypes.bun);
+    })
 
-    function getBunIngredient()
-    {
-        return selectedIngredients.find(item => item.type === IngredientTypes.bun);
-    }
-    const bunIngredient = React.useMemo( getBunIngredient, [selectedIngredients, getBunIngredient]);   
+    const cartIngredients = useSelector( store => {
+        return store.cart.cart.filter((item) => item.type !== "bun").sort((a, b) => {
+            if (a.order > b.order) return 1;
+            if (a.order === b.order) return 0;
+            if (a.order < b.order) return -1;
+            return 0;
+          })
+    });
 
+    const total = useSelector( store => {
 
-    function getTotalReducer()
-    {
-        const sum = bunIngredient ? (bunIngredient.price * 2) : 0;
+        let sum = 0;
 
-        return selectedIngredients.reduce((sum, item) => ( 
-            (item.type !== IngredientTypes.bun) ? (sum + item.price) : sum), sum);  
-    }
-    
-    const [total, totalDispatcher] = React.useReducer(getTotalReducer, 0, undefined);
+        store.cart.cart.forEach( (item) => {
+            if (item.type === IngredientTypes.bun) {
+                sum += item.price * 2;
+            } else {
+                sum += item.price;
+            }
+        })
+        return sum;
+    });
 
-    React.useEffect( totalDispatcher, [selectedIngredients]  );
-    
+      const addIngredient = (item) => {
+        dispatch({
+            type: ADD_INGREDIENT,
+            ingredient: item,
+            key: uuidv4()
+          });
+      };
+
+      const [{ isHover }, dropTarget] = useDrop({
+        accept: DNDTypes.ingredient,
+        collect: monitor => ({
+          isHover: monitor.isOver()
+        }),
+        drop(item) { addIngredient(item); }
+      });
+
+      const className = `${burgerConstructorStyles.burger_constructor_list} ${
+                             isHover ? burgerConstructorStyles.onHover : ''
+                        }`;
 
       return (
         <section className={burgerConstructorStyles.burger_constructor}>
 
-
-            <div className={burgerConstructorStyles.burger_constructor_list} >
+            <div className={className} ref={dropTarget} >
   
-                {bunIngredient && (
-                    <span className={burgerConstructorStyles.burger_bun} >
-                        <ConstructorElement
+  
+                <span className={burgerConstructorStyles.burger_bun} >
+                    {bunIngredient && (
+                        <ConstructorElement 
                             type="top"
                             isLocked={true}
                             text={`${bunIngredient.name} (верх)`}
                             price={bunIngredient.price}
-                            thumbnail={bunIngredient.image_mobile}       
+                            thumbnail={bunIngredient.image_mobile}     
                         />
-                    </span>
-                )}
-
-
+                    )}
+                </span>
+       
         
-                <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`}>
+                <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`} >
 
-                    {selectedIngredients.map((ingredient) => (
-                        (ingredient.type !== IngredientTypes.bun) && (
-                            <span className={`${burgerConstructorStyles.burger_filling} m-2`} key={uuidv4()}>
-                                <DragIcon type="primary"/>
-                                <ConstructorElement
-                                    text={ingredient.name}
-                                    price={ingredient.price}
-                                    thumbnail={ingredient.image_mobile}                                 
-                                />
-                            </span>
-                        )
+                    {cartIngredients.map((ingredient) => (            
+                         <BurgerConstructorCard ingredient={ingredient} key={ingredient.key}/>
                     ))}
-
-                
                 </div>
  
 
-                {bunIngredient && (
-                    <span className={burgerConstructorStyles.burger_bun} >
+              
+                <span className={burgerConstructorStyles.burger_bun} >
+                    {bunIngredient && (
                         <ConstructorElement
                             type="bottom"
                             isLocked={true}
@@ -90,14 +104,13 @@ function BurgerConstructor() {
                             price={bunIngredient.price}
                             thumbnail={bunIngredient.image_mobile}       
                         />
-                    </span>
-                )}
-
+                    )}
+                </span>
+            
+            
             </div>
 
-
             <CartTotal total={total}/>
-
 
         </section>
       );

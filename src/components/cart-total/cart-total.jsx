@@ -5,51 +5,42 @@ import cartTotalStyles from './cart-total.module.css';
 
 import {CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components'
 
-import useModal from '../modal/use-modal'
 import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
+import {IngredientTypes} from '../../utils/constants'
 
-import {SelectedIngredientsContext} from '../../utils/context'
-
-import { getOrders} from '../../utils/burger-api' 
+import { useDispatch, useSelector } from 'react-redux';
+import { getOrders, CLOSE_ORDER_DETAILS } from '../../services/actions/cart-total';
 
 
 function CartTotal({ total }) {
 
-    const orderDetailsDlg = useModal();
+    const isOrderDetailOpen = useSelector(store => store.order.isOrderDetailOpen);
+    const cart = useSelector(store => store.cart.cart);
 
-    const {selectedIngredients} = React.useContext(SelectedIngredientsContext);
+    const bunIngredient = useSelector( store => {
+        return store.cart.cart.find(item => item.type === IngredientTypes.bun);
+    })
 
-    const [order, setOrder] = React.useState(null);
+    const dispatch = useDispatch();
 
-  
     function handleClickMakeOrder()
     {
         const ingredients = [] ; 
 
-        selectedIngredients.forEach((ingredient) => {
+        cart.forEach((ingredient) => {
             ingredients.push(ingredient._id);
           })
 
-
-        getOrders(ingredients).then((data) => {
-
-            if (data.success === true) {
-                setOrder(data.order.number);
-            } 
-            else{
-                throw("не удалось сделать заказ");
-            }
-        })
-        .then(() => {
-            orderDetailsDlg.open();
-        })
-        .catch(e => {
-            console.log(e);
-        })
-
+          dispatch(getOrders(ingredients));
 
     }
+
+    function handleCloseOrderDetail() {
+        dispatch({
+            type: CLOSE_ORDER_DETAILS
+          });
+      }
 
         return (
             <>
@@ -62,15 +53,15 @@ function CartTotal({ total }) {
                     <CurrencyIcon type="primary" />
                 </div>  
         
-                <Button type="primary" size="medium"  onClick={handleClickMakeOrder}>
+                <Button type="primary" size="medium"  onClick={handleClickMakeOrder} disabled={!bunIngredient}>
                     Оформить заказ
                 </Button>
             </section>
 
             {
-                orderDetailsDlg.isOpen && (
-                    <Modal onClose={orderDetailsDlg.requestClose}>
-                        <OrderDetails orderId={order}/>
+                isOrderDetailOpen && (
+                    <Modal onClose={handleCloseOrderDetail}>
+                        <OrderDetails/>
                     </Modal>
                 )
             }

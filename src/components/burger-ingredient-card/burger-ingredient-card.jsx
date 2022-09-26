@@ -1,25 +1,40 @@
 import PropTypes from 'prop-types';
 
 import ingredientPropType from './../../utils/prop-types.jsx'
-
+import { DNDTypes} from '../../utils/constants'
 import burgerIngCardStyle from './burger-ingredient-card.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 
-function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
+import {useSelector} from 'react-redux'
 
+import { useDrag } from 'react-dnd';
+
+function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
 
       const onCardClick = () => {
         ingredientDetailsDlgOpen(ingredient);
       };
 
+      const count = useSelector(store => {
+        const foundedIngredients = store.cart.cart.filter( item => item._id === ingredient._id);
+        return foundedIngredients ? foundedIngredients.length : 0;
+      })
+
+      const [{ opacity }, ref] = useDrag({
+        type: DNDTypes.ingredient,
+        item:  ingredient ,
+        collect: monitor => ({
+          opacity: monitor.isDragging() ? 0.5 : 1
+        })
+      });
 
       return (
 
-              <div className={burgerIngCardStyle.burger_ingredient_card} onClick={onCardClick}>
+              <div className={burgerIngCardStyle.burger_ingredient_card} onClick={onCardClick} ref={ref} style={{ opacity }}>
 
          
-                <Counter count={1} size="default" />
+                {(count !== 0) && (<Counter count={count} size="default" />)}
 
                 <img src={ ingredient.image } alt={`изображение ингредиента ${ingredient.name}`} />
                

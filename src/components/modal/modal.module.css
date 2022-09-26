@@ -82,16 +82,11 @@
 
   }
 
+
   .close_btn {
-    display: block;
+    opacity: 0.5;
   }
-  .close_btn_hover {
-    display: none;
-  }
-  
   .modal_close:hover div.close_btn  {
-    display: none;
+    opacity: 1;
   }
-  .modal_close:hover div.close_btn_hover {
-    display: block;
-  }
+

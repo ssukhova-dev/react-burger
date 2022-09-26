@@ -50,9 +50,6 @@ function Modal(props){
             <div className={modalStyles.close_btn} >
                 <CloseIcon type="primary" />
             </div>
-            <div className={modalStyles.close_btn_hover} >
-                <CloseIcon type="secondary" />
-            </div>
           </div>
 
           <div className={modalStyles.modal_body}>
