@@ -15,6 +15,14 @@ import {useSelector, useDispatch} from 'react-redux'
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 
+import {Switch, Route} from "react-router-dom"
+import LoginPage from '../../pages/login/login';
+import RegisterPage from '../../pages/register/register';
+import ProfilePage from '../../pages/profile/profile';
+import {ProtectedRoute} from "../protected-route/protected-route"
+import {PublicRoute} from "../public-route/public-route"
+
+
 function App() {
 
 
@@ -31,7 +39,6 @@ function App() {
 
   return (
       <div className={styles.app}>
-      
 
           {hasError ? (
               <section className={styles.app_error}>
@@ -46,21 +53,49 @@ function App() {
           ) : (
 
             <>
-              <AppHeader/>
-              <section className={styles.app_container}>
-                <DndProvider backend={HTML5Backend}>
-                  <BurgerIngredients />
-                  <BurgerConstructor />
-                </DndProvider >
-              </section>
+                <AppHeader/>
+                <section className={styles.app_container}>
+
+                  <Switch>
+                    <Route path="/" exact={true}>
+                        <DndProvider backend={HTML5Backend}>
+                          <BurgerIngredients />
+                          <BurgerConstructor />
+                        </DndProvider >               
+                    </Route>
+
+
+                    <PublicRoute path="/login" exact={true} redirectTo="/">              
+                        <LoginPage />
+                    </PublicRoute>
+                    
+                    <Route path="/logout" exact={true}>
+                    </Route>
+
+                    <Route path="/register" exact={true}>
+                        <RegisterPage />
+                    </Route>
+
+                    <ProtectedRoute path="/profile" exact={true} redirectTo="/login"> 
+                        <ProfilePage />
+                    </ProtectedRoute>
+
+                    <Route path="/forgot-password" exact={true}>
+                    </Route>
+
+                    <Route path="/reset-password" exact={true}>
+                    </Route>
+
+                    <Route path="/ingredients/:id" exact={true}>
+                    </Route>
+
+                  </Switch>
+
+                </section>
             </>
-
+          
           ))}
-    
-    
-
         </div>
-
   );
 }
 
