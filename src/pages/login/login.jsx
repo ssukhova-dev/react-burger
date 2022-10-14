@@ -37,7 +37,7 @@ function LoginPage (){
 
             <div className={loginStyle.row}>
                 <p className="text text_type_main-default text_color_inactive">Вы - новый пользователь?</p>
-                <Link className="text text_type_main-default" to="/register">зарегистрироваться</Link>
+                <Link className="text text_type_main-default" to="/register">Зарегистрироваться</Link>
             </div>
 
             <div className={loginStyle.row}>
