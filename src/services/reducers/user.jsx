@@ -1,5 +1,6 @@
 import {USER_LOGIN,
-        USER_LOGOUT} from '../actions/user';
+        USER_LOGOUT,
+        RESET_PASSWORD} from '../actions/user';
 
 
 const initialState = {
@@ -15,6 +16,9 @@ export const userReducer = (state = initialState, action) => {
             return { ...state, token: action.token };
         }
         case USER_LOGOUT: {
+            return { ...state, token: undefined };
+        }
+        case RESET_PASSWORD: {
             return { ...state, token: undefined };
         }
         default: {

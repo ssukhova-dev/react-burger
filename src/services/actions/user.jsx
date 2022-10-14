@@ -2,6 +2,7 @@ import JsCookie from "js-cookie"
 
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';
+export const RESET_PASSWORD = 'RESET_PASSWORD;'
 
 export const isLoggedInSelector = (store) => !!store.user.token;
 
@@ -12,6 +13,13 @@ function userLogin(token) {
         token: token
     }
 }
+
+function resetPassword() {
+    return {
+        type: RESET_PASSWORD
+    }
+}
+
 
 function userLogout() {
     return {
@@ -58,3 +66,13 @@ export const logoutThunk = () => (dispatch) => {
     );
 }
 
+export const resetPasswordThunk = (data) => (dispatch) => {
+    Promise.resolve().then( () => {
+
+
+        dispatch(resetPassword())
+
+    }
+
+    );
+};

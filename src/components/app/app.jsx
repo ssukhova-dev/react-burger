@@ -21,6 +21,8 @@ import RegisterPage from '../../pages/register/register';
 import ProfilePage from '../../pages/profile/profile';
 import {ProtectedRoute} from "../protected-route/protected-route"
 import {PublicRoute} from "../public-route/public-route"
+import ForgotPasswordPage from '../../pages/forgot-password/forgot-password';
+import ResetPasswordPage from '../../pages/reset-password/reset-password';
 
 
 function App() {
@@ -81,9 +83,11 @@ function App() {
                     </ProtectedRoute>
 
                     <Route path="/forgot-password" exact={true}>
+                        <ForgotPasswordPage />
                     </Route>
 
                     <Route path="/reset-password" exact={true}>
+                        <ResetPasswordPage />
                     </Route>
 
                     <Route path="/ingredients/:id" exact={true}>
