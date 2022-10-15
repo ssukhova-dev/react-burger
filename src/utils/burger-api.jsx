@@ -75,3 +75,13 @@ export const login = ({ email, password}) => {
                     body: JSON.stringify({ email, password})})
     .then(checkResponse)
 };
+
+export const logout = (refreshToken) => {
+    return fetch(LOGOUT_API_URL, {
+                    method: 'POST',
+                    headers: {
+                    "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ "token" : refreshToken})})
+    .then(checkResponse)
+};

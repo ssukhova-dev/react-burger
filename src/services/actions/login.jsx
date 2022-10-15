@@ -42,13 +42,6 @@ function resetPassword() {
     }
 }
 
-
-function userLogout() {
-    return {
-        type: USER_LOGOUT
-    }
-}
-
 export function loginThunk(data) {
     return function(dispatch) {
       dispatch(loginRequest());
@@ -73,21 +66,6 @@ export const checkSessionThunk = () => (dispatch) => {
     //const accessToken = localStorage.getItem('userId');
     const accessToken = JsCookie.get(Token.access);
     dispatch(loginSuccess(accessToken));
-}
-
-export const logoutThunk = () => (dispatch) => {
-    //api.logout().then( )
-
-    Promise.resolve().then( () => {
-
-        // localStorage.removeItem('userId');
-        JsCookie.remove(Token.access);
-        JsCookie.remove(Token.refresh);
-        dispatch(userLogout())
-
-    }
-
-    );
 }
 
 export const resetPasswordThunk = (data) => (dispatch) => {

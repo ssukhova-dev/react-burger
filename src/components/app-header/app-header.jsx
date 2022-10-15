@@ -8,7 +8,7 @@ import {PublicRoute} from "../public-route/public-route"
 import {ProtectedRoute} from "../protected-route/protected-route"
 
 import {BurgerIcon, ListIcon, ProfileIcon, Logo} from '@ya.praktikum/react-developer-burger-ui-components'
-import { logoutThunk, isLoggedInSelector } from '../../services/actions/login';
+import { isLoggedInSelector } from '../../services/actions/login';
 
 
 
@@ -77,7 +77,7 @@ function AppHeader() {
                         <ProtectedRoute path="/" noRedirect="true">   
                             <>
                                 <NavLink to="/profile"> profile </NavLink>
-                                <a href="#" onClick={(e) => {e.preventDefault(); dispatch(logoutThunk())} }> logout </a>
+                               
                             </>
                         </ProtectedRoute>
 

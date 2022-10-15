@@ -1,11 +1,8 @@
 import {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR,
-        USER_LOGOUT,
         RESET_PASSWORD} from '../actions/login';
 
-import {REGISTER_REQUEST,
-        REGISTER_ERROR,
-        REGISTER_SUCCESS} from '../actions/register';
-
+import {LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR} from '../actions/logout';
+import {REGISTER_REQUEST, REGISTER_ERROR, REGISTER_SUCCESS} from '../actions/register';
 
 
 const initialState = {
@@ -17,6 +14,9 @@ const initialState = {
 
     loginRequest: false,
     loginFailed: false,
+
+    logoutRequest: false,
+    logoutFailed: false,
 };
 
 
@@ -33,11 +33,18 @@ export const loginReducer = (state = initialState, action) => {
         case LOGIN_ERROR: {
             return { ...state, loginFailed: true, loginRequest: false };
         }
-        case USER_LOGOUT: {
-            return { ...state, token: undefined };
+        case LOGOUT_REQUEST: {
+            return { ...state, logoutRequest: true };
+        }
+        case LOGOUT_SUCCESS: {
+            return { ...state, accessToken: undefined, refreshToken: undefined, 
+                logoutRequest: false, logoutFailed: false };
+        }
+        case LOGOUT_ERROR: {
+            return { ...state, logoutFailed: true, logoutRequest: false };
         }
         case RESET_PASSWORD: {
-            return { ...state, token: undefined };
+            return { ...state, accessToken: undefined, refreshToken: undefined };
         }
         case REGISTER_REQUEST: {
             return { ...state, registerRequest: true };
