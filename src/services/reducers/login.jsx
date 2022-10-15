@@ -46,7 +46,7 @@ export const loginReducer = (state = initialState, action) => {
         
             return { ...state, accessToken: action.accessToken, refreshToken: action.refreshToken, 
                 loginRequest: false, loginFailed: false,
-                user: {...state.user, name: action.user.name, email: action.user.email } };
+                user: {...state.user, name: action.user ? action.user.name : '', email: action.user ? action.user.email : '' } };
         }
         case LOGIN_ERROR: {
             return { ...state, loginFailed: true, loginRequest: false };

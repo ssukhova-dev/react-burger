@@ -62,12 +62,13 @@ export function loginThunk(data) {
     };
 }
 
-/*
+
 export const checkSessionThunk = () => (dispatch) => {
-    //const accessToken = localStorage.getItem('userId');
+
     const accessToken = JsCookie.get(Token.access);
-    dispatch(loginSuccess(accessToken));
-}*/
+    const refreshToken = JsCookie.get(Token.refresh);
+    dispatch(loginSuccess(accessToken, refreshToken));
+}
 
 export const resetPasswordThunk = (data) => (dispatch) => {
     Promise.resolve().then( () => {
