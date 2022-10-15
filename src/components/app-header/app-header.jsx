@@ -8,7 +8,7 @@ import {PublicRoute} from "../public-route/public-route"
 import {ProtectedRoute} from "../protected-route/protected-route"
 
 import {BurgerIcon, ListIcon, ProfileIcon, Logo} from '@ya.praktikum/react-developer-burger-ui-components'
-import { logoutThunk, isLoggedInSelector } from '../../services/actions/user';
+import { logoutThunk, isLoggedInSelector } from '../../services/actions/login';
 
 
 

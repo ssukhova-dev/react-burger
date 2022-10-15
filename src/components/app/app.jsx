@@ -70,25 +70,22 @@ function App() {
                     <PublicRoute path="/login" exact={true} redirectTo="/">              
                         <LoginPage />
                     </PublicRoute>
-                    
-                    <Route path="/logout" exact={true}>
-                    </Route>
 
-                    <Route path="/register" exact={true}>
+                    <PublicRoute path="/register" exact={true} redirectTo="/">
                         <RegisterPage />
-                    </Route>
+                    </PublicRoute>
 
                     <ProtectedRoute path="/profile" exact={true} redirectTo="/login"> 
                         <ProfilePage />
                     </ProtectedRoute>
 
-                    <Route path="/forgot-password" exact={true}>
+                    <PublicRoute path="/forgot-password" exact={true} redirectTo="/">
                         <ForgotPasswordPage />
-                    </Route>
+                    </PublicRoute>
 
-                    <Route path="/reset-password" exact={true}>
+                    <PublicRoute path="/reset-password" exact={true} redirectTo="/">
                         <ResetPasswordPage />
-                    </Route>
+                    </PublicRoute>
 
                     <Route path="/ingredients/:id" exact={true}>
                     </Route>

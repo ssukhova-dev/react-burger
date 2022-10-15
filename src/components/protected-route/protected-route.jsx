@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import { isLoggedInSelector } from '../../services/actions/user';
+import { isLoggedInSelector } from '../../services/actions/login';
 
 export function ProtectedRoute({ redirectTo, noRedirect, ...props }) {
     const isLoggedIn = useSelector(isLoggedInSelector);

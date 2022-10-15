@@ -3,6 +3,11 @@ import React from 'react';
 const BURGER_API_URL = "https://norma.nomoreparties.space/api";
 const INGREDIENTS_API_URL = `${BURGER_API_URL}/ingredients`;
 const ORDERS_API_URL = `${BURGER_API_URL}/orders`;
+const REGISTER_API_URL = `${BURGER_API_URL}/auth/register`;
+const LOGIN_API_URL = `${BURGER_API_URL}/auth/login`;
+const LOGOUT_API_URL = `${BURGER_API_URL}/auth/logout`;
+const TOKEN_API_URL = `${BURGER_API_URL}/auth/token`;
+
 
 
 const checkResponse = (res) => {
@@ -51,3 +56,12 @@ export const getOrdersData = (ingredients) => {
             .then(checkResponse)
 };
 
+export const register = ({ name, email, password}) => {
+    return fetch(REGISTER_API_URL, {
+                        method: 'POST',
+                        headers: {
+                        "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ name, email, password})})
+      .then(checkResponse)
+  };

@@ -1,7 +1,7 @@
 import { legacy_createStore, compose, applyMiddleware } from 'redux';
 import {rootReducer} from '../services/reducers'
 
-import {checkSessionThunk} from '../services/actions/user'
+import {checkSessionThunk} from '../services/actions/login'
 
 import thunk from 'redux-thunk';
 

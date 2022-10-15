@@ -7,7 +7,7 @@ export const RESET_PASSWORD = 'RESET_PASSWORD;'
 export const isLoggedInSelector = (store) => !!store.user.token;
 
 
-function userLogin(token) {
+export function userLogin(token) {
     return {
         type: USER_LOGIN,
         token: token

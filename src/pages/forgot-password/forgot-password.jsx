@@ -4,7 +4,7 @@ import style from './forgot-password.module.css';
 import { Button, Logo, PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from 'react-redux';
 
-import {resetPasswordThunk} from '../../services/actions/user';
+import {resetPasswordThunk} from '../../services/actions/login';
 
 import {Link} from 'react-router-dom'
 

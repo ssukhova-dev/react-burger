@@ -4,7 +4,7 @@ import style from './profile.module.css';
 import { Button, Logo, PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from 'react-redux';
 
-import { logoutThunk, isLoggedInSelector } from '../../services/actions/user';
+import { logoutThunk, isLoggedInSelector } from '../../services/actions/login';
 
 import {NavLink} from 'react-router-dom'
 

@@ -4,7 +4,7 @@ import style from './register.module.css';
 import { Button, Logo, PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from 'react-redux';
 
-import {loginThunk} from '../../services/actions/user';
+import {registerThunk} from '../../services/actions/register';
 
 import {Link} from 'react-router-dom'
 
@@ -20,7 +20,7 @@ function RegisterPage (){
 
     function handleSubmit(e){
         e.preventDefault();
-        dispatch(loginThunk(data));
+        dispatch(registerThunk(data));
     }
 
     return (

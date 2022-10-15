@@ -4,7 +4,7 @@ import loginStyle from './login.module.css';
 import { Button, Logo, PasswordInput, EmailInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from 'react-redux';
 
-import {loginThunk} from '../../services/actions/user';
+import {loginThunk} from '../../services/actions/login';
 
 import {Link} from 'react-router-dom'
 
