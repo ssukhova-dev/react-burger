@@ -4,3 +4,5 @@ export const ERROR_TEXT = "Что-то пошло не так. Обновите 
 export const LOADING_TEXT = "Загрузка...";
 
 export const DNDTypes = { ingredient: 'ingredient', cartIngredient: 'cartIngredient'};
+
+export const Token = { refresh: 'refreshToken', access: 'accessToken'};

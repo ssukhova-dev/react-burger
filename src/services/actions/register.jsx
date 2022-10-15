@@ -1,7 +1,8 @@
 import JsCookie from "js-cookie"
-import {userLogin} from "./login"
 
 import * as api from '../../utils/burger-api'
+
+import {Token} from '../../utils/constants'
 
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -15,10 +16,11 @@ function registerRequest() {
   }
 }
 
-export function registerSuccess(token) {
+export function registerSuccess(accessToken, refreshToken) {
     return {
         type: REGISTER_SUCCESS,
-        token: token
+        accessToken: accessToken,
+        refreshToken: refreshToken,
     }
 }
 
@@ -34,9 +36,9 @@ export function registerThunk(data) {
 
       api.register(data).then(res => {
         if (res && res.success) {
-            const accessToken = res.accessToken; 
-            JsCookie.set('userId', accessToken);
-            dispatch(registerSuccess(accessToken))
+            JsCookie.set(Token.access, res.accessToken);
+            JsCookie.set(Token.refresh, res.refreshToken);
+            dispatch(registerSuccess(res.accessToken, res.refreshToken))
         } else {
             dispatch(registerError());
         }

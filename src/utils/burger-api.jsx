@@ -64,4 +64,14 @@ export const register = ({ name, email, password}) => {
                         },
                         body: JSON.stringify({ name, email, password})})
       .then(checkResponse)
-  };
+};
+
+export const login = ({ email, password}) => {
+    return fetch(LOGIN_API_URL, {
+                    method: 'POST',
+                    headers: {
+                    "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email, password})})
+    .then(checkResponse)
+};
