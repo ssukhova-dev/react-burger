@@ -9,6 +9,7 @@ import BurgerConstructor from '../burger-constructor/burger-constructor'
 import {ERROR_TEXT, LOADING_TEXT} from '../../utils/constants' 
 
 import {getIngredients} from '../../services/actions/burger-ingredients' 
+import {getUser} from '../../services/actions/profile' 
 
 import {useSelector, useDispatch} from 'react-redux'
 
@@ -35,7 +36,8 @@ function App() {
   const dispatch = useDispatch();
   
   React.useEffect(()=> {
-        dispatch(getIngredients())
+        dispatch(getIngredients());
+        dispatch(getUser());
     }, [dispatch])
 
 

@@ -2,8 +2,9 @@ import React from 'react'
 import style from './profile.module.css';
 
 import { Button, Logo, PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { saveUserThunk } from '../../services/actions/profile';
 import { logoutThunk } from '../../services/actions/logout';
 
 import {NavLink} from 'react-router-dom'
@@ -12,7 +13,8 @@ function ProfilePage (){
 
     const dispatch = useDispatch();
 
-    const [data, setData] = React.useState({name: '', email: '', password: ''});
+    const { name, email, password } = useSelector(store => store.login.user);
+    const [data, setData] = React.useState({name: name, email: email, password: password});
 
     function handleChange(e){
         setData(prev => ({...prev, [e.target.name]: e.target.value}));
@@ -20,7 +22,7 @@ function ProfilePage (){
 
     function handleSubmit(e){
         e.preventDefault();
-        dispatch(logoutThunk());
+        dispatch(saveUserThunk(data));
     }
 
     return (
@@ -54,6 +56,7 @@ function ProfilePage (){
             <Input onChange={handleChange} name={'name'} placeholder={'Имя'} value={data.name}/>
             <EmailInput onChange={handleChange} name={'email'}  value={data.email}/>
             <PasswordInput onChange={handleChange} name={'password'} value={data.password} />
+            <Button type="primary" size="medium"  onClick={handleSubmit}>Сохранить</Button>
         </form>
 
       </section>

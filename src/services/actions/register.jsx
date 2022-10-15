@@ -16,11 +16,12 @@ function registerRequest() {
   }
 }
 
-export function registerSuccess(accessToken, refreshToken) {
+export function registerSuccess(accessToken, refreshToken, user) {
     return {
         type: REGISTER_SUCCESS,
         accessToken: accessToken,
         refreshToken: refreshToken,
+        user: user
     }
 }
 
@@ -38,7 +39,7 @@ export function registerThunk(data) {
         if (res && res.success) {
             JsCookie.set(Token.access, res.accessToken);
             JsCookie.set(Token.refresh, res.refreshToken);
-            dispatch(registerSuccess(res.accessToken, res.refreshToken))
+            dispatch(registerSuccess(res.accessToken, res.refreshToken, res.user))
         } else {
             dispatch(registerError());
         }

@@ -19,11 +19,12 @@ function loginRequest() {
   }
 }
 
-export function loginSuccess(accessToken, refreshToken) {
+function loginSuccess(accessToken, refreshToken, user) {
     return {
         type: LOGIN_SUCCESS,
         accessToken: accessToken,
         refreshToken: refreshToken,
+        user: user
     }
 }
 
@@ -50,7 +51,7 @@ export function loginThunk(data) {
         if (res && res.success) {
             JsCookie.set(Token.access, res.accessToken);
             JsCookie.set(Token.refresh, res.refreshToken);
-            dispatch(loginSuccess(res.accessToken, res.refreshToken))
+            dispatch(loginSuccess(res.accessToken, res.refreshToken, res.user))
         } else {
             dispatch(loginError());
         }
@@ -61,12 +62,12 @@ export function loginThunk(data) {
     };
 }
 
-
+/*
 export const checkSessionThunk = () => (dispatch) => {
     //const accessToken = localStorage.getItem('userId');
     const accessToken = JsCookie.get(Token.access);
     dispatch(loginSuccess(accessToken));
-}
+}*/
 
 export const resetPasswordThunk = (data) => (dispatch) => {
     Promise.resolve().then( () => {

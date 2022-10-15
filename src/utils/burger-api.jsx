@@ -1,5 +1,9 @@
 import React from 'react';
 
+import {Token} from './constants'
+import { getCookie } from './cookie-utils';
+import JsCookie from "js-cookie"
+
 const BURGER_API_URL = "https://norma.nomoreparties.space/api";
 const INGREDIENTS_API_URL = `${BURGER_API_URL}/ingredients`;
 const ORDERS_API_URL = `${BURGER_API_URL}/orders`;
@@ -7,6 +11,7 @@ const REGISTER_API_URL = `${BURGER_API_URL}/auth/register`;
 const LOGIN_API_URL = `${BURGER_API_URL}/auth/login`;
 const LOGOUT_API_URL = `${BURGER_API_URL}/auth/logout`;
 const TOKEN_API_URL = `${BURGER_API_URL}/auth/token`;
+const USER_API_URL = `${BURGER_API_URL}/auth/user`;
 
 
 
@@ -85,3 +90,37 @@ export const logout = (refreshToken) => {
                     body: JSON.stringify({ "token" : refreshToken})})
     .then(checkResponse)
 };
+
+export const token = (refreshToken) => {
+    return fetch(TOKEN_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ "token" : refreshToken}),
+    })
+    .then(checkResponse)
+  };
+
+  export const getUser = () => {
+    return fetch(USER_API_URL, {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": JsCookie.get(Token.access),
+                    }
+    })
+    .then(checkResponse)
+  };
+
+  export const updateUser = ({ name, email, password}) => {
+    return fetch(USER_API_URL, {
+                    method: 'PATCH',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": JsCookie.get(Token.access),
+                    },
+                    body: JSON.stringify({ name, email, password})})
+    .then(checkResponse)
+  };
+

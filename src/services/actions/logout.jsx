@@ -33,7 +33,7 @@ export function logoutThunk() {
     return function(dispatch) {
       dispatch(logoutRequest());
 
-      const refreshToken = JsCookie.get(Token.refresh);;
+      const refreshToken = JsCookie.get(Token.refresh);
 
       api.logout(refreshToken).then(res => {
         if (res && res.success) {
