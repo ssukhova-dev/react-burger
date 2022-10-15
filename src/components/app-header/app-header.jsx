@@ -55,7 +55,7 @@ function AppHeader() {
 
                 <div className={appHeaderStyles.navigation_account}>
                     <div className={appHeaderStyles.navigation_link} >
-                        <NavLink to="/register" className={appHeaderStyles.navigation_link} >
+                        <NavLink to="/profile" className={appHeaderStyles.navigation_link} >
                             <div className={appHeaderStyles.link_icon}><ProfileIcon type="secondary"/></div>
                             <div className={appHeaderStyles.link_icon_hover}><ProfileIcon type="primary"/></div>
                             <p className="text text_type_main-default">

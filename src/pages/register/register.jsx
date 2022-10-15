@@ -30,9 +30,9 @@ function RegisterPage (){
 
             <form onSubmit={handleSubmit} className={style.form}>
                 <p className="text text_type_main-default">Регистрация</p>
-                <Input onChange={handleChange} name={'name'} placeholder={'Имя'}/>
-                <EmailInput onChange={handleChange} name={'email'} />
-                <PasswordInput onChange={handleChange} name={'password'} />
+                <Input onChange={handleChange} name={'name'} placeholder={'Имя'} value={data.name}/>
+                <EmailInput onChange={handleChange} name={'email'}  value={data.email}/>
+                <PasswordInput onChange={handleChange} name={'password'}  value={data.password}/>
                 <Button type="primary" size="medium"  onClick={handleSubmit}>Зарегистрироваться</Button>
             </form>
 

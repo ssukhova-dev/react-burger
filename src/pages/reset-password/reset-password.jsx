@@ -30,8 +30,8 @@ function ResetPasswordPage (){
 
             <form onSubmit={handleSubmit} className={style.form}>
                 <p className="text text_type_main-default">Восстановление пароля</p>
-                <PasswordInput onChange={handleChange} name={'password'} placeholder={'Введите новый пароль'}/>  
-                <Input onChange={handleChange} name={'code'} placeholder={'Введите код из письма'}/>              
+                <PasswordInput onChange={handleChange} name={'password'} placeholder={'Введите новый пароль'} value={data.password}/>  
+                <Input onChange={handleChange} name={'code'} placeholder={'Введите код из письма'} value={data.code}/>              
                 <Button type="primary" size="medium"  onClick={handleSubmit}>Восстановить</Button>
             </form>
 

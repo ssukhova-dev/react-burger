@@ -1,0 +1,48 @@
+.profile {
+    display: flex;
+    flex-direction: row;
+    
+    align-items: top;
+    justify-content: left;
+    gap: 60px;
+
+    margin: 80px 0px 0px 0px;
+
+  }
+  
+  .nav {
+    align-items: left;
+  }
+  
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .item {
+    display: flex;
+    margin: 20px 0px 40px 0px;
+  }
+  
+  .link {
+    text-decoration: none;
+  }
+  
+  .active {
+    color: #F2F2F3;
+  }
+  
+  .text {
+    max-width: 320px;
+    opacity: 0.5;
+    text-align: left;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+
+    margin: 20px 0px 40px 0px;
+    gap: 20px;
+  }

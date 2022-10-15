@@ -30,7 +30,7 @@ function ForgotPasswordPage (){
 
             <form onSubmit={handleSubmit} className={style.form}>
                 <p className="text text_type_main-default">Восстановление пароля</p>
-                <Input onChange={handleChange} name={'email'} placeholder={'укажите e-mail'}/>              
+                <Input onChange={handleChange} name={'email'} placeholder={'укажите e-mail'} value={data.email}/>              
                 <Button type="primary" size="medium"  onClick={handleSubmit}>Восстановить</Button>
             </form>
 
