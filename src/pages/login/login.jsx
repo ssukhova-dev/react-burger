@@ -1,7 +1,7 @@
 import React from 'react' 
 import loginStyle from './login.module.css';
 
-import { Button, Logo, PasswordInput, EmailInput} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button,  PasswordInput, EmailInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from 'react-redux';
 
 import {loginThunk} from '../../services/actions/login';
@@ -25,8 +25,6 @@ function LoginPage (){
 
     return (
         <div className={loginStyle.content}>
-
-            <Logo  />
 
             <form onSubmit={handleSubmit} className={loginStyle.form}>
                 <p className="text text_type_main-default">Вход</p>

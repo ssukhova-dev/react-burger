@@ -1,7 +1,7 @@
 import React from 'react' 
 import style from './reset-password.module.css';
 
-import { Button, Logo, PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from 'react-redux';
 
 import {loginThunk} from '../../services/actions/login';
@@ -25,8 +25,6 @@ function ResetPasswordPage (){
 
     return (
         <div className={style.content}>
-
-            <Logo  />
 
             <form onSubmit={handleSubmit} className={style.form}>
                 <p className="text text_type_main-default">Восстановление пароля</p>

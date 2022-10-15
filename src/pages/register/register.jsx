@@ -1,7 +1,7 @@
 import React from 'react' 
 import style from './register.module.css';
 
-import { Button, Logo, PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button,  PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from 'react-redux';
 
 import {registerThunk} from '../../services/actions/register';
@@ -25,8 +25,6 @@ function RegisterPage (){
 
     return (
         <div className={style.content}>
-
-            <Logo  />
 
             <form onSubmit={handleSubmit} className={style.form}>
                 <p className="text text_type_main-default">Регистрация</p>

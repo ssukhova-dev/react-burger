@@ -60,6 +60,10 @@
 
 }
 
+.navigation_link_active{
+  color: #F2F2F3;
+}
+
 
 a:link.navigation_link {
 
