@@ -24,12 +24,8 @@ function ForgotPasswordPage (){
 
     function handleSubmit(e){
         e.preventDefault();
-
-        console.log("forgotPasswordThunk", data);
         dispatch(forgotPasswordThunk(data));
     }
-
-    console.log('forgotPswSuccess', forgotPswSuccess);
 
     if (forgotPswSuccess) {
         return (
@@ -43,7 +39,7 @@ function ForgotPasswordPage (){
             <form onSubmit={handleSubmit} className={style.form}>
                 <p className="text text_type_main-default">Восстановление пароля</p>
                 <Input onChange={handleChange} name={'email'} placeholder={'укажите e-mail'} value={data.email}/>              
-                <Button type="primary" size="medium"  onClick={handleSubmit}>Восстановить</Button>
+                <Button type="primary" size="medium" htmlType="submit">Восстановить</Button>
             </form>
 
             <div className={style.row}>

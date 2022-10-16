@@ -30,7 +30,7 @@ function LoginPage (){
                 <p className="text text_type_main-default">Вход</p>
                 <EmailInput onChange={handleChange} name={'email'}  value={data.email}/>
                 <PasswordInput onChange={handleChange} name={'password'}  value={data.password}/>
-                <Button type="primary" size="medium"  onClick={handleSubmit}>Войти</Button>
+                <Button type="primary" size="medium" htmlType="submit">Войти</Button>
             </form>
 
             <div className={loginStyle.row}>

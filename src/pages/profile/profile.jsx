@@ -73,7 +73,7 @@ function ProfilePage (){
             <PasswordInput onChange={handleChange} name={'password'} value={data.password} />
             {isModified &&
                 <div className={style.buttons_panel}>
-                    <Button type="primary" size="medium"  onClick={handleSubmit}>Сохранить</Button>
+                    <Button type="primary" size="medium"  htmlType="submit">Сохранить</Button>
                     <Button type="primary" size="medium"  onClick={onCancel}>Отмена</Button>
                 </div>
             }
