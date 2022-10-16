@@ -2,7 +2,7 @@ import React from 'react'
 import loginStyle from './login.module.css';
 
 import { Button,  PasswordInput, EmailInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {loginThunk} from '../../services/actions/login';
 
@@ -13,6 +13,10 @@ function LoginPage (){
 
     const dispatch = useDispatch();
     const [data, setData] = React.useState({email: '', password: ''});
+
+    const loginFailed = useSelector(store => !!store.login.loginFailed);
+
+    console.log(loginFailed);
 
     function handleChange(e){
         setData(prev => ({...prev, [e.target.name]: e.target.value}));
@@ -31,6 +35,9 @@ function LoginPage (){
                 <EmailInput onChange={handleChange} name={'email'}  value={data.email}/>
                 <PasswordInput onChange={handleChange} name={'password'}  value={data.password}/>
                 <Button type="primary" size="medium" htmlType="submit">Войти</Button>
+                {loginFailed && 
+                    <p className={`${loginStyle.error} text text_type_main-default`}>Не верный Email или пароль</p>
+                }
             </form>
 
             <div className={loginStyle.row}>
