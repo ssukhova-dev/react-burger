@@ -1,7 +1,7 @@
 import React from 'react' 
 import style from './profile.module.css';
 
-import { Button, Logo, PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { saveUserThunk } from '../../services/actions/profile';
@@ -15,6 +15,10 @@ function ProfilePage (){
 
     const { name, email, password } = useSelector(store => store.login.user);
     const [data, setData] = React.useState({name: name, email: email, password: password});
+
+    React.useEffect(()=> {
+        setData({name: name , email: email, password: password});
+    }, [name, email, password])
 
     function handleChange(e){
         setData(prev => ({...prev, [e.target.name]: e.target.value}));
