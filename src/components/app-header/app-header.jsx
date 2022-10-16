@@ -47,7 +47,7 @@ function AppHeader() {
 
                 <div className={appHeaderStyles.navigation_account}>
                     <div className={appHeaderStyles.navigation_link} >
-                        <NavLink to="/profile" exact={true} className={appHeaderStyles.navigation_link} 
+                        <NavLink to="/profile"  className={appHeaderStyles.navigation_link} 
                                                             activeClassName={appHeaderStyles.navigation_link_active}>
                             <div className={appHeaderStyles.link_icon}><ProfileIcon type="secondary"/></div>
                             <div className={appHeaderStyles.link_icon_hover}><ProfileIcon type="primary"/></div>
