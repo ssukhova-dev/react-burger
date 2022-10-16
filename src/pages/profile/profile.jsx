@@ -25,6 +25,11 @@ function ProfilePage (){
         dispatch(saveUserThunk(data));
     }
 
+    function onCancel(e) {
+        e.preventDefault();
+        setData({name: name, email: email, password: password});
+    }
+
     return (
        <section className={style.profile}>
         <nav className={style.nav}>
@@ -56,7 +61,10 @@ function ProfilePage (){
             <Input onChange={handleChange} name={'name'} placeholder={'Имя'} value={data.name}/>
             <EmailInput onChange={handleChange} name={'email'}  value={data.email}/>
             <PasswordInput onChange={handleChange} name={'password'} value={data.password} />
-            <Button type="primary" size="medium"  onClick={handleSubmit}>Сохранить</Button>
+            <div className={style.buttons_panel}>
+                <Button type="primary" size="medium"  onClick={handleSubmit}>Сохранить</Button>
+                <Button type="primary" size="medium"  onClick={onCancel}>Отмена</Button>
+            </div>
         </form>
 
       </section>
