@@ -1,5 +1,6 @@
 
 import {getOrdersData} from '../../utils/burger-api'
+import {refreshToken} from './profile'
 
 export const GET_ORDERS_REQUEST = 'GET_ORDERS_REQUEST';
 export const GET_ORDERS_SUCCESS = 'GET_ORDERS_SUCCESS';
@@ -54,8 +55,11 @@ export function getOrders(ingredients) {
         dispatch(openOrderDetails());
         })
         .catch(e => {
-            dispatch(getOrdersError());
+          if (e.message === 'jwt expired') {
+              dispatch(refreshToken());
+          } else {
+              dispatch(getOrdersError());
+          }
         });
     };
   }
-
