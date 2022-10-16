@@ -30,6 +30,12 @@ function ProfilePage (){
         setData({name: name, email: email, password: password});
     }
 
+    const isModified = React.useMemo(() => {
+        return name !== data.name || email !== data.email || password !== data.password;
+      }, [data, name, email, password]);
+    
+    
+
     return (
        <section className={style.profile}>
         <nav className={style.nav}>
@@ -61,10 +67,12 @@ function ProfilePage (){
             <Input onChange={handleChange} name={'name'} placeholder={'Имя'} value={data.name}/>
             <EmailInput onChange={handleChange} name={'email'}  value={data.email}/>
             <PasswordInput onChange={handleChange} name={'password'} value={data.password} />
-            <div className={style.buttons_panel}>
-                <Button type="primary" size="medium"  onClick={handleSubmit}>Сохранить</Button>
-                <Button type="primary" size="medium"  onClick={onCancel}>Отмена</Button>
-            </div>
+            {isModified &&
+                <div className={style.buttons_panel}>
+                    <Button type="primary" size="medium"  onClick={handleSubmit}>Сохранить</Button>
+                    <Button type="primary" size="medium"  onClick={onCancel}>Отмена</Button>
+                </div>
+            }
         </form>
 
       </section>
