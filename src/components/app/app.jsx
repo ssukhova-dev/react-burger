@@ -16,7 +16,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 
-import {Switch, Route} from "react-router-dom"
+import {Switch, Route, useLocation, useHistory} from "react-router-dom"
 import LoginPage from '../../pages/login/login';
 import RegisterPage from '../../pages/register/register';
 import ProfilePage from '../../pages/profile/profile';
@@ -24,82 +24,121 @@ import {ProtectedRoute} from "../protected-route/protected-route"
 import {PublicRoute} from "../public-route/public-route"
 import ForgotPasswordPage from '../../pages/forgot-password/forgot-password';
 import ResetPasswordPage from '../../pages/reset-password/reset-password';
+import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-details';
+
+import useModal from '../modal/use-modal'
+import IngredientDetails from '../ingredient-details/ingredient-details'
+import Modal from '../modal/modal'
+import { ADD_CURRENT_INGREDIENT, REMOVE_CURRENT_INGREDIENT } from '../../services/actions/burger-ingredients';
 
 
 function App() {
 
+    const history = useHistory();
+    const location = useLocation();
+    const background = location.state && location.state.background;
 
- const isLoading = useSelector(store => store.ingredients.ingredientsRequest);
- const hasError = useSelector(store => store.ingredients.ingredientsFailed);
-
-
-  const dispatch = useDispatch();
-  
-  React.useEffect(()=> {
-        dispatch(getIngredients());
-        dispatch(getUser());
-    }, [dispatch])
+    const isLoading = useSelector(store => store.ingredients.ingredientsRequest);
+    const hasError = useSelector(store => store.ingredients.ingredientsFailed);
 
 
-  return (
-      <div className={styles.app}>
+    const dispatch = useDispatch();
+    
+    React.useEffect(()=> {
+            dispatch(getIngredients());
+            dispatch(getUser());
+        }, [dispatch])
 
-          {hasError ? (
-              <section className={styles.app_error}>
-                  {ERROR_TEXT}
-              </section> 
-          ) : (
+        
+        const ingredientDetailsDlg = useModal();
 
-          isLoading ? (
-              <section className={styles.app_loading}>
-                  {LOADING_TEXT}
-              </section> 
-          ) : (
+        function showIngredientDetailsDlg(ingredient){
+            dispatch({
+                type: ADD_CURRENT_INGREDIENT,
+                ingredient: ingredient
+            });
+            ingredientDetailsDlg.open();
+        }
 
-            <>
-                <AppHeader/>
-                <section className={styles.app_container}>
-
-                  <Switch>
-                    <Route path="/" exact={true}>
-                        <DndProvider backend={HTML5Backend}>
-                          <BurgerIngredients />
-                          <BurgerConstructor />
-                        </DndProvider >               
-                    </Route>
+        function closeIngredientDetailsDlg(){
+            dispatch({ type: REMOVE_CURRENT_INGREDIENT });
+            ingredientDetailsDlg.requestClose();
+            history.goBack();
+        }
 
 
-                    <PublicRoute path="/login" exact={true} redirectTo="/">              
-                        <LoginPage />
-                    </PublicRoute>
+    return (
+        <div className={styles.app}>
 
-                    <PublicRoute path="/register" exact={true} redirectTo="/">
-                        <RegisterPage />
-                    </PublicRoute>
+            {hasError ? (
+                <section className={styles.app_error}>
+                    {ERROR_TEXT}
+                </section> 
+            ) : (
 
-                    <ProtectedRoute path="/profile" exact={true} redirectTo="/login"> 
-                        <ProfilePage />
-                    </ProtectedRoute>
+            isLoading ? (
+                <section className={styles.app_loading}>
+                    {LOADING_TEXT}
+                </section> 
+            ) : (
 
-                    <PublicRoute path="/forgot-password" exact={true} redirectTo="/">
-                        <ForgotPasswordPage />
-                    </PublicRoute>
+                <>
+                    <AppHeader/>
+                    <section className={styles.app_container}>
 
-                    <PublicRoute path="/reset-password" exact={true} redirectTo="/">
-                        <ResetPasswordPage />
-                    </PublicRoute>
+                    <Switch location={background || location}>
+                        <Route path="/" exact={true}>
+                            <DndProvider backend={HTML5Backend}>
+                            <BurgerIngredients ingredientDetailsDlgOpen={showIngredientDetailsDlg}/>
+                            <BurgerConstructor />
+                            </DndProvider >               
+                        </Route>
 
-                    <Route path="/ingredients/:id" exact={true}>
-                    </Route>
 
-                  </Switch>
+                        <PublicRoute path="/login" exact={true} redirectTo="/">              
+                            <LoginPage />
+                        </PublicRoute>
 
-                </section>
-            </>
-          
-          ))}
-        </div>
-  );
+                        <PublicRoute path="/register" exact={true} redirectTo="/">
+                            <RegisterPage />
+                        </PublicRoute>
+
+                        <ProtectedRoute path="/profile" exact={true} redirectTo="/login"> 
+                            <ProfilePage />
+                        </ProtectedRoute>
+
+                        <PublicRoute path="/forgot-password" exact={true} redirectTo="/">
+                            <ForgotPasswordPage />
+                        </PublicRoute>
+
+                        <PublicRoute path="/reset-password" exact={true} redirectTo="/">
+                            <ResetPasswordPage />
+                        </PublicRoute>
+
+                        <Route path="/ingredients/:id" exact={true}>
+                            <IngredientDetailsPage />
+                        </Route>
+
+                    </Switch>
+
+                    </section>
+
+
+                    {
+                        background && ingredientDetailsDlg.isOpen && (
+                            <Route path="/ingredients/:id" exact={true}>
+                                <Modal onClose={closeIngredientDetailsDlg} title="Детали ингредиента">
+                                    <IngredientDetails />
+                                </Modal>
+                            </Route>
+                        )
+                    }
+
+                </>
+            
+            ))}
+            </div>
+    );
 }
 
 export default App;

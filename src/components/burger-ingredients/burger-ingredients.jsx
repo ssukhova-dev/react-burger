@@ -1,4 +1,5 @@
 import React from 'react' 
+import PropTypes from 'prop-types';
 
 import burgerIngStyles from './burger-ingredients.module.css';
 import commonStyles from  './../../utils/common-styles.module.css';
@@ -7,16 +8,11 @@ import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
  
 import BurgerIngredientCategory from './../burger-ingredient-category/burger-ingredient-category'
 
-import useModal from '../modal/use-modal'
-import IngredientDetails from '../ingredient-details/ingredient-details'
-import Modal from '../modal/modal'
-
-
 import {IngredientTypes} from '../../utils/constants'
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_CURRENT_INGREDIENT, REMOVE_CURRENT_INGREDIENT, SET_CURRENT_TAB } from '../../services/actions/burger-ingredients';
+import { SET_CURRENT_TAB } from '../../services/actions/burger-ingredients';
 
-function BurgerIngredients() {
+function BurgerIngredients({ingredientDetailsDlgOpen}) {
    
     const dispatch = useDispatch();
    
@@ -32,7 +28,6 @@ function BurgerIngredients() {
         [IngredientTypes.sauce, saucesRef],
         [IngredientTypes.main,  mainsRef]
       ]);
-      
 
     const setCurrentTab = (value) => {
         dispatch({
@@ -42,9 +37,6 @@ function BurgerIngredients() {
 
         refs.get(value).current.scrollIntoView({ behavior: 'smooth' });
       };
-    
-
-    const ingredientDetailsDlg = useModal();
 
     const ingredients = useSelector(store => store.ingredients.ingredients);
 
@@ -52,22 +44,6 @@ function BurgerIngredients() {
     const sauces = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.sauce), [ingredients]);
     const mains = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.main), [ingredients]);
 
-
-    function showIngredientDetailsDlg(ingredient){
-        dispatch({
-            type: ADD_CURRENT_INGREDIENT,
-            ingredient: ingredient
-          });
-        ingredientDetailsDlg.open();
-    }
-
-    function closeIngredientDetailsDlg(){
-        dispatch({
-            type: REMOVE_CURRENT_INGREDIENT
-          });
-        ingredientDetailsDlg.requestClose();
-     
-    }
 
     const handleScroll = () => {
 
@@ -105,7 +81,6 @@ function BurgerIngredients() {
             <p className={`${burgerIngStyles.burger_ingredient_caption} text text_type_main-large p-5`} >
                 Соберите бургер
             </p>
-
   
             <div className={burgerIngStyles.burger_ingredients_tabs} >
                 <Tab value={IngredientTypes.bun} active={currentTab === IngredientTypes.bun} onClick={setCurrentTab}>
@@ -119,28 +94,19 @@ function BurgerIngredients() {
                 </Tab>
             </div>
 
-
-
             <div className={`${burgerIngStyles.burger_category_list} ${commonStyles.custom_scrollbar}`} onScroll={handleScroll} ref={listRef}>
-                <BurgerIngredientCategory caption="Булки" ref={bunRef} ingredients={buns} ingredientDetailsDlgOpen={showIngredientDetailsDlg}/>
-                <BurgerIngredientCategory caption="Соусы" ref={saucesRef} ingredients={sauces} ingredientDetailsDlgOpen={showIngredientDetailsDlg}/>
-                <BurgerIngredientCategory caption="Начинка" ref={mainsRef}  ingredients={mains} ingredientDetailsDlgOpen={showIngredientDetailsDlg}/>
+                <BurgerIngredientCategory caption="Булки" ref={bunRef} ingredients={buns} ingredientDetailsDlgOpen={ingredientDetailsDlgOpen}/>
+                <BurgerIngredientCategory caption="Соусы" ref={saucesRef} ingredients={sauces} ingredientDetailsDlgOpen={ingredientDetailsDlgOpen}/>
+                <BurgerIngredientCategory caption="Начинка" ref={mainsRef}  ingredients={mains} ingredientDetailsDlgOpen={ingredientDetailsDlgOpen}/>
             </div>
 
         </section>
-
-        {
-            ingredientDetailsDlg.isOpen && (
-                <Modal onClose={closeIngredientDetailsDlg} title="Детали ингредиента">
-                    <IngredientDetails />
-                </Modal>
-            )
-        }
-
         </>
     );
   }
 
-
+  BurgerIngredients.propTypes = {
+    ingredientDetailsDlgOpen: PropTypes.func.isRequired,
+  };
   
   export default BurgerIngredients 
