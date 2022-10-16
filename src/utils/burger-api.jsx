@@ -7,6 +7,8 @@ import JsCookie from "js-cookie"
 const BURGER_API_URL = "https://norma.nomoreparties.space/api";
 const INGREDIENTS_API_URL = `${BURGER_API_URL}/ingredients`;
 const ORDERS_API_URL = `${BURGER_API_URL}/orders`;
+const PSW_RESET_API_URL = `${BURGER_API_URL}/password-reset`;
+const PSW_RESET_RESET_API_URL = `${BURGER_API_URL}/password-reset/reset`;
 const REGISTER_API_URL = `${BURGER_API_URL}/auth/register`;
 const LOGIN_API_URL = `${BURGER_API_URL}/auth/login`;
 const LOGOUT_API_URL = `${BURGER_API_URL}/auth/logout`;
@@ -124,3 +126,23 @@ export const token = (refreshToken) => {
     .then(checkResponse)
   };
 
+
+  export const pswForgot = ({email}) => {
+    return fetch(PSW_RESET_API_URL, {
+                    method: 'POST',
+                    headers: {
+                    "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ "email": email})})
+    .then(checkResponse)
+};
+
+export const pswReset = ({ password, token}) => {
+    return fetch(PSW_RESET_RESET_API_URL, {
+                    method: 'POST',
+                    headers: {
+                    "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ password, token})})
+    .then(checkResponse)
+};

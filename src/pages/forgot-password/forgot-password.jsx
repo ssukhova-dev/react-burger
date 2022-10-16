@@ -2,11 +2,13 @@ import React from 'react'
 import style from './forgot-password.module.css';
 
 import { Button,  PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import {resetPasswordThunk} from '../../services/actions/login';
+import {forgotPasswordThunk} from '../../services/actions/password';
 
 import {Link} from 'react-router-dom'
+
+import { Redirect } from 'react-router-dom';
 
 
 function ForgotPasswordPage (){
@@ -14,14 +16,26 @@ function ForgotPasswordPage (){
     const dispatch = useDispatch();
     const [data, setData] = React.useState({email: ''});
 
+    const forgotPswSuccess  = useSelector((store) => store.login.forgotPswSuccess);
+
     function handleChange(e){
         setData(prev => ({...prev, [e.target.name]: e.target.value}));
     }
 
     function handleSubmit(e){
         e.preventDefault();
-        dispatch(resetPasswordThunk(data));
+
+        console.log("forgotPasswordThunk", data);
+        dispatch(forgotPasswordThunk(data));
     }
+
+    console.log('forgotPswSuccess', forgotPswSuccess);
+
+    if (forgotPswSuccess) {
+        return (
+          <Redirect to="/reset-password" />
+        )
+      }
 
     return (
         <div className={style.content}>

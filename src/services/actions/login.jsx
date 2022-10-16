@@ -11,6 +11,7 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 
+export const isLoggedInSelector = (store) => !!store.login.accessToken;
 
 
 function loginRequest() {
@@ -34,14 +35,6 @@ function loginError() {
   }
 }
 
-export const isLoggedInSelector = (store) => !!store.login.accessToken;
-
-
-function resetPassword() {
-    return {
-        type: RESET_PASSWORD
-    }
-}
 
 export function loginThunk(data) {
     return function(dispatch) {
@@ -70,13 +63,4 @@ export const checkSessionThunk = () => (dispatch) => {
     dispatch(loginSuccess(accessToken, refreshToken));
 }
 
-export const resetPasswordThunk = (data) => (dispatch) => {
-    Promise.resolve().then( () => {
 
-
-        dispatch(resetPassword())
-
-    }
-
-    );
-};

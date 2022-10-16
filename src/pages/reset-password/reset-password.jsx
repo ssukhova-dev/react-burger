@@ -2,17 +2,19 @@ import React from 'react'
 import style from './reset-password.module.css';
 
 import { Button, PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import {loginThunk} from '../../services/actions/login';
+import {resetPasswordThunk} from '../../services/actions/password';
 
 import {Link} from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 
 
 function ResetPasswordPage (){
 
     const dispatch = useDispatch();
-    const [data, setData] = React.useState({code: '', password: ''});
+    const [data, setData] = React.useState({token: '', password: ''});
+    const resetPswSuccess = useSelector(store => store.login.resetPswSuccess);
 
     function handleChange(e){
         setData(prev => ({...prev, [e.target.name]: e.target.value}));
@@ -20,8 +22,14 @@ function ResetPasswordPage (){
 
     function handleSubmit(e){
         e.preventDefault();
-        dispatch(loginThunk(data));
+        dispatch(resetPasswordThunk(data));
     }
+
+    if (resetPswSuccess) {
+        return (
+          <Redirect to="/login" />
+        )
+      }
 
     return (
         <div className={style.content}>
@@ -29,7 +37,7 @@ function ResetPasswordPage (){
             <form onSubmit={handleSubmit} className={style.form}>
                 <p className="text text_type_main-default">Восстановление пароля</p>
                 <PasswordInput onChange={handleChange} name={'password'} placeholder={'Введите новый пароль'} value={data.password}/>  
-                <Input onChange={handleChange} name={'code'} placeholder={'Введите код из письма'} value={data.code}/>              
+                <Input onChange={handleChange} name={'token'} placeholder={'Введите код из письма'} value={data.token}/>              
                 <Button type="primary" size="medium"  onClick={handleSubmit}>Восстановить</Button>
             </form>
 
