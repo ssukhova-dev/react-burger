@@ -50,14 +50,14 @@ export function useFetch(requestFn)
     return state;
 
 }
-  
 
 export const getOrdersData = (ingredients) => {
 
     return fetch(ORDERS_API_URL, {
                         method: 'POST',
                         headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": JsCookie.get(Token.access),
                         },
                         body: JSON.stringify({ ingredients })})
             .then(checkResponse)
