@@ -11,9 +11,14 @@ import {IngredientTypes} from '../../utils/constants'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrders, CLOSE_ORDER_DETAILS } from '../../services/actions/cart-total';
+import { isLoggedInSelector } from '../../services/actions/login';
 
+import { useHistory} from "react-router-dom"
 
 function CartTotal({ total }) {
+
+    const isLoggedIn = useSelector(isLoggedInSelector);
+    const history = useHistory();
 
     const isOrderDetailOpen = useSelector(store => store.order.isOrderDetailOpen);
     const cart = useSelector(store => store.cart.cart);
@@ -26,15 +31,19 @@ function CartTotal({ total }) {
 
     function handleClickMakeOrder()
     {
-        const ingredients = [] ; 
+        if (isLoggedIn) {
+            const ingredients = [] ; 
 
-        cart.forEach((ingredient) => {
-            ingredients.push(ingredient._id);
-          })
+            cart.forEach((ingredient) => {
+                ingredients.push(ingredient._id);
+            })
 
-          dispatch(getOrders(ingredients));
-
+            dispatch(getOrders(ingredients));
+        } else {
+            history.replace("/login");
+        }
     }
+
 
     function handleCloseOrderDetail() {
         dispatch({

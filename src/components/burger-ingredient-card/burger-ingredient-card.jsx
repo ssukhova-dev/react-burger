@@ -7,12 +7,19 @@ import '@ya.praktikum/react-developer-burger-ui-components'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 
 import {useSelector} from 'react-redux'
+import {useHistory, useLocation} from "react-router-dom"
 
 import { useDrag } from 'react-dnd';
 
 function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
 
+      const history = useHistory();
+      const location = useLocation();
+
       const onCardClick = () => {
+
+        history.push("/ingredients/" + ingredient._id, {background: location});
+
         ingredientDetailsDlgOpen(ingredient);
       };
 
