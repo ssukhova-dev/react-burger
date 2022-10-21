@@ -16,8 +16,6 @@ function LoginPage (){
 
     const loginFailed = useSelector(store => !!store.login.loginFailed);
 
-    console.log(loginFailed);
-
     function handleChange(e){
         setData(prev => ({...prev, [e.target.name]: e.target.value}));
     }

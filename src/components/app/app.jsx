@@ -25,6 +25,7 @@ import {PublicRoute} from "../public-route/public-route"
 import ForgotPasswordPage from '../../pages/forgot-password/forgot-password';
 import ResetPasswordPage from '../../pages/reset-password/reset-password';
 import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-details';
+import PageNotFound404 from '../../pages/page-not-found/page-not-found';
 
 import useModal from '../modal/use-modal'
 import IngredientDetails from '../ingredient-details/ingredient-details'
@@ -117,6 +118,10 @@ function App() {
 
                         <Route path="/ingredients/:id" exact={true}>
                             <IngredientDetailsPage />
+                        </Route>
+
+                        <Route>
+                            <PageNotFound404 />
                         </Route>
 
                     </Switch>

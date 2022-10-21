@@ -8,7 +8,6 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_ERROR = 'LOGOUT_ERROR';
 
-const refreshTokenSelector = (store) => store.login.refreshToken;
 
 function logoutRequest() {
   return {

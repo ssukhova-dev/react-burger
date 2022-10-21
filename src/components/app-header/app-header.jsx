@@ -1,8 +1,5 @@
 import appHeaderStyles from './app-header.module.css';
 
-import {useSelector, useDispatch} from 'react-redux'
-
-import React from 'react'
 import {NavLink} from 'react-router-dom'
 
 import {BurgerIcon, ListIcon, ProfileIcon, Logo} from '@ya.praktikum/react-developer-burger-ui-components'

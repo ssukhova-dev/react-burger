@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {Token} from './constants'
-import { getCookie } from './cookie-utils';
 import JsCookie from "js-cookie"
 
 const BURGER_API_URL = "https://norma.nomoreparties.space/api";

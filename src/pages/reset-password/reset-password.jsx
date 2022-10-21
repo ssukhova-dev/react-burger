@@ -1,7 +1,7 @@
 import React from 'react' 
 import style from './reset-password.module.css';
 
-import { Button, PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, PasswordInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from 'react-redux';
 
 import {resetPasswordThunk} from '../../services/actions/password';
