@@ -3,9 +3,10 @@ import appHeaderStyles from './app-header.module.css';
 import {NavLink, useRouteMatch} from 'react-router-dom'
 
 import {BurgerIcon, ListIcon, ProfileIcon, Logo} from '@ya.praktikum/react-developer-burger-ui-components'
+import { FC } from 'react';
 
 
-function AppHeader() {
+const AppHeader: FC = () => {
 
     const isConstructor = !!useRouteMatch({path: "/", exact: true});
     const isFeed = !!useRouteMatch({path: "/feed"});
@@ -42,7 +43,7 @@ function AppHeader() {
 
     
                 <div className="flex-center pl-5 pr-5 pb-5 pt-5" >
-                <Logo  />
+                    <Logo  />
                 </div>
 
 

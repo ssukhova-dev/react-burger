@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { FC } from 'react';
 import cardStyles from './burger-constructor-card.module.css';
-import ingredientPropType from './../../utils/prop-types.jsx'
+import ingredientPropType from '../../utils/prop-types.jsx'
 import { DNDTypes} from '../../utils/constants'
 
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
@@ -10,12 +10,17 @@ import { useDispatch } from 'react-redux';
 import { REMOVE_INGREDIENT,MOVE_INGREDIENTs } from '../../services/actions/burger-constructor';
 
 import { useDrag, useDrop } from 'react-dnd';
+import { TCartIngredient, TDropCollectedProps } from '../../utils/types';
 
-function BurgerConstructorCard({ingredient}) {
+interface IBurgerConstructorCardProps{
+  ingredient: TCartIngredient;
+}
+
+const BurgerConstructorCard: FC<IBurgerConstructorCardProps> = ({ingredient}) => {
 
     const dispatch = useDispatch();
 
-    const handleRemoveIngredient = (ingredient) => {
+    const handleRemoveIngredient = (ingredient: TCartIngredient) => {
         dispatch(
           {
             type: REMOVE_INGREDIENT,
@@ -33,7 +38,7 @@ function BurgerConstructorCard({ingredient}) {
         })
       });
 
-      const moveIngredients = (dragIngredient, dropIngredient) => {
+      const moveIngredients = (dragIngredient: TCartIngredient, dropIngredient: TCartIngredient) => {
 
         dispatch({
             type: MOVE_INGREDIENTs,
@@ -42,12 +47,12 @@ function BurgerConstructorCard({ingredient}) {
           });
       };
 
-      const [{ isHover }, dropTarget] = useDrop({
+      const [{ isHover }, dropTarget] = useDrop<TCartIngredient, unknown, TDropCollectedProps>({
         accept: DNDTypes.cartIngredient,
         collect: monitor => ({
             isHover: monitor.isOver()
         }),
-        drop(item) {           
+        drop(item: TCartIngredient) {           
             moveIngredients(item, ingredient);  
         }
       });
@@ -68,8 +73,5 @@ function BurgerConstructorCard({ingredient}) {
     
   }
 
-  BurgerConstructorCard.propTypes = {
-    ingredient: ingredientPropType.isRequired
-  };
   
   export default BurgerConstructorCard 

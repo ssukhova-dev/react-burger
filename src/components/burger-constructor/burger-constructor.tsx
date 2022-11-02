@@ -8,6 +8,7 @@ import CartTotal from '../cart-total/cart-total'
 import BurgerConstructorCard from '../burger-constructor-card/burger-constructor-card'
 
 import {IngredientTypes, DNDTypes} from '../../utils/constants'
+import {TIngredient, TCartIngredient, TDropCollectedProps} from '../../utils/types'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_INGREDIENT } from '../../services/actions/burger-constructor';
@@ -15,17 +16,18 @@ import { ADD_INGREDIENT } from '../../services/actions/burger-constructor';
 import {v4 as uuidv4} from 'uuid'
 
 import { useDrop } from 'react-dnd';
+import { FC } from 'react';
 
-function BurgerConstructor() {
+const BurgerConstructor: FC = () => {
 
     const dispatch = useDispatch();
 
-    const bunIngredient = useSelector( store => {
-        return store.cart.cart.find(item => item.type === IngredientTypes.bun);
+    const bunIngredient = useSelector( (store: any) => {
+        return store.cart.cart.find((item: TCartIngredient) => item.type === IngredientTypes.bun);
     })
 
-    const cartIngredients = useSelector( store => {
-        return store.cart.cart.filter((item) => item.type !== "bun").sort((a, b) => {
+    const cartIngredients = useSelector( (store: any) => {
+        return store.cart.cart.filter((item: TCartIngredient) => item.type !== "bun").sort((a: TCartIngredient, b: TCartIngredient) => {
             if (a.order > b.order) return 1;
             if (a.order === b.order) return 0;
             if (a.order < b.order) return -1;
@@ -33,11 +35,11 @@ function BurgerConstructor() {
           })
     });
 
-    const total = useSelector( store => {
+    const total = useSelector( (store: any) => {
 
         let sum = 0;
 
-        store.cart.cart.forEach( (item) => {
+        store.cart.cart.forEach( (item: TCartIngredient) => {
             if (item.type === IngredientTypes.bun) {
                 sum += item.price * 2;
             } else {
@@ -47,7 +49,7 @@ function BurgerConstructor() {
         return sum;
     });
 
-      const addIngredient = (item) => {
+      const addIngredient = (item: TIngredient) => {
         dispatch({
             type: ADD_INGREDIENT,
             ingredient: item,
@@ -55,12 +57,12 @@ function BurgerConstructor() {
           });
       };
 
-      const [{ isHover }, dropTarget] = useDrop({
+      const [{ isHover }, dropTarget] = useDrop<TIngredient, unknown, TDropCollectedProps>({
         accept: DNDTypes.ingredient,
         collect: monitor => ({
           isHover: monitor.isOver()
         }),
-        drop(item) { addIngredient(item); }
+        drop(item: TIngredient) { addIngredient(item); }
       });
 
       const className = `${burgerConstructorStyles.burger_constructor_list} ${
@@ -88,7 +90,7 @@ function BurgerConstructor() {
         
                 <div className={`${burgerConstructorStyles.burger_filling_list} ${commonStyles.custom_scrollbar}`} >
 
-                    {cartIngredients.map((ingredient) => (            
+                    {cartIngredients.map((ingredient: TCartIngredient) => (            
                          <BurgerConstructorCard ingredient={ingredient} key={ingredient.key}/>
                     ))}
                 </div>
