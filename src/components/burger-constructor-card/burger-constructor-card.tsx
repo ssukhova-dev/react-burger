@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import cardStyles from './burger-constructor-card.module.css';
-import ingredientPropType from '../../utils/prop-types.jsx'
 import { DNDTypes} from '../../utils/constants'
 
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
@@ -28,7 +27,7 @@ const BurgerConstructorCard: FC<IBurgerConstructorCardProps> = ({ingredient}) =>
           } );
       };
 
-      const ref = React.useRef(null); 
+      const ref = React.useRef<HTMLSpanElement>(null); 
 
       const [{ opacity }, dragRef] = useDrag({
         type: DNDTypes.cartIngredient,
