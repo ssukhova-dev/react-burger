@@ -1,9 +1,10 @@
 
 import ingredientDetailsStyle from '../../components/ingredient-details/ingredient-details.module.css';
 import IngredientDetails from '../../components/ingredient-details/ingredient-details';
+import { FC } from 'react';
 
 
-function IngredientDetailsPage (){
+const IngredientDetailsPage: FC = () => {
 
     return (
         <main className={ingredientDetailsStyle.pageContent}>

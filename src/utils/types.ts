@@ -23,8 +23,10 @@ export type TDropCollectedProps = {
     isHover: boolean;
 }
 
-export interface IRouteProps{
+export interface IRouterProps{
+    path: string;
+    exact: boolean;
     redirectTo: string;
-    noRedirect: boolean;
+    noRedirect?: boolean;
 }
   

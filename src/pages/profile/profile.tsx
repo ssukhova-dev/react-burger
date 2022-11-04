@@ -1,4 +1,4 @@
-import React from 'react' 
+import React, { FC } from 'react' 
 import style from './profile.module.css';
 
 import { Button, PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
@@ -9,27 +9,34 @@ import { logoutThunk } from '../../services/actions/logout';
 
 import {NavLink} from 'react-router-dom'
 
-function ProfilePage (){
+const ProfilePage: FC = () => {
 
     const dispatch = useDispatch();
 
-    const { name, email, password } = useSelector(store => store.login.user);
+    const { name, email, password } = useSelector((store: any)  => store.login.user);
     const [data, setData] = React.useState({name: name, email: email, password: password});
 
     React.useEffect(()=> {
         setData({name: name , email: email, password: password});
     }, [name, email, password])
 
-    function handleChange(e){
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>){
         setData(prev => ({...prev, [e.target.name]: e.target.value}));
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e: React.FormEvent){
         e.preventDefault();
+        //@ts-ignore
         dispatch(saveUserThunk(data));
     }
 
-    function onCancel(e) {
+    function onLogout(e: React.SyntheticEvent) {
+        e.preventDefault();
+        //@ts-ignore
+        dispatch(logoutThunk());
+    }
+
+    function onCancel(e: React.SyntheticEvent) {
         e.preventDefault();
         setData({name: name, email: email, password: password});
     }
@@ -60,7 +67,7 @@ function ProfilePage (){
             </li>
             <li className={style.item}>
                 <a href="#" className={`${style.link} text text_type_main-medium text_color_inactive`}
-                    onClick={(e) => {e.preventDefault(); dispatch(logoutThunk())} }> Выход </a>
+                    onClick={onLogout}> Выход </a>
             </li>
             </ul>
             <p className={`${style.text} text text_type_main-default text_color_inactive mt-20`}>В этом разделе вы можете

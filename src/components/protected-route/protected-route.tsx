@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import { isLoggedInSelector } from '../../services/actions/login';
-import { IRouteProps } from '../../utils/types';
+import { IRouterProps } from '../../utils/types';
 
-export const ProtectedRoute: FC<IRouteProps> = ({ redirectTo, noRedirect, ...props }) => {
+export const ProtectedRoute: FC<IRouterProps> = ({ redirectTo, noRedirect, ...props }) => {
 
     const isLoggedIn = useSelector(isLoggedInSelector);
 
