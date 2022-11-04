@@ -1,5 +1,4 @@
-import React from 'react' 
-import PropTypes from 'prop-types';
+import { FC } from 'react' 
 
 import cartTotalStyles from './cart-total.module.css';
 
@@ -14,17 +13,22 @@ import { getOrders, CLOSE_ORDER_DETAILS } from '../../services/actions/cart-tota
 import { isLoggedInSelector } from '../../services/actions/login';
 
 import { useHistory} from "react-router-dom"
+import { TCartIngredient } from '../../utils/types';
 
-function CartTotal({ total }) {
+interface ICartTotalProps{
+    total: number;
+  }
+  
+const CartTotal: FC<ICartTotalProps> = ({total}) => {
 
     const isLoggedIn = useSelector(isLoggedInSelector);
     const history = useHistory();
 
-    const isOrderDetailOpen = useSelector(store => store.order.isOrderDetailOpen);
-    const cart = useSelector(store => store.cart.cart);
+    const isOrderDetailOpen = useSelector((store: any) => store.order.isOrderDetailOpen);
+    const cart = useSelector((store: any) => store.cart.cart);
 
-    const bunIngredient = useSelector( store => {
-        return store.cart.cart.find(item => item.type === IngredientTypes.bun);
+    const bunIngredient = useSelector( (store: any) => {
+        return store.cart.cart.find((item: TCartIngredient) => item.type === IngredientTypes.bun);
     })
 
     const dispatch = useDispatch();
@@ -32,12 +36,13 @@ function CartTotal({ total }) {
     function handleClickMakeOrder()
     {
         if (isLoggedIn) {
-            const ingredients = [] ; 
+            const ingredients: Array<string> = [] ; 
 
-            cart.forEach((ingredient) => {
+            cart.forEach((ingredient: TCartIngredient) => {
                 ingredients.push(ingredient._id);
             })
 
+            //@ts-ignore
             dispatch(getOrders(ingredients));
         } else {
             history.replace("/login");
@@ -79,10 +84,7 @@ function CartTotal({ total }) {
         );
 
 
-        };
+};
 
-    CartTotal.propTypes = {
-        total: PropTypes.number.isRequired
-  };
   
-  export default CartTotal 
+export default CartTotal 

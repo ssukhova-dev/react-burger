@@ -12,13 +12,19 @@ export type TIngredient = {
     image_mobile: string;
     image_large: string;
     __v: number;
-  }
+}
 
-  export type TCartIngredient = TIngredient & {
+export type TCartIngredient = TIngredient & {
     order: number;
     key: string;
-  }
+}
 
-  export type TDropCollectedProps = {
+export type TDropCollectedProps = {
     isHover: boolean;
-  }
+}
+
+export interface IRouteProps{
+    redirectTo: string;
+    noRedirect: boolean;
+}
+  

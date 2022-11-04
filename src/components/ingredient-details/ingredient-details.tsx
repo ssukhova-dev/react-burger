@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { FC } from 'react';
 import ingredientDetailsStyle from './ingredient-details.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import {useParams} from "react-router-dom"
 import { ADD_CURRENT_INGREDIENT } from '../../services/actions/burger-ingredients';
+import { TIngredient } from '../../utils/types';
 
-function IngredientDetails (){
+
+const IngredientDetails: FC = () => {
 
     const dispatch = useDispatch();
 
-    const {id} = useParams();
-    const ingredient = useSelector(store => store.currentIngredient.currentIngredient);
-    const ingredients = useSelector(store => store.ingredients.ingredients);
+    const {id}: {id: string} = useParams();
+    const ingredient: TIngredient = useSelector((store: any) => store.currentIngredient.currentIngredient);
+    const ingredients: Array<TIngredient> = useSelector((store: any) => store.ingredients.ingredients);
 
     React.useEffect(() => {
         if (!ingredient && id && ingredients) {
