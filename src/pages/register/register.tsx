@@ -1,4 +1,4 @@
-import React from 'react' 
+import React, { FC } from 'react' 
 import style from './register.module.css';
 
 import { Button,  PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
@@ -9,17 +9,18 @@ import {registerThunk} from '../../services/actions/register';
 import {Link} from 'react-router-dom'
 
 
-function RegisterPage (){
+const RegisterPage: FC = () => {
 
     const dispatch = useDispatch();
     const [data, setData] = React.useState({name: '', email: '', password: ''});
 
-    function handleChange(e){
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>){
         setData(prev => ({...prev, [e.target.name]: e.target.value}));
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e: React.FormEvent){
         e.preventDefault();
+        //@ts-ignore
         dispatch(registerThunk(data));
     }
 

@@ -25,11 +25,13 @@ import {PublicRoute} from "../public-route/public-route"
 import ForgotPasswordPage from '../../pages/forgot-password/forgot-password';
 import ResetPasswordPage from '../../pages/reset-password/reset-password';
 import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-details';
+import PageNotFound404 from '../../pages/page-not-found/page-not-found';
 
 import useModal from '../modal/use-modal'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal'
 import { ADD_CURRENT_INGREDIENT, REMOVE_CURRENT_INGREDIENT } from '../../services/actions/burger-ingredients';
+import { TIngredient } from '../../utils/types';
 
 
 function App() {
@@ -38,21 +40,23 @@ function App() {
     const location = useLocation();
     const background = location.state && location.state.background;
 
-    const isLoading = useSelector(store => store.ingredients.ingredientsRequest);
-    const hasError = useSelector(store => store.ingredients.ingredientsFailed);
+    const isLoading = useSelector((store: any) => store.ingredients.ingredientsRequest);
+    const hasError = useSelector((store: any) => store.ingredients.ingredientsFailed);
 
 
     const dispatch = useDispatch();
     
     React.useEffect(()=> {
+            //@ts-ignore
             dispatch(getIngredients());
+            //@ts-ignore
             dispatch(getUser());
         }, [dispatch])
 
         
         const ingredientDetailsDlg = useModal();
 
-        function showIngredientDetailsDlg(ingredient){
+        function showIngredientDetailsDlg(ingredient: TIngredient){
             dispatch({
                 type: ADD_CURRENT_INGREDIENT,
                 ingredient: ingredient
@@ -117,6 +121,10 @@ function App() {
 
                         <Route path="/ingredients/:id" exact={true}>
                             <IngredientDetailsPage />
+                        </Route>
+
+                        <Route>
+                            <PageNotFound404 />
                         </Route>
 
                     </Switch>

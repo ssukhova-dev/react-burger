@@ -1,13 +1,18 @@
-import PropTypes from 'prop-types';
+ 
 import React from 'react' 
 
 import burgerIngCategoryStyles from './burger-ingredient-category.module.css';
-import ingredientPropType from './../../utils/prop-types.jsx'
-import BurgerIngredientCard from './../burger-ingredient-card/burger-ingredient-card'
+import BurgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card'
+import { TIngredient } from '../../utils/types';
 
 
-const BurgerIngredientCategory = React.forwardRef((props, ref) =>  {
- 
+interface IBurgerIngredientCategoryProps{
+  caption: string;
+  ingredientDetailsDlgOpen: (ingredient: TIngredient) => void;
+  ingredients?: Array<TIngredient>;
+}
+
+const BurgerIngredientCategory = React.forwardRef<HTMLParagraphElement, IBurgerIngredientCategoryProps>((props, ref) => {
 
       return (
               <div className={burgerIngCategoryStyles.burger_ingredient_category}>
@@ -18,7 +23,7 @@ const BurgerIngredientCategory = React.forwardRef((props, ref) =>  {
 
                 <div className={burgerIngCategoryStyles.burger_ingredient_list}>
                    
-                    {props.ingredients.map((ingredient) => (
+                    {props.ingredients && props.ingredients.map((ingredient) => (
                         <BurgerIngredientCard key={ingredient._id}
                         ingredient={ingredient} ingredientDetailsDlgOpen={props.ingredientDetailsDlgOpen}
                         />
@@ -30,11 +35,5 @@ const BurgerIngredientCategory = React.forwardRef((props, ref) =>  {
       );
     
   })
-
-  BurgerIngredientCategory.propTypes = {
-    caption: PropTypes.string.isRequired,
-    ingredientDetailsDlgOpen: PropTypes.func.isRequired,
-    ingredients: PropTypes.arrayOf(ingredientPropType)
-  };
    
   export default BurgerIngredientCategory 

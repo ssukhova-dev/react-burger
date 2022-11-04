@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
 import ReactDom from 'react-dom';
-import PropTypes from 'prop-types';
 
 import modalStyles from './modal.module.css';
 
@@ -9,13 +8,18 @@ import ModalOverlay from '../modal-overlay/modal-overlay'
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 
 
-const ModalSectionElement = document.querySelector('#modals-section');
+const ModalSectionElement: HTMLElement = document.querySelector('#modals-section')!;
 const ESC = 'Escape';
 
-function Modal(props){
+interface IModalProps{
+  title?: string;
+  onClose: () => void;
+}
+
+const Modal: FC<IModalProps> = (props) => {
 
 
-  function handleKeyDown(e) {
+  function handleKeyDown(e: KeyboardEvent) {
     if (e.key === ESC) {
       props.onClose();
     }
@@ -60,12 +64,6 @@ function Modal(props){
       </div>,
       ModalSectionElement
   );
-};
-
-Modal.propTypes = {
-    title: PropTypes.string,
-    onClose: PropTypes.func.isRequired
-  
 };
 
 

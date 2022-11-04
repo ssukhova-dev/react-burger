@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 
-import ingredientPropType from './../../utils/prop-types.jsx'
+import { TCartIngredient, TIngredient } from '../../utils/types';
+
 import { DNDTypes} from '../../utils/constants'
 import burgerIngCardStyle from './burger-ingredient-card.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components'
@@ -10,8 +10,15 @@ import {useSelector} from 'react-redux'
 import {useHistory, useLocation} from "react-router-dom"
 
 import { useDrag } from 'react-dnd';
+import { FC } from 'react';
 
-function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
+
+interface IBurgerIngredientCardProps{
+  ingredient: TIngredient;
+  ingredientDetailsDlgOpen: (ingredient: TIngredient) => void;
+}
+
+const BurgerIngredientCard: FC<IBurgerIngredientCardProps> = ({ ingredient, ingredientDetailsDlgOpen }) => {
 
       const history = useHistory();
       const location = useLocation();
@@ -23,8 +30,8 @@ function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
         ingredientDetailsDlgOpen(ingredient);
       };
 
-      const count = useSelector(store => {
-        const foundedIngredients = store.cart.cart.filter( item => item._id === ingredient._id);
+      const count: number = useSelector((store: any) => {
+        const foundedIngredients: Array<TCartIngredient> = store.cart.cart.filter( (item: TCartIngredient) => item._id === ingredient._id);
         return foundedIngredients ? foundedIngredients.length : 0;
       })
 
@@ -62,9 +69,4 @@ function BurgerIngredientCard({ ingredient, ingredientDetailsDlgOpen }) {
   
   }
 
-  BurgerIngredientCard.propTypes = {
-    ingredient: ingredientPropType.isRequired,
-    ingredientDetailsDlgOpen: PropTypes.func.isRequired
-  };
-  
   export default BurgerIngredientCard 

@@ -1,4 +1,4 @@
-import React from 'react' 
+import React, { FC } from 'react' 
 import loginStyle from './login.module.css';
 
 import { Button,  PasswordInput, EmailInput} from "@ya.praktikum/react-developer-burger-ui-components";
@@ -9,21 +9,20 @@ import {loginThunk} from '../../services/actions/login';
 import {Link} from 'react-router-dom'
 
 
-function LoginPage (){
+const LoginPage: FC = () => {
 
     const dispatch = useDispatch();
     const [data, setData] = React.useState({email: '', password: ''});
 
-    const loginFailed = useSelector(store => !!store.login.loginFailed);
+    const loginFailed = useSelector((store: any) => !!store.login.loginFailed);
 
-    console.log(loginFailed);
-
-    function handleChange(e){
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>){
         setData(prev => ({...prev, [e.target.name]: e.target.value}));
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e: React.FormEvent){
         e.preventDefault();
+        //@ts-ignore
         dispatch(loginThunk(data));
     }
 

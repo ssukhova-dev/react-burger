@@ -1,27 +1,32 @@
-import React from 'react' 
-import PropTypes from 'prop-types';
+import React, { FC } from 'react' 
 
 import burgerIngStyles from './burger-ingredients.module.css';
 import commonStyles from  './../../utils/common-styles.module.css';
 
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
  
-import BurgerIngredientCategory from './../burger-ingredient-category/burger-ingredient-category'
+import BurgerIngredientCategory from '../burger-ingredient-category/burger-ingredient-category'
 
 import {IngredientTypes} from '../../utils/constants'
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_CURRENT_TAB } from '../../services/actions/burger-ingredients';
+import { TIngredient } from '../../utils/types';
 
-function BurgerIngredients({ingredientDetailsDlgOpen}) {
-   
+
+interface IBurgerIngredientsProps{
+    ingredientDetailsDlgOpen: (ingredient: TIngredient) => void;
+  }
+  
+const BurgerIngredients: FC<IBurgerIngredientsProps> = ({ ingredientDetailsDlgOpen }) => {
+  
     const dispatch = useDispatch();
    
-    const bunRef = React.useRef(null);
-    const saucesRef = React.useRef(null);
-    const mainsRef = React.useRef(null);
-    const listRef = React.useRef(null);
+    const bunRef = React.useRef<HTMLParagraphElement>(null);
+    const saucesRef = React.useRef<HTMLParagraphElement>(null);
+    const mainsRef = React.useRef<HTMLParagraphElement>(null);
+    const listRef = React.useRef<HTMLDivElement>(null);
 
-    const currentTab = useSelector(store => store.tabs.currentTab);
+    const currentTab = useSelector((store: any) => store.tabs.currentTab);
 
      const refs = new Map([
         [IngredientTypes.bun,   bunRef],
@@ -29,28 +34,32 @@ function BurgerIngredients({ingredientDetailsDlgOpen}) {
         [IngredientTypes.main,  mainsRef]
       ]);
 
-    const setCurrentTab = (value) => {
+    const setCurrentTab = (value: string) => {
         dispatch({
           type: SET_CURRENT_TAB,
           currentTab: value
         });
 
-        refs.get(value).current.scrollIntoView({ behavior: 'smooth' });
+        let currentRef = refs.get(value);
+        if (currentRef && currentRef.current){
+            currentRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+        
       };
 
-    const ingredients = useSelector(store => store.ingredients.ingredients);
+    const ingredients: Array<TIngredient> = useSelector((store: any) => store.ingredients.ingredients);
 
-    const buns = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.bun), [ingredients]);
-    const sauces = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.sauce), [ingredients]);
-    const mains = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.main), [ingredients]);
+    const buns: TIngredient[] = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.bun), [ingredients]);
+    const sauces: TIngredient[] = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.sauce), [ingredients]);
+    const mains: TIngredient[] = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.main), [ingredients]);
 
 
     const handleScroll = () => {
 
-        const top = listRef.current.getBoundingClientRect().top;
-        const bunTop = bunRef.current.getBoundingClientRect().top;
-        const saucesTop = saucesRef.current.getBoundingClientRect().top;
-        const mainsTop = mainsRef.current.getBoundingClientRect().top;
+        const top = (listRef && listRef.current) ? listRef.current.getBoundingClientRect().top : 0;
+        const bunTop = (bunRef && bunRef.current) ? bunRef.current.getBoundingClientRect().top : 0;
+        const saucesTop = (saucesRef && saucesRef.current) ? saucesRef.current.getBoundingClientRect().top : 0;
+        const mainsTop = (mainsRef && mainsRef.current) ? mainsRef.current.getBoundingClientRect().top : 0;
 
         const difBun = Math.abs(bunTop - top);
         const difSauces = Math.abs(saucesTop - top);
@@ -105,8 +114,4 @@ function BurgerIngredients({ingredientDetailsDlgOpen}) {
     );
   }
 
-  BurgerIngredients.propTypes = {
-    ingredientDetailsDlgOpen: PropTypes.func.isRequired,
-  };
-  
   export default BurgerIngredients 
