@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Token} from './constants'
 import JsCookie from "js-cookie"
+import { TUser } from './types';
 
 const BURGER_API_URL = "https://norma.nomoreparties.space/api";
 const INGREDIENTS_API_URL = `${BURGER_API_URL}/ingredients`;
@@ -16,7 +17,7 @@ const USER_API_URL = `${BURGER_API_URL}/auth/user`;
 
 
 
-const checkResponse = (res) => {
+const checkResponse = (res: Response) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
@@ -25,44 +26,19 @@ export const getIngredientsData = () => {
       .then(checkResponse)
   };
 
-
-export function useFetch(requestFn)
-{
-
-    const [state, setState] = React.useState({isLoading: false,
-                                                hasError: false,
-                                                resultData: []});
-
-    React.useEffect(()=>{ 
-
-        setState({ ...state, hasError: false, isLoading: true });
-
-        requestFn().then((data) => {
-            setState({ ...state, resultData: data.data, isLoading: false }) 
-        })
-        .catch(e => {
-            setState({ ...state, hasError: true, isLoading: false });
-        })
-        
-    }, []);
-
-    return state;
-
-}
-
-export const getOrdersData = (ingredients) => {
+export const getOrdersData = (ingredients: string[]) => {
 
     return fetch(ORDERS_API_URL, {
                         method: 'POST',
                         headers: {
                         "Content-Type": "application/json",
-                        "Authorization": JsCookie.get(Token.access),
+                        "Authorization": JsCookie.get(Token.access)!
                         },
                         body: JSON.stringify({ ingredients })})
             .then(checkResponse)
 };
 
-export const register = ({ name, email, password}) => {
+export const register = ({ name, email, password}: TUser) => {
     return fetch(REGISTER_API_URL, {
                         method: 'POST',
                         headers: {
@@ -72,7 +48,7 @@ export const register = ({ name, email, password}) => {
       .then(checkResponse)
 };
 
-export const login = ({ email, password}) => {
+export const login = ({ email, password}: Omit<TUser, 'name'>) => {
     return fetch(LOGIN_API_URL, {
                     method: 'POST',
                     headers: {
@@ -82,7 +58,7 @@ export const login = ({ email, password}) => {
     .then(checkResponse)
 };
 
-export const logout = (refreshToken) => {
+export const logout = (refreshToken: string) => {
     return fetch(LOGOUT_API_URL, {
                     method: 'POST',
                     headers: {
@@ -92,7 +68,7 @@ export const logout = (refreshToken) => {
     .then(checkResponse)
 };
 
-export const token = (refreshToken) => {
+export const token = (refreshToken: string) => {
     return fetch(TOKEN_API_URL, {
                     method: 'POST',
                     headers: {
@@ -108,25 +84,25 @@ export const token = (refreshToken) => {
                     method: 'GET',
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": JsCookie.get(Token.access),
+                        "Authorization": JsCookie.get(Token.access)!
                     }
     })
     .then(checkResponse)
   };
 
-  export const updateUser = ({ name, email, password}) => {
+  export const updateUser = ({ name, email, password}: TUser) => {
     return fetch(USER_API_URL, {
                     method: 'PATCH',
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": JsCookie.get(Token.access),
+                        "Authorization": JsCookie.get(Token.access)!
                     },
                     body: JSON.stringify({ name, email, password})})
     .then(checkResponse)
   };
 
 
-  export const pswForgot = ({email}) => {
+  export const pswForgot = ({email}: {email: string}) => {
     return fetch(PSW_RESET_API_URL, {
                     method: 'POST',
                     headers: {
@@ -136,7 +112,7 @@ export const token = (refreshToken) => {
     .then(checkResponse)
 };
 
-export const pswReset = ({ password, token}) => {
+export const pswReset = ({ password, token}: {password: string, token: string}) => {
     return fetch(PSW_RESET_RESET_API_URL, {
                     method: 'POST',
                     headers: {

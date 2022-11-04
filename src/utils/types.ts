@@ -30,3 +30,8 @@ export interface IRouterProps{
     noRedirect?: boolean;
 }
   
+export type TUser = {
+    name: string;
+    email: string;
+    password: string;
+}
