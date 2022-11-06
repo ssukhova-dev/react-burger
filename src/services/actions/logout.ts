@@ -4,24 +4,35 @@ import * as api from '../../utils/burger-api'
 
 import {Token} from '../../utils/constants'
 
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const LOGOUT_ERROR = 'LOGOUT_ERROR';
+export const LOGOUT_REQUEST: 'LOGOUT_REQUEST' = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS: 'LOGOUT_SUCCESS' = 'LOGOUT_SUCCESS';
+export const LOGOUT_ERROR: 'LOGOUT_ERROR' = 'LOGOUT_ERROR';
 
+export interface ILogoutRequest {
+  readonly type: typeof LOGOUT_REQUEST;
+}
 
-function logoutRequest() {
+export interface ILogoutSuccess {
+  readonly type: typeof LOGOUT_SUCCESS;
+}
+
+export interface ILogoutError {
+  readonly type: typeof LOGOUT_ERROR;
+}
+
+function logoutRequest(): ILogoutRequest {
   return {
     type: LOGOUT_REQUEST
   }
 }
 
-export function logoutSuccess() {
+export function logoutSuccess(): ILogoutSuccess {
     return {
         type: LOGOUT_SUCCESS
     }
 }
 
-function logoutError() {
+function logoutError(): ILogoutError {
   return {
     type: LOGOUT_ERROR
   }
@@ -29,10 +40,11 @@ function logoutError() {
 
 
 export function logoutThunk() {
+  //@ts-ignore
     return function(dispatch) {
       dispatch(logoutRequest());
 
-      const refreshToken = JsCookie.get(Token.refresh);
+      const refreshToken = JsCookie.get(Token.refresh)!;
 
       api.logout(refreshToken).then(res => {
         if (res && res.success) {
