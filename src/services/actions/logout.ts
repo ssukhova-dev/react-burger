@@ -3,6 +3,7 @@ import JsCookie from "js-cookie"
 import * as api from '../../utils/burger-api'
 
 import {Token} from '../../utils/constants'
+import { AppDispatch, AppThunk } from "../types";
 
 export const LOGOUT_REQUEST: 'LOGOUT_REQUEST' = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS: 'LOGOUT_SUCCESS' = 'LOGOUT_SUCCESS';
@@ -19,6 +20,11 @@ export interface ILogoutSuccess {
 export interface ILogoutError {
   readonly type: typeof LOGOUT_ERROR;
 }
+
+export type TLogoutActions = 
+  | ILogoutRequest
+  | ILogoutSuccess
+  | ILogoutError;
 
 function logoutRequest(): ILogoutRequest {
   return {
@@ -38,10 +44,8 @@ function logoutError(): ILogoutError {
   }
 }
 
+export const logoutThunk: AppThunk = () => (dispatch: AppDispatch) =>  {
 
-export function logoutThunk() {
-  //@ts-ignore
-    return function(dispatch) {
       dispatch(logoutRequest());
 
       const refreshToken = JsCookie.get(Token.refresh)!;
@@ -58,7 +62,7 @@ export function logoutThunk() {
       .catch(e => {
             dispatch(logoutError());
     });;
-    };
-}
+};
+
 
 

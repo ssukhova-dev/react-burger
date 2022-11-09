@@ -1,5 +1,6 @@
 
 import {getOrdersData} from '../../utils/burger-api'
+import { AppDispatch, AppThunk } from '../types';
 import {refreshToken} from './profile'
 
 export const GET_ORDERS_REQUEST: 'GET_ORDERS_REQUEST' = 'GET_ORDERS_REQUEST';
@@ -29,6 +30,18 @@ export interface IClearCart {
 export interface IOpenOrderDetails {
   readonly type: typeof OPEN_ORDER_DETAILS;
 }
+
+export interface ICloseOrderDetails {
+  readonly type: typeof CLOSE_ORDER_DETAILS;
+}
+
+export type TOrderActions = 
+  | IGetOrdersRequest
+  | IGetOrdersSuccess
+  | IGetOrdersError
+  | IOpenOrderDetails
+  | ICloseOrderDetails;
+
 
 function getOrdersRequest(): IGetOrdersRequest {
   return {
@@ -61,9 +74,8 @@ function openOrderDetails(): IOpenOrderDetails {
   }
 }
 
-export function getOrders(ingredients: Array<string>) {
-  //@ts-ignore  
-  return function(dispatch) {
+export const getOrders: AppThunk = (ingredients: Array<string>) => (dispatch: AppDispatch) =>  {
+
       dispatch(getOrdersRequest());
       getOrdersData(ingredients).then(res => {
         if (res && res.success) {
@@ -82,5 +94,5 @@ export function getOrders(ingredients: Array<string>) {
               dispatch(getOrdersError());
           }
         });
-    };
-  }
+};
+  

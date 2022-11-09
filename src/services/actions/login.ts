@@ -4,6 +4,7 @@ import * as api from '../../utils/burger-api'
 
 import {Token} from '../../utils/constants'
 import { TUser } from "../../utils/types";
+import { AppDispatch, AppThunk } from "../types";
 
 export const LOGIN_REQUEST: 'LOGIN_REQUEST' = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS: 'LOGIN_SUCCESS' = 'LOGIN_SUCCESS';
@@ -19,12 +20,17 @@ export interface ILoginSuccess {
   readonly type: typeof LOGIN_SUCCESS;
   readonly accessToken: string;
   readonly refreshToken: string;
-  readonly user: string;
+  readonly user: TUser;
 }
 
 export interface ILoginError {
   readonly type: typeof LOGIN_ERROR;
 }
+
+export type TLoginActions = 
+  | ILoginRequest
+  | ILoginSuccess
+  | ILoginError;
 
 function loginRequest(): ILoginRequest {
   return {
@@ -32,7 +38,7 @@ function loginRequest(): ILoginRequest {
   }
 }
 
-function loginSuccess(accessToken: string, refreshToken: string, user: string): ILoginSuccess {
+function loginSuccess(accessToken: string, refreshToken: string, user: TUser): ILoginSuccess {
     return {
         type: LOGIN_SUCCESS,
         accessToken,
@@ -47,10 +53,8 @@ function loginError(): ILoginError {
   }
 }
 
+export const loginThunk: AppThunk = (data: Omit<TUser, 'name'>) => (dispatch: AppDispatch) =>  {
 
-export function loginThunk(data: Omit<TUser, 'name'>) {
-  //@ts-ignore
-    return function(dispatch) {
       dispatch(loginRequest());
 
       api.login(data).then(res => {
@@ -65,15 +69,15 @@ export function loginThunk(data: Omit<TUser, 'name'>) {
       .catch(e => {
             dispatch(loginError());
     });;
-    };
-}
+};
+
 
 //@ts-ignore
 export const checkSessionThunk = () => (dispatch) => {
 
     const accessToken = JsCookie.get(Token.access)!;
     const refreshToken = JsCookie.get(Token.refresh)!;
-    dispatch(loginSuccess(accessToken, refreshToken, ''));
+    dispatch(loginSuccess(accessToken, refreshToken, {name: '', email: '', password:''} ));
 }
 
 

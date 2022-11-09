@@ -4,6 +4,7 @@ import * as api from '../../utils/burger-api'
 
 import {Token} from '../../utils/constants'
 import { TUser } from "../../utils/types";
+import { AppDispatch, AppThunk } from "../types";
 
 export const GET_USER_REQUEST: 'GET_USER_REQUEST' = 'GET_USER_REQUEST';
 export const GET_USER_SUCCESS: 'GET_USER_SUCCESS' = 'GET_USER_SUCCESS';
@@ -23,7 +24,7 @@ export interface IGetUserRequest {
 
 export interface IGetUserSuccess {
   readonly type: typeof GET_USER_SUCCESS;
-  readonly user: string;
+  readonly user: TUser;
 }
 
 export interface IGetUserError {
@@ -50,7 +51,7 @@ function getUserRequest(): IGetUserRequest {
   }
 }
 
-function getUserSuccess(user: string): IGetUserSuccess {
+function getUserSuccess(user: TUser): IGetUserSuccess {
     return {
         type: GET_USER_SUCCESS,
         user: user
@@ -83,9 +84,8 @@ function refreshTokenRequest(): IRefreshTokenRequest {
     }
   }
 
-export function refreshToken() {
-  //@ts-ignore
-    return function(dispatch) {
+export const refreshToken: AppThunk = () => (dispatch: AppDispatch) =>  {
+ 
       dispatch(refreshTokenRequest());
 
       const refreshToken = JsCookie.get(Token.refresh)!;
@@ -107,13 +107,11 @@ export function refreshToken() {
       .catch(e => {
             dispatch(refreshTokenError());//e.message
        }
-    );;
-    };
-}
+    );
+};
 
-export function getUser() {
-    //@ts-ignore
-    return function(dispatch) {
+export const getUser: AppThunk = () => (dispatch: AppDispatch) =>  {
+ 
       dispatch(getUserRequest());
 
       api.getUser().then(res => {
@@ -130,8 +128,8 @@ export function getUser() {
             dispatch(getUserError());//e.message
         }
     });;
-    };
-  }
+  };
+
 
 
   export interface ISaveUserRequest {
@@ -140,7 +138,7 @@ export function getUser() {
   
   export interface ISaveUserSuccess {
     readonly type: typeof SAVE_USER_SUCCESS;
-    readonly user: string;
+    readonly user: TUser;
   }
   
   export interface ISaveUserError {
@@ -153,7 +151,7 @@ export function getUser() {
     }
   }
   
-  function saveUserSuccess(user: string): ISaveUserSuccess {
+  function saveUserSuccess(user: TUser): ISaveUserSuccess {
       return {
           type: SAVE_USER_SUCCESS,
           user: user
@@ -166,9 +164,8 @@ export function getUser() {
     }
   }
 
-  export function saveUserThunk(data: TUser) {
-    //@ts-ignore
-    return function(dispatch) {
+  export const saveUserThunk: AppThunk = (data: TUser) => (dispatch: AppDispatch) =>  {
+ 
       dispatch(saveUserRequest());
 
       api.updateUser(data).then(res => {
@@ -181,5 +178,17 @@ export function getUser() {
       .catch(e => {
             dispatch(saveUserError());
     });;
-    };
-}
+};
+
+
+export type TProfileActions = 
+  | IGetUserRequest
+  | IGetUserSuccess
+  | IGetUserError
+  | IRefreshTokenRequest
+  | IRefreshTokenSuccess
+  | IRefreshTokenError
+  | ISaveUserRequest
+  | ISaveUserSuccess
+  | ISaveUserError;
+

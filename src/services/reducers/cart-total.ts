@@ -3,17 +3,24 @@ import { GET_ORDERS_REQUEST,
          GET_ORDERS_SUCCESS, 
          GET_ORDERS_ERROR,
          OPEN_ORDER_DETAILS,
-         CLOSE_ORDER_DETAILS } from '../actions/cart-total';
+         CLOSE_ORDER_DETAILS,
+         TOrderActions } from '../actions/cart-total';
 
+type TOrderState = {
+    orderId: string | null,
+    ordersRequest: boolean,
+    ordersFailed: boolean,
+    isOrderDetailOpen: boolean
+} 
 
-const initialState = {
+const initialState: TOrderState = {
     orderId: null,
     ordersRequest: false,
     ordersFailed: false,
     isOrderDetailOpen: false
 };
 
-export const ordersReducer = (state = initialState, action) => {
+export const ordersReducer = (state = initialState, action: TOrderActions): TOrderState => {
     switch (action.type) {
         case GET_ORDERS_REQUEST: {
             return {

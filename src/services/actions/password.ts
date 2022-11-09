@@ -1,4 +1,5 @@
 import * as api from '../../utils/burger-api'
+import { AppDispatch, AppThunk } from '../types';
 
 export const RESET_PSW_REQUEST: 'RESET_PSW_REQUEST' = 'RESET_PSW_REQUEST';
 export const RESET_PSW_SUCCESS: 'RESET_PSW_SUCCESS' = 'RESET_PSW_SUCCESS';
@@ -30,6 +31,14 @@ export interface IforgotPasswordSuccess {
 export interface IForgotPasswordError {
   readonly type: typeof FORGOT_PSW_ERROR;
 }
+
+export type TPasswordActions = 
+  | IResetPasswordRequest
+  | IResetPasswordSuccess
+  | IResetPasswordError
+  | IForgotPasswordRequest
+  | IforgotPasswordSuccess
+  | IForgotPasswordError;
 
 function resetPasswordRequest(): IResetPasswordRequest {
     return {
@@ -67,9 +76,8 @@ function resetPasswordRequest(): IResetPasswordRequest {
     }
   }
 
-export function resetPasswordThunk(data: {password: string, token: string}) {
-  //@ts-ignore
-    return function(dispatch) {
+export const resetPasswordThunk: AppThunk = (data: {password: string, token: string}) => (dispatch: AppDispatch) =>  {
+
         dispatch(resetPasswordRequest());
   
         api.pswReset(data).then(res => {
@@ -82,12 +90,10 @@ export function resetPasswordThunk(data: {password: string, token: string}) {
         .catch(e => {
               dispatch(resetPasswordError());
       });;
-      };
 };
 
-export function forgotPasswordThunk(data: {email: string}) {
-   //@ts-ignore
-    return function(dispatch) {     
+export const forgotPasswordThunk: AppThunk = (data: {email: string}) => (dispatch: AppDispatch) =>  {
+ 
         dispatch(forgotPasswordRequest());
 
         api.pswForgot(data).then(res => {
@@ -100,7 +106,7 @@ export function forgotPasswordThunk(data: {email: string}) {
         .catch(e => {
               dispatch(forgotPasswordError());
       });;
-      };
 };
+
 
 

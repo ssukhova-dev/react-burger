@@ -4,6 +4,7 @@ import * as api from '../../utils/burger-api'
 
 import {Token} from '../../utils/constants'
 import { TUser } from "../../utils/types";
+import { AppDispatch, AppThunk } from "../types";
 
 export const REGISTER_REQUEST: 'REGISTER_REQUEST' = 'REGISTER_REQUEST';
 export const REGISTER_SUCCESS: 'REGISTER_SUCCESS' = 'REGISTER_SUCCESS';
@@ -17,12 +18,17 @@ export interface IRegisterSuccess {
   readonly type: typeof REGISTER_SUCCESS;
   readonly accessToken: string;
   readonly refreshToken: string;
-  readonly user: string;
+  readonly user: TUser;
 }
 
 export interface IRegisterError {
   readonly type: typeof REGISTER_ERROR;
 }
+
+export type TRegisterActions = 
+  | IRegisterRequest
+  | IRegisterSuccess
+  | IRegisterError;
 
 function registerRequest(): IRegisterRequest {
   return {
@@ -30,7 +36,7 @@ function registerRequest(): IRegisterRequest {
   }
 }
 
-export function registerSuccess(accessToken: string, refreshToken: string, user: string): IRegisterSuccess {
+export function registerSuccess(accessToken: string, refreshToken: string, user: TUser): IRegisterSuccess {
     return {
         type: REGISTER_SUCCESS,
         accessToken: accessToken,
@@ -45,9 +51,8 @@ function registerError(): IRegisterError {
   }
 }
 
-export function registerThunk(data: TUser) {
-  //@ts-ignore
-    return function(dispatch) {
+export const registerThunk: AppThunk = (data: TUser) => (dispatch: AppDispatch) =>  {
+ 
       dispatch(registerRequest());
 
       api.register(data).then(res => {
@@ -61,6 +66,6 @@ export function registerThunk(data: TUser) {
       })
       .catch(e => {
             dispatch(registerError());
-    });;
-    };
-  }
+    });
+};
+

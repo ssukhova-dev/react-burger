@@ -1,17 +1,23 @@
 
 
+import { TCartIngredient } from '../../utils/types';
 import { 
          ADD_INGREDIENT, 
          REMOVE_INGREDIENT,
-         MOVE_INGREDIENTs } from '../actions/burger-constructor';
+         MOVE_INGREDIENTs,
+         TConstructorActions } from '../actions/burger-constructor';
 import { CLEAR_CART } from '../actions/cart-total';
 
 
-const initialState = {
+type TCartState = {
+    cart: Array<TCartIngredient>;
+} 
+
+const initialState: TCartState = {
     cart: [],
 }
         
-export const cartReducer = (state = initialState, action) => {
+export const cartReducer = (state = initialState, action: TConstructorActions): TCartState => {
 
     switch (action.type) {
         
@@ -33,7 +39,7 @@ export const cartReducer = (state = initialState, action) => {
                 return {...state, cart: [...newCart, new_ingredient]};
             }
 
-            const new_ingredient = {...action.ingredient, order: state.cart.length, key: action.key};
+            const new_ingredient: TCartIngredient = {...action.ingredient, order: state.cart.length, key: action.key};
 
             return {...state, cart: [...state.cart, new_ingredient]};
         
