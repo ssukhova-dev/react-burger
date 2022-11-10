@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import style from './register.module.css';
 
 import { Button,  PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
 
 import {registerThunk} from '../../services/actions/register';
 
@@ -20,7 +20,6 @@ const RegisterPage: FC = () => {
 
     function handleSubmit(e: React.FormEvent){
         e.preventDefault();
-        //@ts-ignore
         dispatch(registerThunk(data));
     }
 

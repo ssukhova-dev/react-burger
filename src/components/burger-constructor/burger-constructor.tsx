@@ -10,7 +10,7 @@ import BurgerConstructorCard from '../burger-constructor-card/burger-constructor
 import {IngredientTypes, DNDTypes} from '../../utils/constants'
 import {TIngredient, TCartIngredient, TDropCollectedProps} from '../../utils/types'
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 import { ADD_INGREDIENT } from '../../services/actions/burger-constructor';
 
 import {v4 as uuidv4} from 'uuid'
@@ -22,11 +22,11 @@ const BurgerConstructor: FC = () => {
 
     const dispatch = useDispatch();
 
-    const bunIngredient = useSelector( (store: any) => {
+    const bunIngredient = useSelector( (store) => {
         return store.cart.cart.find((item: TCartIngredient) => item.type === IngredientTypes.bun);
     })
 
-    const cartIngredients = useSelector( (store: any) => {
+    const cartIngredients = useSelector( (store) => {
         return store.cart.cart.filter((item: TCartIngredient) => item.type !== "bun").sort((a: TCartIngredient, b: TCartIngredient) => {
             if (a.order > b.order) return 1;
             if (a.order === b.order) return 0;
@@ -35,7 +35,7 @@ const BurgerConstructor: FC = () => {
           })
     });
 
-    const total = useSelector( (store: any) => {
+    const total = useSelector( (store) => {
 
         let sum = 0;
 

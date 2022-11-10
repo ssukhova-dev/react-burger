@@ -10,7 +10,7 @@ export const LOGIN_REQUEST: 'LOGIN_REQUEST' = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS: 'LOGIN_SUCCESS' = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR: 'LOGIN_ERROR' = 'LOGIN_ERROR';
 
-export const isLoggedInSelector = (store: any) => !!store.login.accessToken;
+export const isLoggedInSelector = (store: { login: { accessToken: string; }; }) => !!store.login.accessToken;
 
 export interface ILoginRequest {
   readonly type: typeof LOGIN_REQUEST;
@@ -72,12 +72,11 @@ export const loginThunk: AppThunk = (data: Omit<TUser, 'name'>) => (dispatch: Ap
 };
 
 
-//@ts-ignore
-export const checkSessionThunk = () => (dispatch) => {
+export const checkSessionThunk: AppThunk = () => (dispatch: AppDispatch) =>  {
 
     const accessToken = JsCookie.get(Token.access)!;
     const refreshToken = JsCookie.get(Token.refresh)!;
     dispatch(loginSuccess(accessToken, refreshToken, {name: '', email: '', password:''} ));
 }
-
+ 
 

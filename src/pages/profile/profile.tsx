@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import style from './profile.module.css';
 
 import { Button, PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 
 import { saveUserThunk } from '../../services/actions/profile';
 import { logoutThunk } from '../../services/actions/logout';
@@ -13,7 +13,7 @@ const ProfilePage: FC = () => {
 
     const dispatch = useDispatch();
 
-    const { name, email, password } = useSelector((store: any)  => store.login.user);
+    const { name, email, password } = useSelector((store)  => store.login.user);
     const [data, setData] = React.useState({name: name, email: email, password: password});
 
     React.useEffect(()=> {
@@ -26,13 +26,11 @@ const ProfilePage: FC = () => {
 
     function handleSubmit(e: React.FormEvent){
         e.preventDefault();
-        //@ts-ignore
         dispatch(saveUserThunk(data));
     }
 
     function onLogout(e: React.SyntheticEvent) {
         e.preventDefault();
-        //@ts-ignore
         dispatch(logoutThunk());
     }
 

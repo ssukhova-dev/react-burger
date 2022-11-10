@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import style from './reset-password.module.css';
 
 import { Button, PasswordInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 
 import {resetPasswordThunk} from '../../services/actions/password';
 
@@ -14,7 +14,7 @@ const ResetPasswordPage: FC = () => {
 
     const dispatch = useDispatch();
     const [data, setData] = React.useState({token: '', password: ''});
-    const resetPswSuccess = useSelector((store: any) => store.login.resetPswSuccess);
+    const resetPswSuccess = useSelector((store) => store.login.resetPswSuccess);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>){
         setData(prev => ({...prev, [e.target.name]: e.target.value}));
@@ -22,7 +22,6 @@ const ResetPasswordPage: FC = () => {
 
     function handleSubmit(e: React.FormEvent){
         e.preventDefault();
-        //@ts-ignore
         dispatch(resetPasswordThunk(data));
     }
 

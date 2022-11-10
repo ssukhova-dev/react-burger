@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import style from './forgot-password.module.css';
 
 import { Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 
 import {forgotPasswordThunk} from '../../services/actions/password';
 
@@ -16,7 +16,7 @@ const ForgotPasswordPage: FC = () => {
     const dispatch = useDispatch();
     const [data, setData] = React.useState({email: ''});
 
-    const forgotPswSuccess  = useSelector((store: any) => store.login.forgotPswSuccess);
+    const forgotPswSuccess  = useSelector((store) => store.login.forgotPswSuccess);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>){
         setData(prev => ({...prev, [e.target.name]: e.target.value}));
@@ -24,7 +24,6 @@ const ForgotPasswordPage: FC = () => {
 
     function handleSubmit(e: React.FormEvent){
         e.preventDefault();
-        //@ts-ignore
         dispatch(forgotPasswordThunk(data));
     }
 

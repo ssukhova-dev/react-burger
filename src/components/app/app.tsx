@@ -11,7 +11,7 @@ import {ERROR_TEXT, LOADING_TEXT} from '../../utils/constants'
 import {getIngredients} from '../../services/actions/burger-ingredients' 
 import {getUser} from '../../services/actions/profile' 
 
-import {useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from '../../services/hooks';
 
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
@@ -40,16 +40,14 @@ function App() {
     const location = useLocation();
     const background = location.state && location.state.background;
 
-    const isLoading = useSelector((store: any) => store.ingredients.ingredientsRequest);
-    const hasError = useSelector((store: any) => store.ingredients.ingredientsFailed);
+    const isLoading = useSelector((store) => store.ingredients.ingredientsRequest);
+    const hasError = useSelector((store) => store.ingredients.ingredientsFailed);
 
 
     const dispatch = useDispatch();
     
     React.useEffect(()=> {
-            //@ts-ignore
             dispatch(getIngredients());
-            //@ts-ignore
             dispatch(getUser());
         }, [dispatch])
 

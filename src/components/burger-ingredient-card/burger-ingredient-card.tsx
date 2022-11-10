@@ -6,7 +6,7 @@ import burgerIngCardStyle from './burger-ingredient-card.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 
-import {useSelector} from 'react-redux'
+import { useSelector } from '../../services/hooks';
 import {useHistory, useLocation} from "react-router-dom"
 
 import { useDrag } from 'react-dnd';
@@ -30,7 +30,7 @@ const BurgerIngredientCard: FC<IBurgerIngredientCardProps> = ({ ingredient, ingr
         ingredientDetailsDlgOpen(ingredient);
       };
 
-      const count: number = useSelector((store: any) => {
+      const count: number = useSelector((store) => {
         const foundedIngredients: Array<TCartIngredient> = store.cart.cart.filter( (item: TCartIngredient) => item._id === ingredient._id);
         return foundedIngredients ? foundedIngredients.length : 0;
       })

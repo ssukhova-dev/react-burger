@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import loginStyle from './login.module.css';
 
 import { Button,  PasswordInput, EmailInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 
 import {loginThunk} from '../../services/actions/login';
 
@@ -14,7 +14,7 @@ const LoginPage: FC = () => {
     const dispatch = useDispatch();
     const [data, setData] = React.useState({email: '', password: ''});
 
-    const loginFailed = useSelector((store: any) => !!store.login.loginFailed);
+    const loginFailed = useSelector((store) => !!store.login.loginFailed);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>){
         setData(prev => ({...prev, [e.target.name]: e.target.value}));
@@ -22,7 +22,6 @@ const LoginPage: FC = () => {
 
     function handleSubmit(e: React.FormEvent){
         e.preventDefault();
-        //@ts-ignore
         dispatch(loginThunk(data));
     }
 
