@@ -32,6 +32,8 @@ import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal'
 import { ADD_CURRENT_INGREDIENT, REMOVE_CURRENT_INGREDIENT } from '../../services/actions/burger-ingredients';
 import { TIngredient } from '../../utils/types';
+import FeedPage from '../../pages/feed/feed';
+import OrderDetailsPage from '../../pages/order-details/order-details';
 
 
 function App() {
@@ -91,8 +93,8 @@ function App() {
                     <Switch location={background || location}>
                         <Route path="/" exact={true}>
                             <DndProvider backend={HTML5Backend}>
-                            <BurgerIngredients ingredientDetailsDlgOpen={showIngredientDetailsDlg}/>
-                            <BurgerConstructor />
+                                <BurgerIngredients ingredientDetailsDlgOpen={showIngredientDetailsDlg}/>
+                                <BurgerConstructor />
                             </DndProvider >               
                         </Route>
 
@@ -119,6 +121,14 @@ function App() {
 
                         <Route path="/ingredients/:id" exact={true}>
                             <IngredientDetailsPage />
+                        </Route>
+
+                        <Route path="/feed" exact={true}>
+                            <FeedPage />
+                        </Route>
+
+                        <Route path="/feed/:id" exact={true}>
+                            <OrderDetailsPage />
                         </Route>
 
                         <Route>

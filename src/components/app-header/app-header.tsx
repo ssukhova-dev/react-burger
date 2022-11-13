@@ -30,13 +30,14 @@ const AppHeader: FC = () => {
                     </div> 
 
                     <div className={appHeaderStyles.navigation_link} >
-                    <a href="#" className={appHeaderStyles.navigation_link} >
-                    <div className={appHeaderStyles.link_icon}><ListIcon type={isFeed ? "primary" : "secondary"}/></div>
-                    <div className={appHeaderStyles.link_icon_hover}><ListIcon type="primary"/></div>
-                    <p className="text text_type_main-default">
-                        Лента заказов
-                    </p>
-                    </a>
+                        <NavLink to="/feed" exact={true} className={appHeaderStyles.navigation_link} 
+                                                        activeClassName={appHeaderStyles.navigation_link_active}>
+                            <div className={appHeaderStyles.link_icon}><ListIcon type={isFeed ? "primary" : "secondary"}/></div>
+                            <div className={appHeaderStyles.link_icon_hover}><ListIcon type="primary"/></div>
+                            <p className="text text_type_main-default">
+                                Лента заказов
+                            </p>
+                        </NavLink>
                     </div>
 
                 </div>
