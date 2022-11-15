@@ -51,7 +51,7 @@ function registerError(): IRegisterError {
   }
 }
 
-export const registerThunk: AppThunk = (data: TUser) => (dispatch: AppDispatch) =>  {
+export const registerThunk = (data: TUser): AppThunk => (dispatch: AppDispatch) =>  {
  
       dispatch(registerRequest());
 

@@ -49,7 +49,7 @@ function getIngredientError(): IGetIngredientError {
   }
 }
 
-export const getIngredients: AppThunk = () => (dispatch: AppDispatch) =>  {
+export const getIngredients = (): AppThunk => (dispatch: AppDispatch) =>  {
       dispatch(getIngredientRequest());
 
       getIngredientsData().then(res => {

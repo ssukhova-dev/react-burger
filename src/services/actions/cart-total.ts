@@ -74,7 +74,7 @@ function openOrderDetails(): IOpenOrderDetails {
   }
 }
 
-export const getOrders: AppThunk = (ingredients: Array<string>) => (dispatch: AppDispatch) =>  {
+export const getOrders = (ingredients: Array<string>): AppThunk => (dispatch: AppDispatch) =>  {
 
       dispatch(getOrdersRequest());
       getOrdersData(ingredients).then(res => {

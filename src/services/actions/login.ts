@@ -53,7 +53,7 @@ function loginError(): ILoginError {
   }
 }
 
-export const loginThunk: AppThunk = (data: Omit<TUser, 'name'>) => (dispatch: AppDispatch) =>  {
+export const loginThunk = (data: Omit<TUser, 'name'>): AppThunk => (dispatch: AppDispatch) =>  {
 
       dispatch(loginRequest());
 
@@ -72,7 +72,7 @@ export const loginThunk: AppThunk = (data: Omit<TUser, 'name'>) => (dispatch: Ap
 };
 
 
-export const checkSessionThunk: AppThunk = () => (dispatch: AppDispatch) =>  {
+export const checkSessionThunk = (): AppThunk => (dispatch: AppDispatch) =>  {
 
     const accessToken = JsCookie.get(Token.access)!;
     const refreshToken = JsCookie.get(Token.refresh)!;

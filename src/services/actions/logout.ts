@@ -44,7 +44,7 @@ function logoutError(): ILogoutError {
   }
 }
 
-export const logoutThunk: AppThunk = () => (dispatch: AppDispatch) =>  {
+export const logoutThunk = (): AppThunk => (dispatch: AppDispatch) =>  {
 
       dispatch(logoutRequest());
 

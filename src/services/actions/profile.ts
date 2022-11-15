@@ -84,7 +84,7 @@ function refreshTokenRequest(): IRefreshTokenRequest {
     }
   }
 
-export const refreshToken: AppThunk = () => (dispatch: AppDispatch) =>  {
+export const refreshToken = (): AppThunk => (dispatch: AppDispatch) =>  {
  
       dispatch(refreshTokenRequest());
 
@@ -164,7 +164,7 @@ export const getUser: AppThunk = () => (dispatch: AppDispatch) =>  {
     }
   }
 
-  export const saveUserThunk: AppThunk = (data: TUser) => (dispatch: AppDispatch) =>  {
+  export const saveUserThunk = (data: TUser): AppThunk => (dispatch: AppDispatch) =>  {
  
       dispatch(saveUserRequest());
 

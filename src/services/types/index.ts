@@ -9,7 +9,7 @@ import { TRegisterActions } from '../actions/register';
 import { TProfileActions } from '../actions/profile';
 import { TPasswordActions } from '../actions/password';
 import { Action, ActionCreator } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
 export type RootState = ReturnType<typeof store.getState>;
 
@@ -26,9 +26,17 @@ type TApplicationActions =
     | TPasswordActions;
 
 
-export type AppThunk<TReturn = void> = ActionCreator<
-    ThunkAction<TReturn, Action, RootState, TApplicationActions>
-  >; 
+//export type AppThunk<TReturn = void> = ActionCreator<
+//    ThunkAction<TReturn, Action, RootState, TApplicationActions>
+//  >; 
 
-export type AppDispatch = typeof store.dispatch; 
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType, // return value type
+  RootState, // app state type
+  never, // extra argument type
+  TApplicationActions // action type
+>;
+
+export type AppDispatch = ThunkDispatch<RootState, never, TApplicationActions>;
+//export type AppDispatch = typeof store.dispatch; 
 //export type AppDispatch = Dispatch<TApplicationActions>; 

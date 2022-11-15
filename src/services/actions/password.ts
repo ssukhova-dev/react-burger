@@ -76,7 +76,7 @@ function resetPasswordRequest(): IResetPasswordRequest {
     }
   }
 
-export const resetPasswordThunk: AppThunk = (data: {password: string, token: string}) => (dispatch: AppDispatch) =>  {
+export const resetPasswordThunk = (data: {password: string, token: string}): AppThunk => (dispatch: AppDispatch) =>  {
 
         dispatch(resetPasswordRequest());
   
@@ -92,7 +92,7 @@ export const resetPasswordThunk: AppThunk = (data: {password: string, token: str
       });;
 };
 
-export const forgotPasswordThunk: AppThunk = (data: {email: string}) => (dispatch: AppDispatch) =>  {
+export const forgotPasswordThunk = (data: {email: string}): AppThunk => (dispatch: AppDispatch) =>  {
  
         dispatch(forgotPasswordRequest());
 
