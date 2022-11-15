@@ -1,7 +1,8 @@
 import { store } from '../../utils/store';
 import { TConstructorActions } from '../actions/burger-constructor';
 import { TCurrentIngredientActions,
-         TCurrentTabActions } from '../actions/burger-ingredients';
+         TCurrentTabActions,
+         TIngredientActions } from '../actions/burger-ingredients';
 import { TOrderActions } from '../actions/cart-total';
 import { TLoginActions } from '../actions/login';
 import { TLogoutActions } from '../actions/logout';
@@ -16,6 +17,7 @@ export type RootState = ReturnType<typeof store.getState>;
 // Типизация всех экшенов приложения
 type TApplicationActions = 
     | TConstructorActions
+    | TIngredientActions
     | TCurrentIngredientActions
     | TCurrentTabActions
     | TOrderActions

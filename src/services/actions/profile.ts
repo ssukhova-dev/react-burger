@@ -110,7 +110,7 @@ export const refreshToken = (): AppThunk => (dispatch: AppDispatch) =>  {
     );
 };
 
-export const getUser: AppThunk = () => (dispatch: AppDispatch) =>  {
+export const getUser = (): AppThunk => (dispatch: AppDispatch) =>  {
  
       dispatch(getUserRequest());
 
