@@ -38,7 +38,7 @@ function loginRequest(): ILoginRequest {
   }
 }
 
-function loginSuccess(accessToken: string, refreshToken: string, user: TUser): ILoginSuccess {
+export function loginSuccess(accessToken: string, refreshToken: string, user: TUser): ILoginSuccess {
     return {
         type: LOGIN_SUCCESS,
         accessToken,
@@ -71,12 +71,5 @@ export const loginThunk = (data: Omit<TUser, 'name'>): AppThunk => (dispatch: Ap
     });;
 };
 
-
-export const checkSessionThunk = (): AppThunk => (dispatch: AppDispatch) =>  {
-
-    const accessToken = JsCookie.get(Token.access)!;
-    const refreshToken = JsCookie.get(Token.refresh)!;
-    dispatch(loginSuccess(accessToken, refreshToken, {name: '', email: '', password:''} ));
-}
  
 

@@ -10,6 +10,7 @@ import {ERROR_TEXT, LOADING_TEXT} from '../../utils/constants'
 
 import {getIngredients} from '../../services/actions/burger-ingredients' 
 import {getUser} from '../../services/actions/profile' 
+import {loginSuccess} from '../../services/actions/login' 
 
 import { useSelector, useDispatch } from '../../services/hooks';
 
@@ -35,6 +36,8 @@ import { TIngredient } from '../../utils/types';
 import FeedPage from '../../pages/feed/feed';
 import OrderDetailsPage from '../../pages/order-details/order-details';
 
+import JsCookie from "js-cookie"
+import {Token} from '../../utils/constants'
 
 function App() {
 
@@ -49,6 +52,9 @@ function App() {
     const dispatch = useDispatch();
     
     React.useEffect(()=> {
+            const accessToken = JsCookie.get(Token.access)!;
+            const refreshToken = JsCookie.get(Token.refresh)!;
+            dispatch(loginSuccess(accessToken, refreshToken, {name: '', email: '', password:''} ));
             dispatch(getIngredients());
             dispatch(getUser());
         }, [dispatch])
@@ -158,3 +164,5 @@ function App() {
 }
 
 export default App;
+
+
