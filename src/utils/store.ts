@@ -19,4 +19,4 @@ const enhancer = composeEnhancers(applyMiddleware(thunk));
 
 export const store = legacy_createStore(rootReducer, enhancer); 
 
-//store.dispatch(checkSessionThunk());
+store.dispatch(checkSessionThunk());

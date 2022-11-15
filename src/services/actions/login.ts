@@ -10,7 +10,7 @@ export const LOGIN_REQUEST: 'LOGIN_REQUEST' = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS: 'LOGIN_SUCCESS' = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR: 'LOGIN_ERROR' = 'LOGIN_ERROR';
 
-export const isLoggedInSelector = (store: { login: { accessToken: string; }; }) => !!store.login.accessToken;
+export const isLoggedInSelector = (store: { login: { accessToken: string | undefined } }) => !!store.login.accessToken;
 
 export interface ILoginRequest {
   readonly type: typeof LOGIN_REQUEST;
