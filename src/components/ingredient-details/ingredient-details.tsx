@@ -11,16 +11,18 @@ const IngredientDetails: FC = () => {
     const dispatch = useDispatch();
 
     const {id}: {id: string} = useParams();
-    const ingredient: TIngredient = useSelector((store) => store.currentIngredient.currentIngredient);
+    const ingredient: TIngredient | null = useSelector((store) => store.currentIngredient.currentIngredient);
     const ingredients: Array<TIngredient> = useSelector((store) => store.ingredients.ingredients);
 
     React.useEffect(() => {
         if (!ingredient && id && ingredients) {
-          const ingredient = ingredients.find((ingr) => ingr._id === id);
-          dispatch({
-            type: ADD_CURRENT_INGREDIENT,
-            ingredient: ingredient
-          });
+            const ingredient = ingredients.find((ingr) => ingr._id === id);
+            if (ingredient) {
+                dispatch({
+                    type: ADD_CURRENT_INGREDIENT,
+                    ingredient: ingredient
+                });
+            }
         }
       }, [ingredient, id, ingredients, dispatch]);
 
