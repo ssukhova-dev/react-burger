@@ -9,6 +9,7 @@ import { TLogoutActions } from '../actions/logout';
 import { TRegisterActions } from '../actions/register';
 import { TProfileActions } from '../actions/profile';
 import { TPasswordActions } from '../actions/password';
+import { TWsActions } from '../actions/socket';
 import { Action, ActionCreator } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
@@ -25,7 +26,8 @@ type TApplicationActions =
     | TLogoutActions
     | TRegisterActions
     | TProfileActions
-    | TPasswordActions;
+    | TPasswordActions
+    | TWsActions;
 
 
 //export type AppThunk<TReturn = void> = ActionCreator<

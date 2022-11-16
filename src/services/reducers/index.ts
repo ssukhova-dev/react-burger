@@ -3,6 +3,7 @@ import { ingredientsReducer, currentIngredientReducer, tabReducer } from './burg
 import { cartReducer } from './burger-constructor'
 import { ordersReducer } from './cart-total'
 import { loginReducer } from './login';
+import { wsOrdersReducer } from './orders-socket';
 
 export const rootReducer = combineReducers({
     ingredients: ingredientsReducer,
@@ -10,5 +11,6 @@ export const rootReducer = combineReducers({
     order: ordersReducer,
     currentIngredient: currentIngredientReducer,
     tabs: tabReducer,
-    login: loginReducer
+    login: loginReducer,
+    orders: wsOrdersReducer,
   });
