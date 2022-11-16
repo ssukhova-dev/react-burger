@@ -35,7 +35,7 @@ export interface IOnMessage{
     readonly type: typeof ON_MESSAGE;
 }
 
-export type TWsActions = 
+export type TOrdersWsActions = 
     | IWsConnect
     | IWsConnecting
     | IWsDisconnect

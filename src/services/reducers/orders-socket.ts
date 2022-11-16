@@ -1,5 +1,5 @@
 import {WS_CONNECT, WS_CONNECTING, WS_DISCONNECT, 
-        ON_OPEN, ON_CLOSE, ON_ERROR, ON_MESSAGE, TWsActions } from '../actions/socket';
+        ON_OPEN, ON_CLOSE, ON_ERROR, ON_MESSAGE, TOrdersWsActions } from '../actions/socket';
 
 
 
@@ -13,7 +13,7 @@ const initialState: TWsOrdersState = {
   messages: [],
 }
       
-export const wsOrdersReducer = (state = initialState, action: TWsActions): TWsOrdersState => {
+export const wsOrdersReducer = (state = initialState, action: TOrdersWsActions): TWsOrdersState => {
 
   switch (action.type) {
     case WS_CONNECT:
