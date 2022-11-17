@@ -1,4 +1,4 @@
-import { store } from '../../utils/store';
+
 import { TConstructorActions } from '../actions/burger-constructor';
 import { TCurrentIngredientActions,
          TCurrentTabActions,
@@ -10,7 +10,6 @@ import { TRegisterActions } from '../actions/register';
 import { TProfileActions } from '../actions/profile';
 import { TPasswordActions } from '../actions/password';
 import { TOrdersWsActions } from '../actions/socket';
-import { Action, ActionCreator } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { rootReducer } from '../reducers';
 

@@ -1,14 +1,14 @@
 .order_card {
     display: flex;
     flex-direction: column;
-    align-items: center;
 
     position: relative;
 
     width: 100%;
-    height: 150px;
+    height: 170px;
 
     margin: 4px 4px 0px 0px;
+    padding: 20px;
 
     cursor: pointer;
 
@@ -22,4 +22,76 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.img_list {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.img_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  position: relative;
+  background:rgb(28, 28, 33);
+  border-radius: 100px;
+  border-color: blueviolet;
+  border-style: solid;
+ /* z-index: -1;*/
+  overflow: hidden;
+  margin-right: -22px;
+}
+
+.image {
+  height: 50px;
+  z-index: 1;
+}
+
+.overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  left: 2px;
+  bottom: 2px;
+  border-radius: 100px;
+  background: rgba(28, 28, 33, .6);
+  z-index: 2;
 }

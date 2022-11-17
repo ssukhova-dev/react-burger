@@ -35,3 +35,13 @@ export type TUser = {
     email: string;
     password: string;
 }
+
+export type TOrder = {
+    _id: string;
+    name: string;
+    ingredients: string[];
+    status: string;
+    number: number;
+    createdAt: string;
+    updatedAt: string;
+  };

@@ -1,3 +1,4 @@
+import { TOrder } from '../../utils/types';
 import {WS_CONNECT, WS_CONNECTING, WS_DISCONNECT, 
         ON_OPEN, ON_CLOSE, ON_ERROR, ON_MESSAGE, TOrdersWsActions } from '../actions/socket';
 
@@ -5,15 +6,27 @@ import {WS_CONNECT, WS_CONNECTING, WS_DISCONNECT,
 
 type TWsOrdersState = {
   wsConnected: boolean;
-  messages: Array<string>;
+  loading: boolean;
+  error?: Event;
+
+  feedOrders: Array<TOrder>;
+  total: number;
+  totalToday: number;
 } 
 
 const initialState: TWsOrdersState = {
   wsConnected: false,
-  messages: [],
+  loading: false,
+
+  feedOrders: [],
+  total: 0,
+  totalToday: 0,
 }
       
 export const wsOrdersReducer = (state = initialState, action: TOrdersWsActions): TWsOrdersState => {
+
+
+  console.log("wsOrdersReducer: ", action.type);
 
   switch (action.type) {
     case WS_CONNECT:
@@ -34,14 +47,18 @@ export const wsOrdersReducer = (state = initialState, action: TOrdersWsActions):
         wsConnected: false
       };
 
-  /*  case ON_MESSAGE:
+    case ON_MESSAGE:
+
+      console.log("ON_MESSAGE: ", action.payload);
+
       return {
         ...state,
-        messages: state.messages.length
-          ? [...state.messages, { ...action.payload, timestamp: new Date().getTime() / 1000 }]
-          : [{ ...action.payload, timestamp: new Date().getTime() / 1000 }]
-      };*/
-
+        error: undefined,
+        feedOrders: action.payload.orders ? action.payload.orders : state.feedOrders,
+        total: action.payload.total,
+        totalToday: action.payload.totalToday,
+        loading: false,
+      };
 
     default:
       return state;

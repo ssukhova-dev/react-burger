@@ -12,5 +12,5 @@ export const rootReducer = combineReducers({
     currentIngredient: currentIngredientReducer,
     tabs: tabReducer,
     login: loginReducer,
-    orders: wsOrdersReducer,
+    feed: wsOrdersReducer,
   });

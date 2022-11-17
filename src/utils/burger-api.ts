@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 import {Token} from './constants'
 import JsCookie from "js-cookie"
@@ -15,6 +15,7 @@ const LOGOUT_API_URL = `${BURGER_API_URL}/auth/logout`;
 const TOKEN_API_URL = `${BURGER_API_URL}/auth/token`;
 const USER_API_URL = `${BURGER_API_URL}/auth/user`;
 
+export const WS_FEED_ORDERS_URL = "wss://norma.nomoreparties.space/orders/all";
 
 
 const checkResponse = (res: Response) => {

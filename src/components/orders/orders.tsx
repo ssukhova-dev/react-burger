@@ -19,7 +19,7 @@ const Orders: FC = () => {
 
 
     const ingredients: Array<TIngredient> = useSelector((store) => store.ingredients.ingredients);
-
+    const { feedOrders } = useSelector(state => state.feed);
 
    
 
@@ -32,13 +32,10 @@ const Orders: FC = () => {
             </p>
 
             <div className={`${styles.orders_list} ${commonStyles.custom_scrollbar}`} ref={listRef}>
-                <OrderCard />
-                <OrderCard />
-                <OrderCard />
-                <OrderCard />
-                <OrderCard />
-                <OrderCard />
-                <OrderCard />
+  
+                {feedOrders && feedOrders.map((order) => (
+                        <OrderCard key={order._id} order={order}  />
+                    ))}
             </div>
 
         </section>

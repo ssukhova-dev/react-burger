@@ -4,7 +4,6 @@ import {rootReducer} from '../services/reducers'
 import thunk from 'redux-thunk';
 import { socketMiddleware } from '../services/middleware/socket-middleware';
 import { ordersWsActions } from '../services/actions/socket';
-import { composeWithDevTools } from '@reduxjs/toolkit/dist/devtoolsExtension';
 
 declare global {
   interface Window {
@@ -21,5 +20,4 @@ const enhancer = composeEnhancers(applyMiddleware(thunk, ordersWsMiddleware));
 
 export const store = legacy_createStore(rootReducer, enhancer); 
 
-//export const store = legacy_createStore(rootReducer, 
-//  composeWithDevTools(applyMiddleware(thunk))); 
+

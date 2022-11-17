@@ -1,3 +1,5 @@
+import { TOrder } from "../../utils/types";
+
 export const WS_CONNECT: 'WS_CONNECT' = 'WS_CONNECT';
 export const WS_CONNECTING: 'WS_CONNECTING' = 'WS_CONNECTING';
 export const WS_DISCONNECT: 'WS_DISCONNECT' = 'WS_DISCONNECT';
@@ -9,6 +11,7 @@ export const ON_MESSAGE: 'ON_MESSAGE' = 'ON_MESSAGE';
 
 export interface IWsConnect {
     readonly type: typeof WS_CONNECT;
+    readonly payload: string; 
 }
 
 export interface IWsConnecting {
@@ -29,10 +32,15 @@ export interface IOnClose {
 
 export interface IOnError{
     readonly type: typeof ON_ERROR;
+    readonly payload: Event;
 }
 
 export interface IOnMessage{
     readonly type: typeof ON_MESSAGE;
+    readonly payload: { success: boolean;
+                        orders: TOrder[];
+                        total: number;
+                        totalToday: number;}
 }
 
 export type TOrdersWsActions = 
@@ -45,6 +53,18 @@ export type TOrdersWsActions =
     | IOnMessage;
 
 
+export function wsOrdersConnect(url: string): IWsConnect {
+    return {
+        type: WS_CONNECT,
+        payload: url,
+    }
+}
+
+export function wsOrdersDisconnect(): IWsDisconnect {
+    return {
+        type: WS_DISCONNECT,
+    }
+}
 
 
 export const ordersWsActions = {
