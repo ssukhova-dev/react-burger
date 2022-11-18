@@ -179,7 +179,7 @@ function App() {
                     {
                         background && orderInfoDlg.isOpen && (
                             <Route path="/feed/:id" exact={true}>
-                                <Modal onClose={closeOrderInfoDlg} title="order">
+                                <Modal onClose={closeOrderInfoDlg} >
                                     <OrderInfo />
                                 </Modal>
                             </Route>

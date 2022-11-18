@@ -11,6 +11,7 @@ import {useHistory, useLocation} from "react-router-dom"
 
 import { FC } from 'react';
 import React from 'react';
+import { getPrice } from '../../utils';
 
 
 interface IOrderCardProps{
@@ -45,24 +46,12 @@ const OrderCard: FC<IOrderCardProps> = ({order, orderInfoDlgOpen}) => {
         return icons.slice(0,6);
       }
 
-      function getPrice(){
-        let price = 0;
-
-        order.ingredients.forEach((ingredient_id) => {
-          ingredients.forEach((ingredient) => {
-            if (ingredient._id === ingredient_id) {            
-              price += ingredient.price;
-            }
-          });
-        })
-        return price;
-      }
 
       const ingredient_icons = React.useMemo(() => getIcons(), [ingredients])!;
       const rest = order.ingredients.length > 6 ? order.ingredients.length - 6 : 0;
 
       const date = order.createdAt;
-      const price = React.useMemo(() => getPrice(), [ingredients]);
+      const price = React.useMemo(() => getPrice(order, ingredients), [ingredients]);
 
 
       return (
@@ -83,7 +72,7 @@ const OrderCard: FC<IOrderCardProps> = ({order, orderInfoDlgOpen}) => {
                   {
                     ingredient_icons && ingredient_icons.map((image, index) => (
                       <li key={index}>
-                        <div className={styles.img_container} style={{ zIndex: 6-index }}>
+                        <div className={styles.img_container} >
                           <img className={styles.image} src={image} alt={image} />
                           {(!!rest && index === 5) && (
                             <p className={`${styles.overlay} text text_type_main-default`}>{`+${rest}`}</p>

@@ -19,6 +19,10 @@ export type TCartIngredient = TIngredient & {
     key: string;
 }
 
+export type TOrderIngredient = TIngredient & {
+    count: number;
+}
+
 export type TDropCollectedProps = {
     isHover: boolean;
 }

@@ -1,9 +1,14 @@
 import styles from './order-info.module.css';
+import commonStyles from  './../../utils/common-styles.module.css';
 import {useParams} from "react-router-dom"
 import { useDispatch, useSelector } from '../../services/hooks';
 import { FC } from 'react';
 import { TIngredient, TOrder } from '../../utils/types';
 import React from 'react';
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { getPrice } from '../../utils';
+import { ADD_CURRENT_ORDER } from '../../services/actions/order';
+import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 
 const OrderInfo: FC = () => {
 
@@ -12,43 +17,68 @@ const OrderInfo: FC = () => {
     const {id}: {id: string} = useParams();
     const order: TOrder | null = useSelector((store) => store.currentOrder.currentOrder);
     const ingredients: Array<TIngredient> = useSelector((store) => store.ingredients.ingredients);
+    const feedOrders: Array<TOrder> = useSelector((store) => store.feed.feedOrders);
 
-  /*  React.useEffect(() => {
-        if (!ingredient && id && ingredients) {
-            const ingredient = ingredients.find((ingr) => ingr._id === id);
-            if (ingredient) {
+    const price = React.useMemo(() => getPrice(order, ingredients), [order, ingredients]) ;
+
+
+    React.useEffect(() => {
+        if (!order && id && feedOrders) {
+            const order = feedOrders.find((ord) => ord._id === id);
+            if (order) {
                 dispatch({
-                    type: ADD_CURRENT_INGREDIENT,
-                    ingredient: ingredient
+                    type: ADD_CURRENT_ORDER,
+                    order: order
                 });
             }
         }
-      }, [ingredient, id, ingredients, dispatch]);*/
+      }, [order, id, feedOrders, dispatch]);
+
+    const status = order ? ((order.status === "done")? "Выполнен" : "В работе"   ) : "";
 
     return (
+        order ? (
         <div className={styles.content_body}>
 
-            <p className="text text_type_digits-large m-5" >
-               
+            <p className="text text_type_digits-default m-2" >
+                #{order.number}
             </p>
 
-            <p className="text text_type_main-medium m-5" >
-                идентификатор заказа
+            <p className={`${styles.name} text text_type_main-medium`}  >
+                {order.name}
             </p>
 
-            <div className={styles.done_img}>
-                    
-            </div>  
-
-            <p className="text text_type_main-default  m-2" >
-                Ваш заказ начали готовить
+            <p className={`${styles.status} text text_type_main-small`}  >
+                {status}
             </p>
 
-            <p className="text text_type_main-default text_color_inactive" >
-                Дождитесь готовности на орбитальной станции
+            <p className="text text_type_main-medium m-2" >
+                Состав:
             </p>
+
+
+            <div className={`${styles.ingredients_list} ${commonStyles.custom_scrollbar}`} >
+                <IngredientCardList orderIngredients={order.ingredients}/>
+            </div>
+
+            
+            <div className={styles.footer} >
+                <p className="text text_type_main-default text_color_inactive" >
+                    {order.createdAt}
+                </p>
+
+                <div className={`${styles.price} ml-6`}>
+                      <p className={"text text_type_digits-default mr-2"}>{price}</p>
+                      <CurrencyIcon type="primary" />
+                </div>
+            </div>
+
+     
             
         </div>
+        ):(
+            <></>
+        )
     )
 
 }
