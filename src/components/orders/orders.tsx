@@ -5,12 +5,14 @@ import commonStyles from  './../../utils/common-styles.module.css';
 
 import {IngredientTypes} from '../../utils/constants'
 import { useSelector, useDispatch } from '../../services/hooks';
-import { TIngredient } from '../../utils/types';
+import { TIngredient, TOrder } from '../../utils/types';
 import OrderCard from '../order-card/order-card';
 
-  
+interface IOrdersProps{
+    orderInfoDlgOpen: (order: TOrder) => void;
+}
 
-const Orders: FC = () => {
+const Orders: FC<IOrdersProps> = ({ orderInfoDlgOpen }) => {
   
     const dispatch = useDispatch();
    
@@ -19,7 +21,7 @@ const Orders: FC = () => {
 
 
     const ingredients: Array<TIngredient> = useSelector((store) => store.ingredients.ingredients);
-    const { feedOrders } = useSelector(state => state.feed);
+    const { feedOrders } = useSelector(store => store.feed);
 
    
 
@@ -34,7 +36,7 @@ const Orders: FC = () => {
             <div className={`${styles.orders_list} ${commonStyles.custom_scrollbar}`} ref={listRef}>
   
                 {feedOrders && feedOrders.map((order) => (
-                        <OrderCard key={order._id} order={order}  />
+                        <OrderCard key={order._id} order={order} orderInfoDlgOpen={orderInfoDlgOpen} />
                     ))}
             </div>
 

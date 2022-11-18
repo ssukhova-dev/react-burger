@@ -1,9 +1,9 @@
 
-import styles from './order-details.module.css';
+import styles from './order-info.module.css';
 import { FC } from 'react';
 
 
-const OrderDetailsPage: FC = () => {
+const OrderInfoPage: FC = () => {
 
     return (
         <section className={styles.content}>
@@ -18,4 +18,4 @@ const OrderDetailsPage: FC = () => {
 
 
 
-export default OrderDetailsPage
+export default OrderInfoPage

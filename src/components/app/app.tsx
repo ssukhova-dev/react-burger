@@ -32,12 +32,15 @@ import useModal from '../modal/use-modal'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal'
 import { ADD_CURRENT_INGREDIENT, REMOVE_CURRENT_INGREDIENT } from '../../services/actions/burger-ingredients';
-import { TIngredient } from '../../utils/types';
+import { TIngredient, TOrder } from '../../utils/types';
 import FeedPage from '../../pages/feed/feed';
-import OrderDetailsPage from '../../pages/order-details/order-details';
+
 
 import JsCookie from "js-cookie"
 import {Token} from '../../utils/constants'
+import OrderInfo from '../order-info/order-info';
+import OrderInfoPage from '../../pages/order-info/order-info';
+import { ADD_CURRENT_ORDER, REMOVE_CURRENT_ORDER } from '../../services/actions/order';
 
 function App() {
 
@@ -73,6 +76,23 @@ function App() {
         function closeIngredientDetailsDlg(){
             dispatch({ type: REMOVE_CURRENT_INGREDIENT });
             ingredientDetailsDlg.requestClose();
+            history.goBack();
+        }
+
+
+        const orderInfoDlg = useModal();
+
+        function showOrderInfoDlg(order: TOrder){
+            dispatch({
+                type: ADD_CURRENT_ORDER,
+                order: order
+            });
+            orderInfoDlg.open();
+        }
+
+        function closeOrderInfoDlg(){
+            dispatch({ type: REMOVE_CURRENT_ORDER });
+            orderInfoDlg.requestClose();
             history.goBack();
         }
 
@@ -130,11 +150,11 @@ function App() {
                         </Route>
 
                         <Route path="/feed" exact={true}>
-                            <FeedPage />
+                            <FeedPage orderInfoDlgOpen={showOrderInfoDlg}/>
                         </Route>
 
                         <Route path="/feed/:id" exact={true}>
-                            <OrderDetailsPage />
+                            <OrderInfoPage />
                         </Route>
 
                         <Route>
@@ -151,6 +171,16 @@ function App() {
                             <Route path="/ingredients/:id" exact={true}>
                                 <Modal onClose={closeIngredientDetailsDlg} title="Детали ингредиента">
                                     <IngredientDetails />
+                                </Modal>
+                            </Route>
+                        )
+                    }
+
+                    {
+                        background && orderInfoDlg.isOpen && (
+                            <Route path="/feed/:id" exact={true}>
+                                <Modal onClose={closeOrderInfoDlg} title="order">
+                                    <OrderInfo />
                                 </Modal>
                             </Route>
                         )

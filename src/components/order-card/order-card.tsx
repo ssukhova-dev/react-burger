@@ -15,20 +15,19 @@ import React from 'react';
 
 interface IOrderCardProps{
   order: TOrder;
- // ingredientDetailsDlgOpen: (ingredient: TIngredient) => void;
+  orderInfoDlgOpen: (order: TOrder) => void;
 }
 
-//const OrderCard: FC<IBurgerIngredientCardProps> = ({ ingredient, ingredientDetailsDlgOpen }) => {
-const OrderCard: FC<IOrderCardProps> = ({order}) => {
+const OrderCard: FC<IOrderCardProps> = ({order, orderInfoDlgOpen}) => {
 
       const history = useHistory();
       const location = useLocation();
 
       const onCardClick = () => {
 
-       /* history.push("/ingredients/" + ingredient._id, {background: location});
+        history.push("/feed/" + order._id, {background: location});
 
-        ingredientDetailsDlgOpen(ingredient);*/
+        orderInfoDlgOpen(order);
       };
 
       const ingredients: Array<TIngredient> = useSelector((store) => store.ingredients.ingredients);

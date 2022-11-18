@@ -1,48 +1,95 @@
 import React, { FC } from 'react' 
 
 import styles from './feed-info.module.css';
-import commonStyles from  './../../utils/common-styles.module.css';
 
-import {IngredientTypes} from '../../utils/constants'
 import { useSelector, useDispatch } from '../../services/hooks';
-import { TIngredient } from '../../utils/types';
-
-  
-const OrderCard: FC = () => {
 
 
-    return (
-        <section className={styles.app_loading}>
-                    feed info
-        </section> 
-    )
-}
 
 
 const FeedInfo: FC = () => {
   
-    const dispatch = useDispatch();
-   
+    const {total, totalToday} = useSelector(store => store.feed);
 
-    const listRef = React.useRef<HTMLDivElement>(null);
+    const {doneOrders, inProgressOrders} = useSelector((store) => {
 
+        let doneOrders: number[] = [];
+        let inProgressOrders: number[] = [];
 
-    const ingredients: Array<TIngredient> = useSelector((store) => store.ingredients.ingredients);
+        store.feed.feedOrders.forEach((order) => {
+            
+            if (order.status === "done"){
+                doneOrders.push(order.number);
+            } else if (order.status === "pending"){
+                inProgressOrders.push(order.number);
+            }
 
+          });
+          doneOrders = doneOrders.slice(0,30);
+          inProgressOrders = inProgressOrders.slice(0,30);
 
+          return {doneOrders, inProgressOrders};
+    });
    
 
     return (
-        <>
-        <section className={styles.orders}>
 
+        <section className={styles.content}>
+            <div className={styles.orders_status}>
+                <p className={"text text_type_main-medium"}>Готовы: </p>
+                <p className={"text text_type_main-medium"}>В работе:  </p>
+                
+                <div className={styles.done_orders}>
+                    <ul className={styles.orders_list}>
+                    {
+                        doneOrders.slice(0,10).map((order, index) => (
+                        <li key={index}>
+                            <p className={"text text_type_digits-default"}>{order}</p>
+                        </li>
+                        ))
+                    }
+                    </ul>
+                    <ul className={styles.orders_list}>
+                    {
+                        doneOrders.slice(10,20).map((order, index) => (
+                        <li key={index}>
+                            <p className={"text text_type_digits-default"}>{order}</p>
+                        </li>
+                        ))
+                    }
+                    </ul>
+                    <ul className={styles.orders_list}>
+                    {
+                        doneOrders.slice(20,30).map((order, index) => (
+                        <li key={index}>
+                            <p className={"text text_type_digits-default"}>{order}</p>
+                        </li>
+                        ))
+                    }
+                    </ul>
+                </div>
 
-            <div className={`${styles.orders_list} ${commonStyles.custom_scrollbar}`} ref={listRef}>
-                <OrderCard />
+                <div className={styles.inprogress_orders}>
+                    <ul className={styles.orders_list}>
+                    {
+                        inProgressOrders.map((order, index) => (
+                        <li key={index}>
+                            <p className={"text text_type_digits-default"}>{order}</p>
+                        </li>
+                        ))
+                    }
+                    </ul>
+                </div>
+
             </div>
-
+            <div>
+                <p className={"text text_type_main-medium mt-10"}>Выполнено за все время:</p>
+                <p className={"text text_type_digits-large"}> {total} </p>
+                <p className={"text text_type_main-medium mt-5"}>Выполнено за сегодня:</p>
+                <p className={"text text_type_digits-large"}> {totalToday} </p>
+            </div>
         </section>
-        </>
+ 
     );
   }
 

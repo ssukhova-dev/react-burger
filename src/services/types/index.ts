@@ -12,6 +12,7 @@ import { TPasswordActions } from '../actions/password';
 import { TOrdersWsActions } from '../actions/socket';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { rootReducer } from '../reducers';
+import { TCurrentOrderActions } from '../actions/order';
 
 //export type RootState = ReturnType<typeof store.getState>;
 export type RootState = ReturnType<typeof rootReducer>;
@@ -28,7 +29,8 @@ type TApplicationActions =
     | TRegisterActions
     | TProfileActions
     | TPasswordActions
-    | TOrdersWsActions;
+    | TOrdersWsActions
+    | TCurrentOrderActions;
 
 
 //export type AppThunk<TReturn = void> = ActionCreator<

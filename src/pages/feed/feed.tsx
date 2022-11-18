@@ -7,10 +7,14 @@ import styles from './feed.module.css';
 import { wsOrdersConnect, wsOrdersDisconnect } from '../../services/actions/socket';
 import { WS_FEED_ORDERS_URL } from '../../utils/burger-api';
 import { LOADING_TEXT } from '../../utils/constants';
+import { TOrder } from '../../utils/types';
 
 
+interface IFeedPageProps{
+    orderInfoDlgOpen: (order: TOrder) => void;
+}
 
-const FeedPage: FC = () => {
+const FeedPage: FC<IFeedPageProps> = ({ orderInfoDlgOpen }) => {
  
     const dispatch = useDispatch();
 
@@ -32,7 +36,7 @@ const FeedPage: FC = () => {
         ) : (
 
             <section className={styles.content}>
-                <Orders />
+                <Orders orderInfoDlgOpen={orderInfoDlgOpen}/>
                 <FeedInfo />
             </section> 
         )
