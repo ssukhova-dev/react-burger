@@ -1,12 +1,12 @@
 
 .content_body {
 
-    position: absolute;
+   /* position: absolute;
   
     right: 0px;
     left: 0px;
     top: -50px;
-    bottom: 0px;
+    bottom: 0px;*/
 
 
     display: flex;
@@ -18,18 +18,20 @@
    
     margin: auto;
 
-    width: 680px;
-    height: 640px;
+    width: 640px;
+    height: 580px;
 
   }
 
   .name {
     margin: 30px 10px 10px 10px;
+    text-align: left;
   }
 
   .status {
     color: #00CCCC;
-    margin: 0px 0px 30px 10px;
+    margin: 0px 0px 10px 10px;
+    text-align: left;
   }
 
   .ingredients_list {

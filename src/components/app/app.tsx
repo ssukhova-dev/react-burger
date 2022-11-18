@@ -87,6 +87,7 @@ function App() {
                 type: ADD_CURRENT_ORDER,
                 order: order
             });
+            orderInfoDlg.setTitle("#" + order.number.toString());
             orderInfoDlg.open();
         }
 
@@ -179,7 +180,7 @@ function App() {
                     {
                         background && orderInfoDlg.isOpen && (
                             <Route path="/feed/:id" exact={true}>
-                                <Modal onClose={closeOrderInfoDlg} >
+                                <Modal onClose={closeOrderInfoDlg} title={orderInfoDlg.title}>
                                     <OrderInfo />
                                 </Modal>
                             </Route>

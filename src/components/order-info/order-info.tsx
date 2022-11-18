@@ -40,10 +40,6 @@ const OrderInfo: FC = () => {
         order ? (
         <div className={styles.content_body}>
 
-            <p className="text text_type_digits-default m-2" >
-                #{order.number}
-            </p>
-
             <p className={`${styles.name} text text_type_main-medium`}  >
                 {order.name}
             </p>
@@ -52,7 +48,7 @@ const OrderInfo: FC = () => {
                 {status}
             </p>
 
-            <p className="text text_type_main-medium m-2" >
+            <p className={`${styles.name} text text_type_main-medium`}  >
                 Состав:
             </p>
 
