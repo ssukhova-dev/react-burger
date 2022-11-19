@@ -15,4 +15,19 @@ export function getPrice(order: TOrder | null, ingredients: TIngredient[]){
       });
     })
     return price;
-  }
+}
+
+export function gerOrderStatus(order: TOrder | null){
+
+    if (!order){
+      return "";
+    }
+
+    if (order.status === "done"){
+      return "Выполнен";
+    } else if (order.status === "pending") {
+      return "Готовится";
+    }
+
+    return "Отменён";
+}

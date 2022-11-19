@@ -6,7 +6,7 @@ import { FC } from 'react';
 import { TIngredient, TOrder } from '../../utils/types';
 import React from 'react';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getPrice } from '../../utils';
+import { gerOrderStatus, getPrice } from '../../utils';
 import { ADD_CURRENT_ORDER } from '../../services/actions/order';
 import IngredientCardList from '../ingredient-card-list.tsx/ingredient-card-list';
 
@@ -36,7 +36,7 @@ const OrderInfo: FC = () => {
         }
       }, [order, id, feedOrders, dispatch]);
 
-    const status = order ? ((order.status === "done")? "Выполнен" : "Готовится"   ) : "";
+    const status = gerOrderStatus(order);
 
     return (
         order ? (

@@ -6,7 +6,7 @@ import { useSelector } from '../../services/hooks';
 import {useHistory, useLocation} from "react-router-dom"
 import { FC } from 'react';
 import React from 'react';
-import { getPrice } from '../../utils';
+import { gerOrderStatus, getPrice } from '../../utils';
 
 interface IOrderCardProps{
   order: TOrder;
@@ -46,9 +46,11 @@ const OrderCard: FC<IOrderCardProps> = ({order, orderInfoDlgOpen, feedPage = tru
       const ingredient_icons = React.useMemo(() => getIcons(), [ingredients])!;
       const rest = order.ingredients.length > 6 ? order.ingredients.length - 6 : 0;
 
-      const createdAtStr = order.createdAt;
       const price = React.useMemo(() => getPrice(order, ingredients), [ingredients]);
 
+      const status = gerOrderStatus(order);
+
+      const createdAtStr = order.createdAt;
       const date = new Intl.DateTimeFormat('ru-RU', { dateStyle: 'short', timeStyle: 'long', timeZone: 'Europe/Volgograd' }).format(new Date(createdAtStr));
 
       return (
@@ -61,7 +63,13 @@ const OrderCard: FC<IOrderCardProps> = ({order, orderInfoDlgOpen, feedPage = tru
 
                   <p className={`${styles.name} text text_type_main-medium mt-6`}>{order.name}</p>
 
-                  <div className={`${styles.container} mt-6`}>
+                
+                  <p className={`${styles.status} text text_type_main-small `}  >
+                      {feedPage ? " " : status}
+                  </p>
+      
+
+                  <div className={`${styles.container} mt-2`}>
                     
                     <ul className={styles.img_list}>
                     {
