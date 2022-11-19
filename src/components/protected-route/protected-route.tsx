@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import { Route, Redirect } from 'react-router-dom';
 import { isLoggedInSelector } from '../../services/actions/login';
 import { IRouterProps } from '../../utils/types';

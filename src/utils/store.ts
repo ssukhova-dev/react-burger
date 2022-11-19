@@ -5,6 +5,9 @@ import thunk from 'redux-thunk';
 import { socketMiddleware } from '../services/middleware/socket-middleware';
 import { ordersWsActions } from '../services/actions/socket';
 import { profileOrdersWsActions } from '../services/actions/profile-socket';
+import { loginSuccess } from '../services/actions/login';
+import JsCookie from "js-cookie"
+import { Token } from './constants';
 
 declare global {
   interface Window {
@@ -22,4 +25,8 @@ const enhancer = composeEnhancers(applyMiddleware(thunk, ordersWsMiddleware, pro
 
 export const store = legacy_createStore(rootReducer, enhancer); 
 
+
+const accessToken = JsCookie.get(Token.access)!;
+const refreshToken = JsCookie.get(Token.refresh)!;
+store.dispatch(loginSuccess(accessToken, refreshToken, {name: '', email: '', password:''}));
 

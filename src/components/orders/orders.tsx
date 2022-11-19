@@ -39,7 +39,7 @@ const Orders: FC<IOrdersProps> = ({ orderInfoDlgOpen, feedPage = true }) => {
             <div className={`${styles.orders_list} ${commonStyles.custom_scrollbar}`} ref={listRef}>
   
                 {orders && orders.map((order) => (
-                        <OrderCard key={order._id} order={order} orderInfoDlgOpen={orderInfoDlgOpen} />
+                        <OrderCard key={order._id} order={order} orderInfoDlgOpen={orderInfoDlgOpen} feedPage={feedPage}/>
                     ))}
             </div>
 

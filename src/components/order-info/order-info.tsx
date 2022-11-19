@@ -14,6 +14,8 @@ const OrderInfo: FC = () => {
 
     const dispatch = useDispatch();
 
+    console.log("OrderInfo");
+
     const {id}: {id: string} = useParams();
     const order: TOrder | null = useSelector((store) => store.currentOrder.currentOrder);
     const ingredients: Array<TIngredient> = useSelector((store) => store.ingredients.ingredients);
@@ -21,6 +23,8 @@ const OrderInfo: FC = () => {
 
     const price = React.useMemo(() => getPrice(order, ingredients), [order, ingredients]) ;
 
+
+    console.log("OrderInfo", order);
 
     React.useEffect(() => {
         if (!order && id && feedOrders) {

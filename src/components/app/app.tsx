@@ -35,9 +35,6 @@ import { ADD_CURRENT_INGREDIENT, REMOVE_CURRENT_INGREDIENT } from '../../service
 import { TIngredient, TOrder } from '../../utils/types';
 import FeedPage from '../../pages/feed/feed';
 
-
-import JsCookie from "js-cookie"
-import {Token} from '../../utils/constants'
 import OrderInfo from '../order-info/order-info';
 import OrderInfoPage from '../../pages/order-info/order-info';
 import { ADD_CURRENT_ORDER, REMOVE_CURRENT_ORDER } from '../../services/actions/order';
@@ -55,9 +52,6 @@ function App() {
     const dispatch = useDispatch();
     
     React.useEffect(()=> {
-            const accessToken = JsCookie.get(Token.access)!;
-            const refreshToken = JsCookie.get(Token.refresh)!;
-            dispatch(loginSuccess(accessToken, refreshToken, {name: '', email: '', password:''} ));
             dispatch(getIngredients());
             dispatch(getUser());
         }, [dispatch])
@@ -134,6 +128,10 @@ function App() {
                             <RegisterPage />
                         </PublicRoute>
 
+                        <ProtectedRoute path="/profile/orders/:id" exact={true} redirectTo="/login">
+                            <OrderInfoPage profileOrder={true}/>
+                        </ProtectedRoute>
+
                         <ProtectedRoute path="/profile" exact={false} redirectTo="/login"> 
                             <ProfilePage orderInfoDlgOpen={showOrderInfoDlg}/>
                         </ProtectedRoute>
@@ -180,6 +178,16 @@ function App() {
                     {
                         background && orderInfoDlg.isOpen && (
                             <Route path="/feed/:id" exact={true}>
+                                <Modal onClose={closeOrderInfoDlg} title={orderInfoDlg.title}>
+                                    <OrderInfo />
+                                </Modal>
+                            </Route>
+                        )
+                    }
+
+                    {
+                        background && orderInfoDlg.isOpen && (
+                            <Route path="/profile/orders/:id" exact={true}>
                                 <Modal onClose={closeOrderInfoDlg} title={orderInfoDlg.title}>
                                     <OrderInfo />
                                 </Modal>

@@ -17,16 +17,18 @@ import { getPrice } from '../../utils';
 interface IOrderCardProps{
   order: TOrder;
   orderInfoDlgOpen: (order: TOrder) => void;
+  feedPage?: boolean;
 }
 
-const OrderCard: FC<IOrderCardProps> = ({order, orderInfoDlgOpen}) => {
+const OrderCard: FC<IOrderCardProps> = ({order, orderInfoDlgOpen, feedPage = true}) => {
 
       const history = useHistory();
       const location = useLocation();
 
       const onCardClick = () => {
 
-        history.push("/feed/" + order._id, {background: location});
+        const url = feedPage ? "/feed/" : "/profile/orders/";
+        history.push(url + order._id, {background: location});
 
         orderInfoDlgOpen(order);
       };
