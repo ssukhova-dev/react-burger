@@ -1,18 +1,12 @@
-
 import { TCartIngredient, TIngredient, TOrder } from '../../utils/types';
-
-
 import styles from './order-card.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components'
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
-
 import { useSelector } from '../../services/hooks';
 import {useHistory, useLocation} from "react-router-dom"
-
 import { FC } from 'react';
 import React from 'react';
 import { getPrice } from '../../utils';
-
 
 interface IOrderCardProps{
   order: TOrder;
@@ -52,12 +46,12 @@ const OrderCard: FC<IOrderCardProps> = ({order, orderInfoDlgOpen, feedPage = tru
       const ingredient_icons = React.useMemo(() => getIcons(), [ingredients])!;
       const rest = order.ingredients.length > 6 ? order.ingredients.length - 6 : 0;
 
-      const date = order.createdAt;
+      const createdAtStr = order.createdAt;
       const price = React.useMemo(() => getPrice(order, ingredients), [ingredients]);
 
+      const date = (new Date(createdAtStr)).toLocaleString();
 
       return (
-
               <div className={styles.order_card} onClick={onCardClick} >
 
                   <div className={styles.header}>
@@ -68,31 +62,28 @@ const OrderCard: FC<IOrderCardProps> = ({order, orderInfoDlgOpen, feedPage = tru
                   <p className={`${styles.name} text text_type_main-medium mt-6`}>{order.name}</p>
 
                   <div className={`${styles.container} mt-6`}>
-
-
-                  <ul className={styles.img_list}>
-                  {
-                    ingredient_icons && ingredient_icons.map((image, index) => (
-                      <li key={index}>
-                        <div className={styles.img_container} >
-                          <img className={styles.image} src={image} alt={image} />
-                          {(!!rest && index === 5) && (
-                            <p className={`${styles.overlay} text text_type_main-default`}>{`+${rest}`}</p>
-                          )}
-                        </div>                        
-                      </li>
-                    ))
-                  }
-                  </ul>
-                  
-                  
+                    
+                    <ul className={styles.img_list}>
+                    {
+                      ingredient_icons && ingredient_icons.map((img, index) => (
+                        <li key={index}>
+                          <div className={styles.img_container} >
+                            <img className={styles.image} src={img} alt={img} />
+                            {(!!rest && index === 5) && (
+                              <p className={`${styles.overlay} text text_type_main-default`}>{`+${rest}`}</p>
+                            )}
+                          </div>                        
+                        </li>
+                      ))
+                    }
+                    </ul>
+                    
+                    
                     <div className={`${styles.price} ml-6`}>
                       <p className={"text text_type_digits-default mr-2"}>{price}</p>
                       <CurrencyIcon type="primary" />
                     </div>
                   </div>
-          
-
 
               </div>
     

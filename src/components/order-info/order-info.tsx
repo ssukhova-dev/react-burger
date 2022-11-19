@@ -21,6 +21,7 @@ const OrderInfo: FC = () => {
     const feedOrders: Array<TOrder> = useSelector((store) => store.feed.feedOrders);
 
     const price = React.useMemo(() => getPrice(order, ingredients), [order, ingredients]) ;
+    const date = order ? (new Date(order.createdAt)).toLocaleString() : "";
 
 
     React.useEffect(() => {
@@ -61,7 +62,7 @@ const OrderInfo: FC = () => {
             
             <div className={styles.footer} >
                 <p className="text text_type_main-default text_color_inactive" >
-                    {order.createdAt}
+                    {date}
                 </p>
 
                 <div className={`${styles.price} ml-6`}>
