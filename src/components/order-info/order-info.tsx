@@ -8,13 +8,12 @@ import React from 'react';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getPrice } from '../../utils';
 import { ADD_CURRENT_ORDER } from '../../services/actions/order';
-import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
+import IngredientCardList from '../ingredient-card-list.tsx/ingredient-card-list';
+
 
 const OrderInfo: FC = () => {
 
     const dispatch = useDispatch();
-
-    console.log("OrderInfo");
 
     const {id}: {id: string} = useParams();
     const order: TOrder | null = useSelector((store) => store.currentOrder.currentOrder);
@@ -23,8 +22,6 @@ const OrderInfo: FC = () => {
 
     const price = React.useMemo(() => getPrice(order, ingredients), [order, ingredients]) ;
 
-
-    console.log("OrderInfo", order);
 
     React.useEffect(() => {
         if (!order && id && feedOrders) {
