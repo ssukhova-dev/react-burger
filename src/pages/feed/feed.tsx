@@ -25,7 +25,7 @@ const FeedPage: FC<IFeedPageProps> = ({ orderInfoDlgOpen }) => {
         }
       }, [dispatch]);
 
-    const { loading, feedOrders } = useSelector(state => state.feed);
+    const { loading } = useSelector(state => state.feed);
 
 
     return (

@@ -13,6 +13,7 @@ import { TOrdersWsActions } from '../actions/socket';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { rootReducer } from '../reducers';
 import { TCurrentOrderActions } from '../actions/order';
+import { TProfileOrdersWsActions } from '../actions/profile-socket';
 
 //export type RootState = ReturnType<typeof store.getState>;
 export type RootState = ReturnType<typeof rootReducer>;
@@ -30,7 +31,8 @@ type TApplicationActions =
     | TProfileActions
     | TPasswordActions
     | TOrdersWsActions
-    | TCurrentOrderActions;
+    | TCurrentOrderActions
+    | TProfileOrdersWsActions;
 
 
 //export type AppThunk<TReturn = void> = ActionCreator<

@@ -134,8 +134,8 @@ function App() {
                             <RegisterPage />
                         </PublicRoute>
 
-                        <ProtectedRoute path="/profile" exact={true} redirectTo="/login"> 
-                            <ProfilePage />
+                        <ProtectedRoute path="/profile" exact={false} redirectTo="/login"> 
+                            <ProfilePage orderInfoDlgOpen={showOrderInfoDlg}/>
                         </ProtectedRoute>
 
                         <PublicRoute path="/forgot-password" exact={true} redirectTo="/">

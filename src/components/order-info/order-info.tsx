@@ -34,7 +34,7 @@ const OrderInfo: FC = () => {
         }
       }, [order, id, feedOrders, dispatch]);
 
-    const status = order ? ((order.status === "done")? "Выполнен" : "В работе"   ) : "";
+    const status = order ? ((order.status === "done")? "Выполнен" : "Готовится"   ) : "";
 
     return (
         order ? (

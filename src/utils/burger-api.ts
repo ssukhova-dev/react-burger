@@ -16,6 +16,8 @@ const TOKEN_API_URL = `${BURGER_API_URL}/auth/token`;
 const USER_API_URL = `${BURGER_API_URL}/auth/user`;
 
 export const WS_FEED_ORDERS_URL = "wss://norma.nomoreparties.space/orders/all";
+export const WS_PROFILE_ORDERS_URL = "wss://norma.nomoreparties.space/orders";
+
 
 
 const checkResponse = (res: Response) => {

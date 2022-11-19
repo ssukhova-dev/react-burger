@@ -15,7 +15,6 @@ import { RootState } from "../types";
 
 export const socketMiddleware = (wsActions: TWsActions): Middleware<{}, RootState> => {
 
-   // export const socketMiddleware = (wsActions)=> {
     return (store) =>
     {
 
@@ -30,8 +29,7 @@ export const socketMiddleware = (wsActions: TWsActions): Middleware<{}, RootStat
             const { wsConnect, wsConnecting, wsDisconnect, wsSendMessage, onOpen, onClose, onError, onMessage } = wsActions;
         
 
-            if (type === wsConnect) {
-                //socket = new WebSocket(`${wsUrl}?token=${user.token}`);
+            if (type === wsConnect) {             
                 url = payload;
                 socket = new WebSocket(url);
                 dispatch({ type: wsConnecting});

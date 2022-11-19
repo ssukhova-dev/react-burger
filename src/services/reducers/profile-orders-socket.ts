@@ -1,55 +1,56 @@
 import { TOrder } from '../../utils/types';
-import {WS_CONNECT, WS_CONNECTING, WS_DISCONNECT, 
-        ON_OPEN, ON_CLOSE, ON_ERROR, ON_MESSAGE, TOrdersWsActions } from '../actions/socket';
+import {WS_CONNECT_PROFILE, WS_CONNECTING_PROFILE, WS_DISCONNECT_PROFILE, 
+        ON_OPEN_PROFILE, ON_CLOSE_PROFILE, ON_ERROR_PROFILE, 
+        ON_MESSAGE_PROFILE, TProfileOrdersWsActions } from '../actions/profile-socket';
 
 
 
-type TWsOrdersState = {
+type TWsProfileOrdersState = {
   wsConnected: boolean;
   loading: boolean;
   error?: Event;
 
-  feedOrders: Array<TOrder>;
+  orders: Array<TOrder>;
   total: number;
   totalToday: number;
 } 
 
-const initialState: TWsOrdersState = {
+const initialState: TWsProfileOrdersState = {
   wsConnected: false,
   loading: false,
 
-  feedOrders: [],
+  orders: [],
   total: 0,
   totalToday: 0,
 }
       
-export const wsOrdersReducer = (state = initialState, action: TOrdersWsActions): TWsOrdersState => {
+export const wsProfileOrdersReducer = (state = initialState, action: TProfileOrdersWsActions): TWsProfileOrdersState => {
 
   switch (action.type) {
-    case WS_CONNECT:
+    case WS_CONNECT_PROFILE:
       return {
         ...state,
         wsConnected: true
       };
 
-    case ON_ERROR:
+    case ON_ERROR_PROFILE:
       return {
         ...state,
         wsConnected: false
       };
 
-    case ON_CLOSE:
+    case ON_CLOSE_PROFILE:
       return {
         ...state,
         wsConnected: false
       };
 
-    case ON_MESSAGE:
+    case ON_MESSAGE_PROFILE:
 
       return {
         ...state,
         error: undefined,
-        feedOrders: action.payload.orders ? action.payload.orders : state.feedOrders,
+        orders: action.payload.orders ? action.payload.orders : state.orders,
         total: action.payload.total,
         totalToday: action.payload.totalToday,
         loading: false,

@@ -5,6 +5,7 @@ import { ordersReducer } from './cart-total'
 import { loginReducer } from './login';
 import { wsOrdersReducer } from './orders-socket';
 import { currentOrderReducer } from './order';
+import { wsProfileOrdersReducer } from './profile-orders-socket';
 
 export const rootReducer = combineReducers({
     ingredients: ingredientsReducer,
@@ -15,4 +16,5 @@ export const rootReducer = combineReducers({
     login: loginReducer,
     feed: wsOrdersReducer,
     currentOrder: currentOrderReducer,
+    profileOrders: wsProfileOrdersReducer,
   });
