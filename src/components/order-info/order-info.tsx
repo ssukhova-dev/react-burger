@@ -21,8 +21,8 @@ const OrderInfo: FC = () => {
     const feedOrders: Array<TOrder> = useSelector((store) => store.feed.feedOrders);
 
     const price = React.useMemo(() => getPrice(order, ingredients), [order, ingredients]) ;
-    const date = order ? (new Date(order.createdAt)).toLocaleString() : "";
 
+   const date =  order ? new Intl.DateTimeFormat('ru-RU', { dateStyle: 'short', timeStyle: 'long', timeZone: 'Europe/Volgograd' }).format(new Date(order.createdAt)) : "";
 
     React.useEffect(() => {
         if (!order && id && feedOrders) {

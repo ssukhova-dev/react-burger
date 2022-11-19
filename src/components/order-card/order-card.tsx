@@ -49,7 +49,7 @@ const OrderCard: FC<IOrderCardProps> = ({order, orderInfoDlgOpen, feedPage = tru
       const createdAtStr = order.createdAt;
       const price = React.useMemo(() => getPrice(order, ingredients), [ingredients]);
 
-      const date = (new Date(createdAtStr)).toLocaleString();
+      const date = new Intl.DateTimeFormat('ru-RU', { dateStyle: 'short', timeStyle: 'long', timeZone: 'Europe/Volgograd' }).format(new Date(createdAtStr));
 
       return (
               <div className={styles.order_card} onClick={onCardClick} >
