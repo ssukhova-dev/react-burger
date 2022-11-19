@@ -64,7 +64,7 @@ const OrderCard: FC<IOrderCardProps> = ({order, orderInfoDlgOpen, feedPage = tru
                   <p className={`${styles.name} text text_type_main-medium mt-6`}>{order.name}</p>
 
                 
-                  <p className={`${styles.status} text text_type_main-small `}  >
+                  <p className={`${styles.status} ${order.status === 'pending' && styles.status_inprogress} text text_type_main-small `}  >
                       {feedPage ? " " : status}
                   </p>
       

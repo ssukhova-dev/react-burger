@@ -5,7 +5,7 @@
     position: relative;
 
     width: 100%;
-    height: 200px;
+    height: 199px;
 
     margin: 4px 4px 0px 0px;
     padding: 20px;
@@ -48,9 +48,13 @@
 }
 
 .status {
-  color: #00CCCC;
+  color: #ffffff;
   margin: 10px 0px 10px 0px;
   text-align: left;
+}
+
+.status_inprogress {
+  color: #00CCCC;
 }
 
 .price {
