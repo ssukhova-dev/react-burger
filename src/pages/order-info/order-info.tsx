@@ -20,8 +20,6 @@ interface IOrderInfoPageProps{
   
 const OrderInfoPage: FC<IOrderInfoPageProps> = ({profileOrder = false}) => {
 
-    console.log("OrderInfoPage");
-
     const dispatch = useDispatch();
 
     const {id}: {id: string} = useParams();
