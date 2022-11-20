@@ -24,103 +24,97 @@ const checkResponse = (res: Response) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
+function request(url: string, options?: RequestInit) {
+  return fetch(url, options).then(checkResponse);
+}
+
 export const getIngredientsData = () => {
-    return fetch(INGREDIENTS_API_URL)
-      .then(checkResponse)
+    return request(INGREDIENTS_API_URL);
   };
 
 export const getOrdersData = (ingredients: string[]) => {
 
-    return fetch(ORDERS_API_URL, {
+    return request(ORDERS_API_URL, {
                         method: 'POST',
                         headers: {
                         "Content-Type": "application/json",
                         "Authorization": JsCookie.get(Token.access)!
                         },
-                        body: JSON.stringify({ ingredients })})
-            .then(checkResponse)
+                        body: JSON.stringify({ ingredients })});
 };
 
 export const register = ({ name, email, password}: TUser) => {
-    return fetch(REGISTER_API_URL, {
+    return request(REGISTER_API_URL, {
                         method: 'POST',
                         headers: {
                         "Content-Type": "application/json"
                         },
-                        body: JSON.stringify({ name, email, password})})
-      .then(checkResponse)
+                        body: JSON.stringify({ name, email, password})});
 };
 
 export const login = ({ email, password}: Omit<TUser, 'name'>) => {
-    return fetch(LOGIN_API_URL, {
+    return request(LOGIN_API_URL, {
                     method: 'POST',
                     headers: {
                     "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ email, password})})
-    .then(checkResponse)
+                    body: JSON.stringify({ email, password})});
 };
 
 export const logout = (refreshToken: string) => {
-    return fetch(LOGOUT_API_URL, {
+    return request(LOGOUT_API_URL, {
                     method: 'POST',
                     headers: {
                     "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ "token" : refreshToken})})
-    .then(checkResponse)
+                    body: JSON.stringify({ "token" : refreshToken})});
 };
 
 export const token = (refreshToken: string) => {
-    return fetch(TOKEN_API_URL, {
+    return request(TOKEN_API_URL, {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({ "token" : refreshToken}),
-    })
-    .then(checkResponse)
+    });
   };
 
   export const getUser = () => {
-    return fetch(USER_API_URL, {
+    return request(USER_API_URL, {
                     method: 'GET',
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": JsCookie.get(Token.access)!
                     }
-    })
-    .then(checkResponse)
+    });
   };
 
   export const updateUser = ({ name, email, password}: TUser) => {
-    return fetch(USER_API_URL, {
+    return request(USER_API_URL, {
                     method: 'PATCH',
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": JsCookie.get(Token.access)!
                     },
-                    body: JSON.stringify({ name, email, password})})
-    .then(checkResponse)
+                    body: JSON.stringify({ name, email, password})});
   };
 
 
   export const pswForgot = ({email}: {email: string}) => {
-    return fetch(PSW_RESET_API_URL, {
+    return request(PSW_RESET_API_URL, {
                     method: 'POST',
                     headers: {
                     "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ "email": email})})
-    .then(checkResponse)
+                    body: JSON.stringify({ "email": email})});
 };
 
 export const pswReset = ({ password, token}: {password: string, token: string}) => {
-    return fetch(PSW_RESET_RESET_API_URL, {
+    return request(PSW_RESET_RESET_API_URL, {
                     method: 'POST',
                     headers: {
                     "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ password, token})})
-    .then(checkResponse)
+                    body: JSON.stringify({ password, token})});
 };
