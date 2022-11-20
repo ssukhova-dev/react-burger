@@ -14,6 +14,7 @@ import { wsProfileOrdersConnect, wsProfileOrdersDisconnect } from '../../service
 import { WS_PROFILE_ORDERS_URL } from '../../utils/burger-api';
 import JsCookie from "js-cookie"
 import { Token } from '../../utils/constants';
+import { useForm } from '../../utils/hooks/useForm';
 
 interface IProfilePageProps{
     orderInfoDlgOpen: (order: TOrder) => void;
@@ -25,10 +26,10 @@ const ProfilePage: FC<IProfilePageProps> = ({orderInfoDlgOpen}) => {
     const {path} = useRouteMatch();
 
     const {name, email, password} = useSelector((store)  => store.login.user);
-    const [data, setData] = React.useState({name: name, email: email, password: password});
+    const {values, handleChange, setValues} = useForm({name: name, email: email, password: password});
 
     React.useEffect(()=> {
-        setData({name: name , email: email, password: password});
+        setValues({name: name , email: email, password: password});
     }, [name, email, password])
 
 
@@ -43,13 +44,9 @@ const ProfilePage: FC<IProfilePageProps> = ({orderInfoDlgOpen}) => {
     const { loading } = useSelector(state => state.feed);
 
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>){
-        setData(prev => ({...prev, [e.target.name]: e.target.value}));
-    }
-
     function handleSubmit(e: React.FormEvent){
         e.preventDefault();
-        dispatch(saveUserThunk(data));
+        dispatch(saveUserThunk({name: values.name, email: values.email, password: values.password}));
     }
 
     function onLogout(e: React.SyntheticEvent) {
@@ -59,12 +56,12 @@ const ProfilePage: FC<IProfilePageProps> = ({orderInfoDlgOpen}) => {
 
     function onCancel(e: React.SyntheticEvent) {
         e.preventDefault();
-        setData({name: name, email: email, password: password});
+        setValues({name: name, email: email, password: password});
     }
 
     const isModified = React.useMemo(() => {
-        return name !== data.name || email !== data.email || password !== data.password;
-      }, [data, name, email, password]);
+        return name !== values.name || email !== values.email || password !== values.password;
+      }, [values, name, email, password]);
     
     
 
@@ -100,9 +97,9 @@ const ProfilePage: FC<IProfilePageProps> = ({orderInfoDlgOpen}) => {
             <Route exact path={path}>
 
                 <form onSubmit={handleSubmit} className={style.form}>
-                    <Input onChange={handleChange} name={'name'} placeholder={'Имя'} value={data.name}/>
-                    <EmailInput onChange={handleChange} name={'email'}  value={data.email}/>
-                    <PasswordInput onChange={handleChange} name={'password'} value={data.password} />
+                    <Input onChange={handleChange} name={'name'} placeholder={'Имя'} value={values.name}/>
+                    <EmailInput onChange={handleChange} name={'email'}  value={values.email}/>
+                    <PasswordInput onChange={handleChange} name={'password'} value={values.password} />
                     {isModified &&
                         <div className={style.buttons_panel}>
                             <Button type="primary" size="medium"  htmlType="submit">Сохранить</Button>

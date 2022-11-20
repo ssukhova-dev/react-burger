@@ -7,20 +7,17 @@ import { useDispatch } from '../../services/hooks';
 import {registerThunk} from '../../services/actions/register';
 
 import {Link} from 'react-router-dom'
+import { useForm } from '../../utils/hooks/useForm';
 
 
 const RegisterPage: FC = () => {
 
     const dispatch = useDispatch();
-    const [data, setData] = React.useState({name: '', email: '', password: ''});
-
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>){
-        setData(prev => ({...prev, [e.target.name]: e.target.value}));
-    }
+    const {values, handleChange} = useForm({name: '', email: '', password: ''});
 
     function handleSubmit(e: React.FormEvent){
         e.preventDefault();
-        dispatch(registerThunk(data));
+        dispatch(registerThunk({name: values.name, email: values.email, password: values.password}));
     }
 
     return (
@@ -28,9 +25,9 @@ const RegisterPage: FC = () => {
 
             <form onSubmit={handleSubmit} className={style.form}>
                 <p className="text text_type_main-default">Регистрация</p>
-                <Input onChange={handleChange} name={'name'} placeholder={'Имя'} value={data.name}/>
-                <EmailInput onChange={handleChange} name={'email'}  value={data.email}/>
-                <PasswordInput onChange={handleChange} name={'password'}  value={data.password}/>
+                <Input onChange={handleChange} name={'name'} placeholder={'Имя'} value={values.name}/>
+                <EmailInput onChange={handleChange} name={'email'}  value={values.email}/>
+                <PasswordInput onChange={handleChange} name={'password'}  value={values.password}/>
                 <Button type="primary" size="medium"  htmlType="submit">Зарегистрироваться</Button>
             </form>
 
