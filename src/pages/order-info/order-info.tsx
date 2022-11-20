@@ -3,7 +3,6 @@ import styles from '../../components/ingredient-details/ingredient-details.modul
 import { FC } from 'react';
 import OrderInfo from '../../components/order-info/order-info';
 import { useDispatch, useSelector } from '../../services/hooks';
-import { TIngredient, TOrder } from '../../utils/types';
 import { useParams } from 'react-router-dom';
 import React from 'react';
 import { ADD_CURRENT_ORDER } from '../../services/actions/order';
@@ -23,7 +22,7 @@ const OrderInfoPage: FC<IOrderInfoPageProps> = ({profileOrder = false}) => {
     const dispatch = useDispatch();
 
     const {id}: {id: string} = useParams();
-    const order: TOrder | null = useSelector((store) => store.currentOrder.currentOrder);
+    const order = useSelector((store) => store.currentOrder.currentOrder);
     const orders = useSelector(store => { return profileOrder ? store.profileOrders.orders : store.feed.feedOrders });
     
     const { loading} = useSelector(state => state.feed);
@@ -69,7 +68,7 @@ const OrderInfoPage: FC<IOrderInfoPageProps> = ({profileOrder = false}) => {
                 
                     </div>
 
-                    <OrderInfo />
+                    <OrderInfo profileOrder={profileOrder}/>
                 </main>
             ):(
                 <></>

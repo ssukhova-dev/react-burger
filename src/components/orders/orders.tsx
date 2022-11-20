@@ -3,9 +3,8 @@ import React, { FC } from 'react'
 import styles from './orders.module.css';
 import commonStyles from  './../../utils/common-styles.module.css';
 
-import {IngredientTypes} from '../../utils/constants'
-import { useSelector, useDispatch } from '../../services/hooks';
-import { TIngredient, TOrder } from '../../utils/types';
+import { useSelector } from '../../services/hooks';
+import { TOrder } from '../../utils/types';
 import OrderCard from '../order-card/order-card';
 
 interface IOrdersProps{
@@ -15,17 +14,9 @@ interface IOrdersProps{
 
 const Orders: FC<IOrdersProps> = ({ orderInfoDlgOpen, feedPage = true }) => {
   
-    const dispatch = useDispatch();
-   
-
     const listRef = React.useRef<HTMLDivElement>(null);
-
-
-    const ingredients: Array<TIngredient> = useSelector((store) => store.ingredients.ingredients);
     const orders = useSelector(store => { return feedPage ? store.feed.feedOrders : store.profileOrders.orders});
                               
-   
-
     return (
         <>
         <section className={styles.orders}>

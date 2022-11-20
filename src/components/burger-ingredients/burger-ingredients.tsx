@@ -47,7 +47,7 @@ const BurgerIngredients: FC<IBurgerIngredientsProps> = ({ ingredientDetailsDlgOp
         
       };
 
-    const ingredients: Array<TIngredient> = useSelector((store) => store.ingredients.ingredients);
+    const ingredients = useSelector((store) => store.ingredients.ingredients);
 
     const buns: TIngredient[] = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.bun), [ingredients]);
     const sauces: TIngredient[] = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.sauce), [ingredients]);

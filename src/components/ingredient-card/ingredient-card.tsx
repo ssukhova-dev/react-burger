@@ -6,13 +6,7 @@ import styles from './ingredient-card.module.css';
 import '@ya.praktikum/react-developer-burger-ui-components'
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 
-import { useSelector } from '../../services/hooks';
-import {useHistory, useLocation} from "react-router-dom"
-
 import { FC } from 'react';
-import React from 'react';
-import { getPrice } from '../../utils';
-
 
 interface IIngredientCardProps{
   name: string;
@@ -23,14 +17,7 @@ interface IIngredientCardProps{
 
 const IngredientCard: FC<IIngredientCardProps> = ({name, img, price, count}) => {
 
-  
-
-      const ingredients: Array<TIngredient> = useSelector((store) => store.ingredients.ingredients);
-
-    
-
       return (
-
               <div className={styles.ingredient_card} >
 
                 <div className={styles.name_container}>
@@ -46,15 +33,9 @@ const IngredientCard: FC<IIngredientCardProps> = ({name, img, price, count}) => 
                 <div className={`${styles.price} ml-6`}>
                   <p className={"text text_type_digits-default mr-2"}>{count} x {price}</p>
                   <CurrencyIcon type="primary" />
-                </div>
-                 
-          
-
-
+                </div>               
               </div>
-    
       );
-  
   }
 
   export default IngredientCard 

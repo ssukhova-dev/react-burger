@@ -9,7 +9,6 @@ import { FC } from 'react';
 import React from 'react';
 
 import IngredientCard from '../ingredient-card/ingredient-card';
-import {v4 as uuidv4} from 'uuid'
 
 interface IIngredientCardListProps{
     orderIngredients: string[];
@@ -17,8 +16,7 @@ interface IIngredientCardListProps{
 
 const IngredientCardList: FC<IIngredientCardListProps> = ({orderIngredients}) => {
 
-      const allIngredients: Array<TIngredient> = useSelector((store) => store.ingredients.ingredients);
-
+      const allIngredients = useSelector((store) => store.ingredients.ingredients);
 
       const summarizeIngredients = (orderIngredients: string[], allIngredients: TIngredient[]) => {
         const result: TOrderIngredient[] = [];
@@ -41,8 +39,8 @@ const IngredientCardList: FC<IIngredientCardListProps> = ({orderIngredients}) =>
       return (
         <>
      
-                {ingredients.map((ingredient) => (
-                    <IngredientCard key={uuidv4()} 
+                {ingredients.map((ingredient, index) => (
+                    <IngredientCard key={index} 
                                 name={ingredient.name} 
                                 img={ingredient.image_mobile} 
                                 price={ingredient.price} 

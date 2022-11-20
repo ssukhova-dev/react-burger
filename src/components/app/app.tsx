@@ -81,7 +81,6 @@ function App() {
                 type: ADD_CURRENT_ORDER,
                 order: order
             });
-            orderInfoDlg.setTitle("#" + order.number.toString());
             orderInfoDlg.open();
         }
 
@@ -90,7 +89,6 @@ function App() {
             orderInfoDlg.requestClose();
             history.goBack();
         }
-
 
     return (
         <div className={styles.app}>
@@ -166,7 +164,7 @@ function App() {
 
 
                     {
-                        background && ingredientDetailsDlg.isOpen && (
+                        background && (
                             <Route path="/ingredients/:id" exact={true}>
                                 <Modal onClose={closeIngredientDetailsDlg} title="Детали ингредиента">
                                     <IngredientDetails />
@@ -176,20 +174,20 @@ function App() {
                     }
 
                     {
-                        background && orderInfoDlg.isOpen && (
+                        background && (
                             <Route path="/feed/:id" exact={true}>
-                                <Modal onClose={closeOrderInfoDlg} title={orderInfoDlg.title}>
-                                    <OrderInfo />
+                                <Modal onClose={closeOrderInfoDlg} >
+                                    <OrderInfo profileOrder={false}/>
                                 </Modal>
                             </Route>
                         )
                     }
 
                     {
-                        background && orderInfoDlg.isOpen && (
+                        background && (
                             <Route path="/profile/orders/:id" exact={true}>
-                                <Modal onClose={closeOrderInfoDlg} title={orderInfoDlg.title}>
-                                    <OrderInfo />
+                                <Modal onClose={closeOrderInfoDlg} >
+                                    <OrderInfo profileOrder={true}/>
                                 </Modal>
                             </Route>
                         )

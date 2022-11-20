@@ -27,7 +27,7 @@ const OrderCard: FC<IOrderCardProps> = ({order, orderInfoDlgOpen, feedPage = tru
         orderInfoDlgOpen(order);
       };
 
-      const ingredients: Array<TIngredient> = useSelector((store) => store.ingredients.ingredients);
+      const ingredients = useSelector((store) => store.ingredients.ingredients);
 
       function getIcons(){
         const icons: Array<string> = [];
