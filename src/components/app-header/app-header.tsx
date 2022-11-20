@@ -43,9 +43,11 @@ const AppHeader: FC = () => {
                 </div>
 
     
-                <div className="flex-center pl-5 pr-5 pb-5 pt-5" >
-                    <Logo  />
-                </div>
+                <NavLink to="/" exact={true} >
+                    <div className="flex-center pl-5 pr-5 pb-5 pt-5" >
+                        <Logo  />
+                    </div>
+                </NavLink>
 
 
                 <div className={appHeaderStyles.navigation_account}>
