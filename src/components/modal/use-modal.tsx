@@ -15,8 +15,7 @@ function useModal() {
     return {
       open: handleOpenModal,  
       isOpen: isModalOpen,
-      requestClose: handleCloseModal
-  
+      requestClose: handleCloseModal,
     };
   }
   

@@ -1,12 +1,12 @@
 import orderDetailsStyle from './order-details.module.css';
 import doneImg from './../../images/done.svg'
 
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import { FC } from 'react';
 
 const OrderDetails: FC = () => {
 
-    const orderId = useSelector((store: any) => store.order.orderId);
+    const orderId = useSelector((store) => store.order.orderId);
 
     return (
         <div className={orderDetailsStyle.content_body}>

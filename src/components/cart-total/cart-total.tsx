@@ -8,7 +8,7 @@ import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
 import {IngredientTypes} from '../../utils/constants'
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 import { getOrders, CLOSE_ORDER_DETAILS } from '../../services/actions/cart-total';
 import { isLoggedInSelector } from '../../services/actions/login';
 
@@ -24,10 +24,10 @@ const CartTotal: FC<ICartTotalProps> = ({total}) => {
     const isLoggedIn = useSelector(isLoggedInSelector);
     const history = useHistory();
 
-    const isOrderDetailOpen = useSelector((store: any) => store.order.isOrderDetailOpen);
-    const cart = useSelector((store: any) => store.cart.cart);
+    const isOrderDetailOpen = useSelector((store) => store.order.isOrderDetailOpen);
+    const cart = useSelector((store) => store.cart.cart);
 
-    const bunIngredient = useSelector( (store: any) => {
+    const bunIngredient = useSelector( (store) => {
         return store.cart.cart.find((item: TCartIngredient) => item.type === IngredientTypes.bun);
     })
 
@@ -42,7 +42,6 @@ const CartTotal: FC<ICartTotalProps> = ({total}) => {
                 ingredients.push(ingredient._id);
             })
 
-            //@ts-ignore
             dispatch(getOrders(ingredients));
         } else {
             history.replace("/login");

@@ -2,30 +2,25 @@ import React, { FC } from 'react'
 import style from './forgot-password.module.css';
 
 import { Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 
 import {forgotPasswordThunk} from '../../services/actions/password';
 
 import {Link} from 'react-router-dom'
 
 import { Redirect } from 'react-router-dom';
+import { useForm } from '../../utils/hooks/useForm';
 
 
 const ForgotPasswordPage: FC = () => {
 
     const dispatch = useDispatch();
-    const [data, setData] = React.useState({email: ''});
-
-    const forgotPswSuccess  = useSelector((store: any) => store.login.forgotPswSuccess);
-
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>){
-        setData(prev => ({...prev, [e.target.name]: e.target.value}));
-    }
+    const forgotPswSuccess  = useSelector((store) => store.login.forgotPswSuccess);
+    const {values, handleChange} = useForm({email: ''});
 
     function handleSubmit(e: React.FormEvent){
         e.preventDefault();
-        //@ts-ignore
-        dispatch(forgotPasswordThunk(data));
+        dispatch(forgotPasswordThunk({email: values.email}));
     }
 
     if (forgotPswSuccess) {
@@ -39,7 +34,7 @@ const ForgotPasswordPage: FC = () => {
 
             <form onSubmit={handleSubmit} className={style.form}>
                 <p className="text text_type_main-default">Восстановление пароля</p>
-                <Input onChange={handleChange} name={'email'} placeholder={'укажите e-mail'} value={data.email}/>              
+                <Input onChange={handleChange} name={'email'} placeholder={'укажите e-mail'} value={values.email}/>              
                 <Button type="primary" size="medium" htmlType="submit">Восстановить</Button>
             </form>
 

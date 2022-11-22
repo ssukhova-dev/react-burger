@@ -1,0 +1,103 @@
+.order_card {
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    width: 100%;
+    height: 199px;
+
+    margin: 4px 4px 0px 0px;
+    padding: 20px;
+
+    cursor: pointer;
+
+    background: #1C1C21;
+    border-radius: 30px;
+  }
+
+  .flex_center_row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.status {
+  color: #ffffff;
+  margin: 10px 0px 10px 0px;
+  text-align: left;
+}
+
+.status_inprogress {
+  color: #00CCCC;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.img_list {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.img_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  position: relative;
+  background:rgb(28, 28, 33);
+  border-radius: 100px;
+  border-color: blueviolet;
+  border-style: solid;
+  overflow: hidden;
+  margin-right: -22px;
+}
+
+.image {
+  height: 50px;
+}
+.overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  left: 2px;
+  bottom: 2px;
+  border-radius: 100px;
+  background: rgba(28, 28, 33, .6);
+}

@@ -1,17 +1,50 @@
-import {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR } from '../actions/login';
+import {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, TLoginActions } from '../actions/login';
 
-import {LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR} from '../actions/logout';
-import {REGISTER_REQUEST, REGISTER_ERROR, REGISTER_SUCCESS} from '../actions/register';
+import {LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_ERROR, TLogoutActions} from '../actions/logout';
+import {REGISTER_REQUEST, REGISTER_ERROR, REGISTER_SUCCESS, TRegisterActions} from '../actions/register';
 import {GET_USER_REQUEST, GET_USER_ERROR, GET_USER_SUCCESS,
         SAVE_USER_REQUEST, SAVE_USER_ERROR, SAVE_USER_SUCCESS,
-        REFRESH_TOKEN_REQUEST, REFRESH_TOKEN_SUCCESS, REFRESH_TOKEN_ERROR } from '../actions/profile';
+        REFRESH_TOKEN_REQUEST, REFRESH_TOKEN_SUCCESS, REFRESH_TOKEN_ERROR, TProfileActions } from '../actions/profile';
 
 import {RESET_PSW_REQUEST, RESET_PSW_SUCCESS, RESET_PSW_ERROR,
-        FORGOT_PSW_REQUEST, FORGOT_PSW_SUCCESS, FORGOT_PSW_ERROR } from '../actions/password';
+        FORGOT_PSW_REQUEST, FORGOT_PSW_SUCCESS, FORGOT_PSW_ERROR, TPasswordActions } from '../actions/password';
+import { TUser } from '../../utils/types';
 
+type TLoginState = {
+    accessToken: string | undefined,
+    refreshToken: string | undefined,
 
+    user: TUser,
+    
+    registerRequest: boolean,
+    registerFailed: boolean,
 
-const initialState = {
+    loginRequest: boolean,
+    loginFailed: boolean,
+
+    logoutRequest: boolean,
+    logoutFailed: boolean,
+
+    getUserRequest: boolean,
+    getUserFailed: boolean,
+
+    saveUserRequest: boolean,
+    saveUserFailed: boolean,
+
+    refreshTokenRequest: boolean,
+    refreshTokenFailed: boolean,
+
+    resetPswRequest: boolean,
+    resetPswSuccess: boolean,
+    resetPswFailed: boolean,
+
+    forgotPswRequest: boolean,
+    forgotPswSuccess: boolean,
+    forgotPswFailed: boolean,
+};
+        
+
+const initialState: TLoginState = {
     accessToken: undefined,
     refreshToken: undefined,
 
@@ -44,8 +77,14 @@ const initialState = {
     forgotPswFailed: false,
 };
 
+type TLoginReducerActions =
+    | TLoginActions
+    | TLogoutActions
+    | TRegisterActions
+    | TProfileActions
+    | TPasswordActions;
 
-export const loginReducer = (state = initialState, action) => {
+export const loginReducer = (state = initialState, action: TLoginReducerActions): TLoginState => {
 
     switch (action.type) {
         case LOGIN_REQUEST: {

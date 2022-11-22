@@ -2,48 +2,66 @@ import React, { FC } from 'react'
 import style from './profile.module.css';
 
 import { Button, PasswordInput, EmailInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 
 import { saveUserThunk } from '../../services/actions/profile';
 import { logoutThunk } from '../../services/actions/logout';
 
-import {NavLink} from 'react-router-dom'
+import {Switch, Route, NavLink, useRouteMatch} from "react-router-dom"
+import Orders from '../../components/orders/orders';
+import { TOrder } from '../../utils/types';
+import { wsProfileOrdersConnect, wsProfileOrdersDisconnect } from '../../services/actions/profile-socket';
+import { WS_PROFILE_ORDERS_URL } from '../../utils/burger-api';
+import JsCookie from "js-cookie"
+import { Token } from '../../utils/constants';
+import { useForm } from '../../utils/hooks/useForm';
 
-const ProfilePage: FC = () => {
+interface IProfilePageProps{
+    orderInfoDlgOpen: (order: TOrder) => void;
+}
+
+const ProfilePage: FC<IProfilePageProps> = ({orderInfoDlgOpen}) => {
 
     const dispatch = useDispatch();
+    const {path} = useRouteMatch();
 
-    const { name, email, password } = useSelector((store: any)  => store.login.user);
-    const [data, setData] = React.useState({name: name, email: email, password: password});
+    const {name, email, password} = useSelector((store)  => store.login.user);
+    const {values, handleChange, setValues} = useForm({name: name, email: email, password: password});
 
     React.useEffect(()=> {
-        setData({name: name , email: email, password: password});
+        setValues({name: name , email: email, password: password});
     }, [name, email, password])
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>){
-        setData(prev => ({...prev, [e.target.name]: e.target.value}));
-    }
+
+    React.useEffect(() => {
+        const accessToken = JsCookie.get(Token.access)!.replace("Bearer ", "");
+        dispatch(wsProfileOrdersConnect(WS_PROFILE_ORDERS_URL + `?token=${accessToken}`));
+        return () => {
+          dispatch(wsProfileOrdersDisconnect());
+        }
+      }, [dispatch]);
+
+    const { loading } = useSelector(state => state.feed);
+
 
     function handleSubmit(e: React.FormEvent){
         e.preventDefault();
-        //@ts-ignore
-        dispatch(saveUserThunk(data));
+        dispatch(saveUserThunk({name: values.name, email: values.email, password: values.password}));
     }
 
     function onLogout(e: React.SyntheticEvent) {
         e.preventDefault();
-        //@ts-ignore
         dispatch(logoutThunk());
     }
 
     function onCancel(e: React.SyntheticEvent) {
         e.preventDefault();
-        setData({name: name, email: email, password: password});
+        setValues({name: name, email: email, password: password});
     }
 
     const isModified = React.useMemo(() => {
-        return name !== data.name || email !== data.email || password !== data.password;
-      }, [data, name, email, password]);
+        return name !== values.name || email !== values.email || password !== values.password;
+      }, [values, name, email, password]);
     
     
 
@@ -52,7 +70,7 @@ const ProfilePage: FC = () => {
         <nav className={style.nav}>
             <ul className={style.list}>
             <li className={style.item}>
-                <NavLink className={`${style.link} text text_type_main-medium text_color_inactive`}
+                <NavLink exact={true} className={`${style.link} text text_type_main-medium text_color_inactive`}
                     activeClassName={style.active}
                     to="/profile">
                     Профиль
@@ -74,17 +92,29 @@ const ProfilePage: FC = () => {
             изменить свои персональные данные</p>
         </nav>
 
-        <form onSubmit={handleSubmit} className={style.form}>
-            <Input onChange={handleChange} name={'name'} placeholder={'Имя'} value={data.name}/>
-            <EmailInput onChange={handleChange} name={'email'}  value={data.email}/>
-            <PasswordInput onChange={handleChange} name={'password'} value={data.password} />
-            {isModified &&
-                <div className={style.buttons_panel}>
-                    <Button type="primary" size="medium"  htmlType="submit">Сохранить</Button>
-                    <Button type="primary" size="medium"  onClick={onCancel}>Отмена</Button>
-                </div>
-            }
-        </form>
+
+        <Switch>
+            <Route exact path={path}>
+
+                <form onSubmit={handleSubmit} className={style.form}>
+                    <Input onChange={handleChange} name={'name'} placeholder={'Имя'} value={values.name}/>
+                    <EmailInput onChange={handleChange} name={'email'}  value={values.email}/>
+                    <PasswordInput onChange={handleChange} name={'password'} value={values.password} />
+                    {isModified &&
+                        <div className={style.buttons_panel}>
+                            <Button type="primary" size="medium"  htmlType="submit">Сохранить</Button>
+                            <Button type="primary" size="medium"  onClick={onCancel}>Отмена</Button>
+                        </div>
+                    }
+                </form>
+
+            </Route>
+            <Route exact path="/profile/orders">
+                <Orders orderInfoDlgOpen={orderInfoDlgOpen} feedPage={false}/>
+            </Route>
+        </Switch>
+
+
 
       </section>
     );

@@ -1,0 +1,30 @@
+.orders {
+    display: flex;
+    flex-flow: column;
+
+    align-items: center;
+
+}
+
+.title {
+    width: 100%;
+    text-align: left;
+
+    margin-top: 20px;
+}
+
+.orders_list {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px; 
+
+    width: 600px;
+    height: 100vh;
+
+
+    overflow-x: hidden;
+    overflow-y: auto;  
+}
+

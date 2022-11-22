@@ -2,28 +2,25 @@ import React, { FC } from 'react'
 import style from './reset-password.module.css';
 
 import { Button, PasswordInput, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 
 import {resetPasswordThunk} from '../../services/actions/password';
 
 import {Link} from 'react-router-dom'
 import { Redirect } from 'react-router-dom';
+import { useForm } from '../../utils/hooks/useForm';
 
 
 const ResetPasswordPage: FC = () => {
 
     const dispatch = useDispatch();
-    const [data, setData] = React.useState({token: '', password: ''});
-    const resetPswSuccess = useSelector((store: any) => store.login.resetPswSuccess);
+    const {values, handleChange} = useForm({token: '', password: ''});
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>){
-        setData(prev => ({...prev, [e.target.name]: e.target.value}));
-    }
+    const resetPswSuccess = useSelector((store) => store.login.resetPswSuccess);
 
     function handleSubmit(e: React.FormEvent){
         e.preventDefault();
-        //@ts-ignore
-        dispatch(resetPasswordThunk(data));
+        dispatch(resetPasswordThunk({token: values.token, password: values.password}));
     }
 
     if (resetPswSuccess) {
@@ -37,8 +34,8 @@ const ResetPasswordPage: FC = () => {
 
             <form onSubmit={handleSubmit} className={style.form}>
                 <p className="text text_type_main-default">Восстановление пароля</p>
-                <PasswordInput onChange={handleChange} name={'password'} value={data.password}/>  
-                <Input onChange={handleChange} name={'token'} placeholder={'Введите код из письма'} value={data.token}/>              
+                <PasswordInput onChange={handleChange} name={'password'} value={values.password}/>  
+                <Input onChange={handleChange} name={'token'} placeholder={'Введите код из письма'} value={values.token}/>              
                 <Button type="primary" size="medium"  htmlType="submit">Восстановить</Button>
             </form>
 

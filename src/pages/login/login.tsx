@@ -2,28 +2,24 @@ import React, { FC } from 'react'
 import loginStyle from './login.module.css';
 
 import { Button,  PasswordInput, EmailInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 
 import {loginThunk} from '../../services/actions/login';
 
 import {Link} from 'react-router-dom'
+import { useForm } from '../../utils/hooks/useForm';
 
 
 const LoginPage: FC = () => {
 
     const dispatch = useDispatch();
-    const [data, setData] = React.useState({email: '', password: ''});
+    const {values, handleChange} = useForm({email: '', password: ''});
 
-    const loginFailed = useSelector((store: any) => !!store.login.loginFailed);
-
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>){
-        setData(prev => ({...prev, [e.target.name]: e.target.value}));
-    }
+    const loginFailed = useSelector((store) => !!store.login.loginFailed);
 
     function handleSubmit(e: React.FormEvent){
         e.preventDefault();
-        //@ts-ignore
-        dispatch(loginThunk(data));
+        dispatch(loginThunk({email: values.email, password: values.password}));
     }
 
     return (
@@ -31,8 +27,8 @@ const LoginPage: FC = () => {
 
             <form onSubmit={handleSubmit} className={loginStyle.form}>
                 <p className="text text_type_main-default">Вход</p>
-                <EmailInput onChange={handleChange} name={'email'}  value={data.email}/>
-                <PasswordInput onChange={handleChange} name={'password'}  value={data.password}/>
+                <EmailInput onChange={handleChange} name={'email'}  value={values.email}/>
+                <PasswordInput onChange={handleChange} name={'password'}  value={values.password}/>
                 <Button type="primary" size="medium" htmlType="submit">Войти</Button>
                 {loginFailed && 
                     <p className={`${loginStyle.error} text text_type_main-default`}>Не верный Email или пароль</p>

@@ -4,7 +4,7 @@ import { DNDTypes} from '../../utils/constants'
 
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
 
 import { REMOVE_INGREDIENT,MOVE_INGREDIENTs } from '../../services/actions/burger-constructor';
 

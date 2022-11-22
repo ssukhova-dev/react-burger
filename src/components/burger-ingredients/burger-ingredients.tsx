@@ -8,7 +8,7 @@ import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredientCategory from '../burger-ingredient-category/burger-ingredient-category'
 
 import {IngredientTypes} from '../../utils/constants'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 import { SET_CURRENT_TAB } from '../../services/actions/burger-ingredients';
 import { TIngredient } from '../../utils/types';
 
@@ -26,7 +26,7 @@ const BurgerIngredients: FC<IBurgerIngredientsProps> = ({ ingredientDetailsDlgOp
     const mainsRef = React.useRef<HTMLParagraphElement>(null);
     const listRef = React.useRef<HTMLDivElement>(null);
 
-    const currentTab = useSelector((store: any) => store.tabs.currentTab);
+    const currentTab = useSelector((store) => store.tabs.currentTab);
 
      const refs = new Map([
         [IngredientTypes.bun,   bunRef],
@@ -47,7 +47,7 @@ const BurgerIngredients: FC<IBurgerIngredientsProps> = ({ ingredientDetailsDlgOp
         
       };
 
-    const ingredients: Array<TIngredient> = useSelector((store: any) => store.ingredients.ingredients);
+    const ingredients = useSelector((store) => store.ingredients.ingredients);
 
     const buns: TIngredient[] = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.bun), [ingredients]);
     const sauces: TIngredient[] = React.useMemo(() => ingredients.filter(item => item.type === IngredientTypes.sauce), [ingredients]);

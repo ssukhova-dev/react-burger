@@ -1,0 +1,41 @@
+.content {
+    display: flex;
+    flex-flow: column;
+
+    align-items: left;
+    text-align: left;
+    width: 600px;
+
+    margin: 50px 0px 0px 0px;
+}
+
+
+.orders_status {
+    grid-row-start: 4;
+    display: grid;
+    grid-template-columns: minmax(300px, max-content) max-content;
+    grid-template-rows: max-content max-content;
+    grid-gap: 20px 32px;
+}
+
+.done_orders {
+    grid-row-start: 3;
+    display: grid;
+    grid-template-columns: minmax(100px, max-content) minmax(100px, max-content) max-content;
+    color: #00CCCC;
+}
+
+.inprogress_orders{
+    grid-row-start: 3;
+    display: grid;
+    grid-template-columns: minmax(100px, max-content) minmax(100px, max-content) max-content;
+
+}
+
+.orders_list {
+    list-style: none;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+

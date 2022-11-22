@@ -10,8 +10,9 @@ import {ERROR_TEXT, LOADING_TEXT} from '../../utils/constants'
 
 import {getIngredients} from '../../services/actions/burger-ingredients' 
 import {getUser} from '../../services/actions/profile' 
+import {loginSuccess} from '../../services/actions/login' 
 
-import {useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from '../../services/hooks';
 
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
@@ -31,8 +32,12 @@ import useModal from '../modal/use-modal'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal'
 import { ADD_CURRENT_INGREDIENT, REMOVE_CURRENT_INGREDIENT } from '../../services/actions/burger-ingredients';
-import { TIngredient } from '../../utils/types';
+import { TIngredient, TOrder } from '../../utils/types';
+import FeedPage from '../../pages/feed/feed';
 
+import OrderInfo from '../order-info/order-info';
+import OrderInfoPage from '../../pages/order-info/order-info';
+import { ADD_CURRENT_ORDER, REMOVE_CURRENT_ORDER } from '../../services/actions/order';
 
 function App() {
 
@@ -40,16 +45,14 @@ function App() {
     const location = useLocation();
     const background = location.state && location.state.background;
 
-    const isLoading = useSelector((store: any) => store.ingredients.ingredientsRequest);
-    const hasError = useSelector((store: any) => store.ingredients.ingredientsFailed);
+    const isLoading = useSelector((store) => store.ingredients.ingredientsRequest);
+    const hasError = useSelector((store) => store.ingredients.ingredientsFailed);
 
 
     const dispatch = useDispatch();
     
     React.useEffect(()=> {
-            //@ts-ignore
             dispatch(getIngredients());
-            //@ts-ignore
             dispatch(getUser());
         }, [dispatch])
 
@@ -70,6 +73,22 @@ function App() {
             history.goBack();
         }
 
+
+        const orderInfoDlg = useModal();
+
+        function showOrderInfoDlg(order: TOrder){
+            dispatch({
+                type: ADD_CURRENT_ORDER,
+                order: order
+            });
+            orderInfoDlg.open();
+        }
+
+        function closeOrderInfoDlg(){
+            dispatch({ type: REMOVE_CURRENT_ORDER });
+            orderInfoDlg.requestClose();
+            history.goBack();
+        }
 
     return (
         <div className={styles.app}>
@@ -93,8 +112,8 @@ function App() {
                     <Switch location={background || location}>
                         <Route path="/" exact={true}>
                             <DndProvider backend={HTML5Backend}>
-                            <BurgerIngredients ingredientDetailsDlgOpen={showIngredientDetailsDlg}/>
-                            <BurgerConstructor />
+                                <BurgerIngredients ingredientDetailsDlgOpen={showIngredientDetailsDlg}/>
+                                <BurgerConstructor />
                             </DndProvider >               
                         </Route>
 
@@ -107,8 +126,12 @@ function App() {
                             <RegisterPage />
                         </PublicRoute>
 
-                        <ProtectedRoute path="/profile" exact={true} redirectTo="/login"> 
-                            <ProfilePage />
+                        <ProtectedRoute path="/profile/orders/:id" exact={true} redirectTo="/login">
+                            <OrderInfoPage profileOrder={true}/>
+                        </ProtectedRoute>
+
+                        <ProtectedRoute path="/profile" exact={false} redirectTo="/login"> 
+                            <ProfilePage orderInfoDlgOpen={showOrderInfoDlg}/>
                         </ProtectedRoute>
 
                         <PublicRoute path="/forgot-password" exact={true} redirectTo="/">
@@ -123,6 +146,14 @@ function App() {
                             <IngredientDetailsPage />
                         </Route>
 
+                        <Route path="/feed" exact={true}>
+                            <FeedPage orderInfoDlgOpen={showOrderInfoDlg}/>
+                        </Route>
+
+                        <Route path="/feed/:id" exact={true}>
+                            <OrderInfoPage />
+                        </Route>
+
                         <Route>
                             <PageNotFound404 />
                         </Route>
@@ -133,10 +164,30 @@ function App() {
 
 
                     {
-                        background && ingredientDetailsDlg.isOpen && (
+                        background && (
                             <Route path="/ingredients/:id" exact={true}>
                                 <Modal onClose={closeIngredientDetailsDlg} title="Детали ингредиента">
                                     <IngredientDetails />
+                                </Modal>
+                            </Route>
+                        )
+                    }
+
+                    {
+                        background && (
+                            <Route path="/feed/:id" exact={true}>
+                                <Modal onClose={closeOrderInfoDlg} >
+                                    <OrderInfo profileOrder={false}/>
+                                </Modal>
+                            </Route>
+                        )
+                    }
+
+                    {
+                        background && (
+                            <Route path="/profile/orders/:id" exact={true}>
+                                <Modal onClose={closeOrderInfoDlg} >
+                                    <OrderInfo profileOrder={true}/>
                                 </Modal>
                             </Route>
                         )
@@ -150,3 +201,5 @@ function App() {
 }
 
 export default App;
+
+
