@@ -70,7 +70,7 @@ const BurgerConstructor: FC = () => {
                         }`;
 
       return (
-        <section className={burgerConstructorStyles.burger_constructor}>
+        <section className={burgerConstructorStyles.burger_constructor} data-test="burger-constructor">
 
             <div className={className} ref={dropTarget} >
   

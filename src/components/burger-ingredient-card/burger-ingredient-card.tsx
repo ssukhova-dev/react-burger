@@ -45,7 +45,7 @@ const BurgerIngredientCard: FC<IBurgerIngredientCardProps> = ({ ingredient, ingr
 
       return (
 
-              <div className={burgerIngCardStyle.burger_ingredient_card} onClick={onCardClick} ref={ref} style={{ opacity }}>
+              <div className={burgerIngCardStyle.burger_ingredient_card} onClick={onCardClick} ref={ref} style={{ opacity }} data-test-id={ingredient._id}>
 
          
                 {(count !== 0) && (<Counter count={count} size="default" />)}
