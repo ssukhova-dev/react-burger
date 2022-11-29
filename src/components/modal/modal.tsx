@@ -50,7 +50,7 @@ const Modal: FC<IModalProps> = (props) => {
        
           </div>
 
-          <div className={modalStyles.modal_close} onClick={ handleClose}>
+          <div className={modalStyles.modal_close} onClick={ handleClose} data-test="btn_close_modal">
             <div className={modalStyles.close_btn} >
                 <CloseIcon type="primary" />
             </div>

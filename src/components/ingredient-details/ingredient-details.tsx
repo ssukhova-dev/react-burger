@@ -31,7 +31,7 @@ const IngredientDetails: FC = () => {
             <div className={ingredientDetailsStyle.content_body}>
                 <img src={ ingredient.image_large } alt={`изображение ингредиента ${ingredient.name}`} />         
 
-                <p className="text text_type_main-medium m-5" >
+                <p className="text text_type_main-medium m-5" data-test="ingredient_details_name">
                     {ingredient.name}
                 </p>
 

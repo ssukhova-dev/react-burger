@@ -25,8 +25,7 @@ describe('react-burger is available', function() {
     cy.visit('http://localhost:3000');
   });
 
-  it('should drag and drop', function() {
-
+  it('should drag and drop and make order', function() {
     cy.get('[data-test-id="60d3b41abdacab0026a733c6"]').as('BunIngredient')
     cy.get('[data-test-id="60d3b41abdacab0026a733ce"]').as('ingredient1');
     cy.get('[data-test-id="60d3b41abdacab0026a733ca"]').as('ingredient2');
@@ -55,19 +54,30 @@ describe('react-burger is available', function() {
      .trigger("drop")
      .trigger("dragend");
 
-     cy.get('@ingredient3').trigger("dragstart").trigger("dragleave");
-     cy.get('@BurgerConstructor')
-      .trigger("dragenter")
-      .trigger("dragover")
-      .trigger("drop")
-      .trigger("dragend");
-   
+    cy.get('@ingredient3').trigger("dragstart").trigger("dragleave");
+    cy.get('@BurgerConstructor')
+     .trigger("dragenter")
+     .trigger("dragover")
+     .trigger("drop")
+     .trigger("dragend");
+
+
+     cy.get('[data-test="btn_make_order"]').find('button').as('BtnMakeOrder');
+     cy.get('@BtnMakeOrder').click();
+     cy.get('[data-test="order_number"]', { timeout: 30000 }).contains("123").should("exist");
+     cy.get('[data-test="btn_close_modal"]').click();
   });
+
+
+  it('should show детали ингредиента модальный диалог', function() {
+     cy.get('[data-test-id="60d3b41abdacab0026a733c6"]').as('BunIngredient')
+
+     cy.get('@BunIngredient').click();
+     cy.get('[data-test="ingredient_details_name"]').should('have.text', 'Краторная булка N-200i');
+     cy.get('[data-test="btn_close_modal"]').click();
+
+   });
+ 
 
 }); 
 
-// Проверяем, что на странице в модальном окне отображается нужный номер заказа
-// Номер заказа моковый из файла fixtures/order.json
-// Селектор по атрибуту data-testid
-
-//cy.get("[data-testid=order-number]").contains("123").should("exist");
