@@ -11,7 +11,7 @@ const OrderDetails: FC = () => {
     return (
         <div className={orderDetailsStyle.content_body}>
 
-            <p className="text text_type_digits-large m-5" >
+            <p className="text text_type_digits-large m-5" data-test="order_number">
                 {orderId}
             </p>
 

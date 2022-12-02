@@ -57,7 +57,7 @@ const CartTotal: FC<ICartTotalProps> = ({total}) => {
 
         return (
             <>
-            <section className={cartTotalStyles.cart_total}>
+            <section className={cartTotalStyles.cart_total} data-test="btn_make_order">
 
                 <div className={cartTotalStyles.price_module}>
                     <p className="text text_type_digits-medium">
@@ -66,7 +66,7 @@ const CartTotal: FC<ICartTotalProps> = ({total}) => {
                     <CurrencyIcon type="primary" />
                 </div>  
         
-                <Button type="primary" size="medium"  onClick={handleClickMakeOrder} disabled={!bunIngredient}>
+                <Button type="primary" size="medium"  onClick={handleClickMakeOrder} disabled={!bunIngredient} data-test="btn_make_order">
                     Оформить заказ
                 </Button>
             </section>
