@@ -33,33 +33,17 @@ describe('react-burger is available', function() {
 
     cy.get('[data-test="burger-constructor"]').as('BurgerConstructor')
 
-    cy.get('@BunIngredient').trigger("dragstart").trigger("dragleave");
-    cy.get('@BurgerConstructor')
-     .trigger("dragenter")
-     .trigger("dragover")
-     .trigger("drop")
-     .trigger("dragend");
+    cy.get('@BunIngredient').trigger("dragstart");
+    cy.get('@BurgerConstructor').trigger("drop");
 
-    cy.get('@ingredient1').trigger("dragstart").trigger("dragleave");
-    cy.get('@BurgerConstructor')
-     .trigger("dragenter")
-     .trigger("dragover")
-     .trigger("drop")
-     .trigger("dragend");
+    cy.get('@ingredient1').trigger("dragstart");
+    cy.get('@BurgerConstructor').trigger("drop");
 
-    cy.get('@ingredient2').trigger("dragstart").trigger("dragleave");
-    cy.get('@BurgerConstructor')
-     .trigger("dragenter")
-     .trigger("dragover")
-     .trigger("drop")
-     .trigger("dragend");
+    cy.get('@ingredient2').trigger("dragstart");
+    cy.get('@BurgerConstructor').trigger("drop");
 
-    cy.get('@ingredient3').trigger("dragstart").trigger("dragleave");
-    cy.get('@BurgerConstructor')
-     .trigger("dragenter")
-     .trigger("dragover")
-     .trigger("drop")
-     .trigger("dragend");
+    cy.get('@ingredient3').trigger("dragstart");
+    cy.get('@BurgerConstructor').trigger("drop");
 
 
      cy.get('[data-test="btn_make_order"]').find('button').as('BtnMakeOrder');
