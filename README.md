@@ -26,7 +26,9 @@
 
 1. Скачать проект
 2. Из директории проекта запустить команды:
+
    `npm install --legacy-peer-deps`
+   
    `npm run start`
 
    проект откроется в браузере http://localhost:3000
